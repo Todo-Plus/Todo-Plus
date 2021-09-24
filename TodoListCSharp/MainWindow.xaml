@@ -5,13 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoListCSharp"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="850" MinWidth="300" Height="850" Width="300">
+        Title="MainWindow" MinHeight="850" MinWidth="379" Height="850" Width="300">
     <StackPanel>
-        <StackPanel Height="40">
+        <Grid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <StackPanel Style="{StaticResource MWTypeContainer}">
+                    <Label Style="{StaticResource MWTypeChosedFont}">Todo</Label>
+                    <Label Style="{StaticResource MWTypeUnderlineChosed}"></Label>
+                </StackPanel>
+                <StackPanel Style="{StaticResource MWTypeContainer}">
+                    <Label Style="{StaticResource MWTypeUnchosedFont}">Done</Label>
+                    <Label Style="{StaticResource MWTypeUnderlineUnchosed}"></Label>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10, 0">
+                <StackPanel Orientation="Horizontal" Width="Auto">
+                    <Button Style="{StaticResource MWTopButtonStyle}"></Button>
+                    <Button Style="{StaticResource MWTopButtonStyle}"></Button>
+                    <Button Style="{StaticResource MWTopButtonStyle}"></Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+        <ListBox Height="Auto">
             
-        </StackPanel>
-        <ItemsControl ItemsSource="{Binding Path=strlist}">
-            
-        </ItemsControl>
+        </ListBox>
     </StackPanel>
 </Window>
