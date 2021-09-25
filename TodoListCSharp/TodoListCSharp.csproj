@@ -7,7 +7,48 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="source\**" />
+    <EmbeddedResource Remove="source\**" />
+    <None Remove="source\**" />
+    <Page Remove="source\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="locked.png" />
+    <None Remove="resources\icons\add.png" />
+    <None Remove="resources\icons\locked.bmp" />
+    <None Remove="resources\icons\locked.png" />
+    <None Remove="resources\icons\setting.png" />
+    <None Remove="resources\icons\unlock.png" />
+    <None Remove="setting.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="resources\icons\add.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\locked.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\setting.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\unlock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="utils\" />
+    <Folder Include="sources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="locked.png" />
+    <Content Include="resources\icons\locked.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="setting.png" />
   </ItemGroup>
 
 </Project>

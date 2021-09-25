@@ -4,10 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoListCSharp"
+        xmlns:us="clr-namespace:TodoListCSharp.controls"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="850" MinWidth="379" Height="850" Width="300">
     <StackPanel>
-        <Grid>
+        <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="White">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <StackPanel Style="{StaticResource MWTypeContainer}">
                     <Label Style="{StaticResource MWTypeChosedFont}">Todo</Label>
@@ -16,18 +17,18 @@
                 <StackPanel Style="{StaticResource MWTypeContainer}">
                     <Label Style="{StaticResource MWTypeUnchosedFont}">Done</Label>
                     <Label Style="{StaticResource MWTypeUnderlineUnchosed}"></Label>
-                </StackPanel>
+                </StackPanel> 
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10, 0">
                 <StackPanel Orientation="Horizontal" Width="Auto">
-                    <Button Style="{StaticResource MWTopButtonStyle}"></Button>
-                    <Button Style="{StaticResource MWTopButtonStyle}"></Button>
-                    <Button Style="{StaticResource MWTopButtonStyle}"></Button>
+                    <us:IconButton Style="{StaticResource MWTopButtonStyle}" ImageSource="/resources/icons/locked.png"></us:IconButton>
+                    <us:IconButton Style="{StaticResource MWTopButtonStyle}" ImageSource="/resources/icons/setting.png"></us:IconButton>
+                    <us:IconButton Style="{StaticResource MWTopButtonStyle}" ImageSource="/resources/icons/add.png"></us:IconButton>
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <ListBox Height="Auto">
-            
+        <ListBox Template="{DynamicResource MWTodoListBoxItem}" Height="Auto">
+             
         </ListBox>
-    </StackPanel>
-</Window>
+    </StackPanel> 
+</Window> 

@@ -7,15 +7,21 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="SettingWindow.xaml.cs">
+    <Compile Update="controls\IconButton.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="settings\SettingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="controls\IconButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="SettingWindow.xaml">
+    <Page Update="settings\SettingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="styles\MainWindowStyle.xaml">

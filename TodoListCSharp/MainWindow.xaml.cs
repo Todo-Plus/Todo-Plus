@@ -1,28 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using System.IO;
+using System.Runtime.InteropServices;
 
 namespace TodoListCSharp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// 程序主窗口
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        public static extern System.IntPtr FindWindow([MarshalAs(UnmanagedType.LPTStr)] string lpClassName, [MarshalAs(UnmanagedType.LPTStr)] string lpWindowName);
+        [DllImport("user32.dll")]
+        public static extern System.IntPtr SetParent(System.IntPtr hWndChild, System.IntPtr hWndNewParent);
+        public MainWindow() {
             InitializeComponent();
+        }
+
+        private void ButtonClickedLockWindow(object sender, RoutedEventArgs e) {
+
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            base.DragMove();
         }
     }
 }
