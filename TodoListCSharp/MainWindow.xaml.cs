@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
 
 namespace TodoListCSharp
 {
@@ -16,6 +17,14 @@ namespace TodoListCSharp
         public static extern System.IntPtr SetParent(System.IntPtr hWndChild, System.IntPtr hWndNewParent);
         public MainWindow() {
             InitializeComponent();
+
+            List<TodoItem> list = new List<TodoItem>();
+            list.Add(new TodoItem() { 
+                iIndex = 1,
+                strTitle = "Test Item 1"
+            });
+
+            this.todoList.ItemsSource = list;
         }
 
         private void ButtonClickedLockWindow(object sender, RoutedEventArgs e) {
@@ -25,5 +34,13 @@ namespace TodoListCSharp
         private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
             base.DragMove();
         }
+    }
+
+    public class TodoItem {
+        // todo： 修改为private并且设置对应的函数
+        public int iIndex { set; get; }
+        public string strTitle { set; get; }
+        public string strDesc { set; get; }
+        public bool bDone { set; get; }
     }
 }

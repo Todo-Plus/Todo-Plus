@@ -54,8 +54,14 @@
     <!-- Main Window Control Template-->
     <!--Symmary End-->
 
-    <ControlTemplate x:Key="MWTodoListBoxItem" TargetType="{x:Type ListBox}">
-        <Grid/>
-    </ControlTemplate>
+    <DataTemplate x:Key="MWTodoListBoxItem" >
+        <Grid Height="40" Margin="10, 2" Width="Auto">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <Ellipse Width="10" Height="10" Fill="#BBBBBB"/>
+                <Label Content="{Binding strTitle}" VerticalAlignment="Center" Margin="10, 0" FontSize="15"></Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"></StackPanel>
+        </Grid>
+    </DataTemplate>
 
 </ResourceDictionary>

@@ -41,6 +41,7 @@
   <ItemGroup>
     <Folder Include="utils\" />
     <Folder Include="sources\" />
+    <Folder Include="test\" />
   </ItemGroup>
 
   <ItemGroup>

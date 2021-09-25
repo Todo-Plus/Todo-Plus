@@ -27,8 +27,8 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <ListBox Template="{DynamicResource MWTodoListBoxItem}" Height="Auto">
-             
-        </ListBox>
+        <ListBox Name="todoList"  ItemTemplate="{StaticResource MWTodoListBoxItem}" Height="Auto"/>
+
+
     </StackPanel> 
 </Window> 
