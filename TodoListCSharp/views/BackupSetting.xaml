@@ -1,11 +1,11 @@
-﻿<Window x:Class="TodoListCSharp.SettingWindow"
+﻿<Window x:Class="TodoListCSharp.views.BackupSetting"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TodoListCSharp"
+        xmlns:local="clr-namespace:TodoListCSharp.views"
         mc:Ignorable="d"
-        Title="Settings" MinHeight="560" MinWidth="416">
+        Title="BackupSetting" MinHeight="560" MinWidth="416" Height="560" Width="416">
     <Grid>
         
     </Grid>

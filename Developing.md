@@ -19,6 +19,22 @@ XAML命名：开头大写字母说明窗口，一般来说每个窗口的样式�
 
 
 
+## Controls
+
+### IconButton
+
+可附带图标的按钮，设置属性实现不同效果
+
+```xaml
+/// <summary>
+/// 自定义属性注册
+/// @ImageSource： 图像资源
+/// @IconDiameter： 图标直径
+/// @CircleDiameter： 按钮的直径
+/// @HoverIcon：鼠标悬浮时显示的按钮图像
+/// </summary>
+```
+
 ## Log
 
 #### 2021/09/26

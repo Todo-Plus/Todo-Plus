@@ -21,10 +21,16 @@ namespace TodoListCSharp.controls {
         public IconButton() {
             InitializeComponent();
         }
-
+        /// <summary>
+        ///  自定义相关属性函数声明
+        /// </summary>
         public ImageSource ImageSource {
             get { return (ImageSource)GetValue(ImageSourceProperty); }
             set { SetValue(ImageSourceProperty, value); }
+        }
+        public ImageSource HoverIcon {
+            get { return (ImageSource)GetValue(HoverIconProperty); }
+            set { SetValue(HoverIconProperty, value); }
         }
         public int IconDiameter {
             get { return (int)GetValue(IconDiameterProperty); }
@@ -35,18 +41,28 @@ namespace TodoListCSharp.controls {
             set { SetValue(CircleDiameterProperty, value); }
         }
 
+        /// <summary>
+        /// 自定义属性注册
+        /// @ImageSource： 图像资源
+        /// @IconDiameter： 图标直径
+        /// @CircleDiameter： 按钮的直径
+        /// @HoverIcon：鼠标悬浮时显示的按钮图像
+        /// </summary>
         public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register("ImageSource",
             typeof(ImageSource), typeof(IconButton));
+        public static readonly DependencyProperty HoverIconProperty = DependencyProperty.Register("HoverIcon",
+            typeof(ImageSource), typeof(IconButton));
         public static readonly DependencyProperty IconDiameterProperty = DependencyProperty.Register("IconDiameter",
-            typeof(int), typeof(int));
+            typeof(int), typeof(IconButton));
         public static readonly DependencyProperty CircleDiameterProperty = DependencyProperty.Register("CircleDiameter",
-            typeof(int), typeof(int));
+            typeof(int), typeof(IconButton));
 
         private void IconButton_Loaded(object sender, RoutedEventArgs e) {
             var data = new IconButtonModel() {
                 ImageSource = ImageSource,
                 IconDiameter = IconDiameter,
-                CircleDiameter = CircleDiameter
+                CircleDiameter = CircleDiameter,
+                HoverIcon = HoverIcon
             };
             this.DataContext = data;
         }
@@ -62,6 +78,7 @@ namespace TodoListCSharp.controls {
 
         public class IconButtonModel {
             public ImageSource ImageSource { get; set; }
+            public ImageSource HoverIcon { get; set; }
             public int IconDiameter { get; set; }
             public int CircleDiameter { get; set; }
         }

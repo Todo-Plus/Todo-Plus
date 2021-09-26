@@ -10,7 +10,19 @@
     <Compile Update="controls\IconButton.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="settings\SettingWindow.xaml.cs">
+    <Compile Update="controls\Titlebar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="views\AppearanceSetting.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="views\BackupSetting.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="views\GeneralSetting.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="views\SettingWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -18,13 +30,25 @@
     <Page Update="controls\IconButton.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="MainWindow.xaml">
+    <Page Update="controls\Titlebar.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="settings\SettingWindow.xaml">
+    <Page Update="views\AppearanceSetting.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="views\BackupSetting.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="views\GeneralSetting.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="styles\MainWindowStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="views\SettingWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

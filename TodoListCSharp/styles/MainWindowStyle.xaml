@@ -67,10 +67,26 @@
                 <Label Content="{Binding strTitle}" VerticalAlignment="Center" Margin="5, 0" FontSize="15"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <us:IconButton x:Name="T_AddButton" Visibility="Hidden" ImageSource="/resources/icons/add_normal.png" Style="{StaticResource MWItemButtonStyle}" IconDiameter="20"></us:IconButton>
-                <us:IconButton x:Name="T_EditButton" Visibility="Hidden" ImageSource="/resources/icons/edit_normal.png" Style="{StaticResource MWItemButtonStyle}" IconDiameter="20"></us:IconButton>
-                <us:IconButton x:Name="T_DeleteButton" Visibility="Hidden" ImageSource="/resources/icons/delete_normal.png" Style="{StaticResource MWItemButtonStyle}" IconDiameter="20"></us:IconButton>
-                <us:IconButton x:Name="T_TotopButton" Visibility="Hidden" ImageSource="/resources/icons/totop_normal.png" Style="{StaticResource MWItemButtonStyle}" IconDiameter="20"></us:IconButton>
+                <us:IconButton x:Name="T_AddButton" Visibility="Hidden" 
+                               ImageSource="/resources/icons/add_normal.png" 
+                               HoverIcon="/resources/icons/add_hover.png"
+                               Style="{StaticResource MWItemButtonStyle}" 
+                               IconDiameter="20"/>
+                <us:IconButton x:Name="T_EditButton" Visibility="Hidden" 
+                               ImageSource="/resources/icons/edit_normal.png" 
+                               HoverIcon="/resources/icons/edit_hover.png"
+                               Style="{StaticResource MWItemButtonStyle}" 
+                               IconDiameter="20"/>
+                <us:IconButton x:Name="T_DeleteButton" Visibility="Hidden" 
+                               ImageSource="/resources/icons/delete_normal.png" 
+                               HoverIcon="/resources/icons/delete_hover.png"
+                               Style="{StaticResource MWItemButtonStyle}" 
+                               IconDiameter="20"/>
+                <us:IconButton x:Name="T_TotopButton" Visibility="Hidden" 
+                               ImageSource="/resources/icons/totop_normal.png" 
+                               HoverIcon="/resources/icons/totop_hover.png"
+                               Style="{StaticResource MWItemButtonStyle}" 
+                               IconDiameter="20"/>
             </StackPanel>
         </Grid>
         <DataTemplate.Triggers>

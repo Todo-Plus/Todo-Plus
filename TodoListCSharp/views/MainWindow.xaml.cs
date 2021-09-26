@@ -1,7 +1,8 @@
 ﻿using System.Windows;
-using System.IO;
+using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using TodoListCSharp.views;
 
 namespace TodoListCSharp
 {
@@ -10,11 +11,18 @@ namespace TodoListCSharp
     /// </summary>
     public partial class MainWindow : Window
     {
+        // DllImport Define
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern System.IntPtr FindWindow([MarshalAs(UnmanagedType.LPTStr)] string lpClassName, [MarshalAs(UnmanagedType.LPTStr)] string lpWindowName);
         [DllImport("user32.dll")]
         public static extern System.IntPtr SetParent(System.IntPtr hWndChild, System.IntPtr hWndNewParent);
+
+        // Property Define
+
+        private SettingWindow oSettingWindow = null;
+
+        // Functions Define and Implement
         public MainWindow() {
             InitializeComponent();
 
@@ -37,6 +45,16 @@ namespace TodoListCSharp
 
         private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
             base.DragMove();
+        }
+
+        private void OpenSettingWindow(object sender, RoutedEventArgs e) {
+            if (oSettingWindow != null) {
+                return;
+            }
+
+            oSettingWindow = new SettingWindow();
+            oSettingWindow.Show();
+            oSettingWindow.Owner = this;
         }
     }
 

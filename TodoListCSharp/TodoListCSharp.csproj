@@ -14,12 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="locked.png" />
     <None Remove="resources\icons\add.png" />
     <None Remove="resources\icons\add_hover.png" />
     <None Remove="resources\icons\add_normal.png" />
+    <None Remove="resources\icons\back.png" />
     <None Remove="resources\icons\back_hover.png" />
     <None Remove="resources\icons\back_normal.png" />
+    <None Remove="resources\icons\close.png" />
     <None Remove="resources\icons\delete_hover.png" />
     <None Remove="resources\icons\delete_normal.png" />
     <None Remove="resources\icons\edit_hover.bmp" />
@@ -32,8 +33,6 @@
     <None Remove="resources\icons\totop_hover.png" />
     <None Remove="resources\icons\totop_normal.png" />
     <None Remove="resources\icons\unlock.png" />
-    <None Remove="setting.png" />
-    <None Remove="styles\add_normal.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,10 +45,16 @@
     <Content Include="resources\icons\add_normal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\icons\back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\icons\back_hover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\back_normal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\close.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\delete_hover.png">
@@ -91,12 +96,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="locked.png" />
     <Content Include="resources\icons\locked.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="setting.png" />
-    <Resource Include="styles\add_normal.png" />
   </ItemGroup>
 
 </Project>

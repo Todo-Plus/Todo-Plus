@@ -17,16 +17,20 @@
                             <Ellipse x:Name="T_Background" Height="{Binding CircleDiameter}" Width="{Binding CircleDiameter}"/>
                             <!-- Set for Icon Size-->
                             <Ellipse x:Name="T_Ellipse" Height="{Binding IconDiameter}" Width="{Binding IconDiameter}" Margin="2">
-                                <Ellipse.Fill> 
+                                <Ellipse.Fill>
                                     <ImageBrush ImageSource="{Binding ImageSource}" RenderOptions.BitmapScalingMode="HighQuality"/>
                                 </Ellipse.Fill>
-                                    
                             </Ellipse>
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="T_Background" Property="Fill" Value="#DCDCDC"/>
+                                <Setter TargetName="T_Background" Property="Fill" Value="#Eef1f1"/>
+                                <Setter TargetName="T_Ellipse" Property="Fill">
+                                    <Setter.Value>
+                                        <ImageBrush ImageSource="{Binding HoverIcon}" RenderOptions.BitmapScalingMode="HighQuality"/>
+                                    </Setter.Value>
+                                </Setter>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate> 

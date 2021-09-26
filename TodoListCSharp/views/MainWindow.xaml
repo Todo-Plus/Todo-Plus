@@ -24,18 +24,22 @@
                     <us:IconButton 
                         Style="{StaticResource MWTopButtonStyle}" 
                         ImageSource="/resources/icons/locked.png"
-                        IconDiameter="20"
-                        CircleDiameter="25"/>
+                        HoverIcon="/resources/icons/locked.png"
+                        IconDiameter="30"
+                        CircleDiameter="32"
+                        Click="OpenSettingWindow"/>
                     <us:IconButton 
                         Style="{StaticResource MWTopButtonStyle}" 
                         ImageSource="/resources/icons/setting.png"
-                        IconDiameter="20"
-                        CircleDiameter="25"/>
+                        HoverIcon="/resources/icons/setting.png"
+                        IconDiameter="30"
+                        CircleDiameter="32"/>
                     <us:IconButton 
                         Style="{StaticResource MWTopButtonStyle}" 
                         ImageSource="/resources/icons/add.png"
-                        IconDiameter="20"
-                        CircleDiameter="25"/>
+                        HoverIcon="/resources/icons/add.png"
+                        IconDiameter="30"
+                        CircleDiameter="32"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
