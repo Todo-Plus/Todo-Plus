@@ -11,9 +11,9 @@
         <us:Titlebar Title="Setting" Padding="10, 0" Background="White"/>
         <!--Display Mode Draw-->
         <StackPanel Background="White">
-            <Label Padding="10, 20, 10, 5" FontFamily="Inter" FontSize="20">Display Mode</Label>
+            <Label Padding="10, 20, 10, 10" FontFamily="Inter" FontSize="20">Display Mode</Label>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Grid Margin="40, 0">
+                <Grid Margin="40, 10">
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
@@ -62,7 +62,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                 <Image Margin="20, 10"
-                    Source="/resources/icons/backup .png"></Image>
+                    Source="/resources/icons/backup.png"></Image>
                 <Label VerticalAlignment="Center"
                        FontSize="20"
                        Foreground="#ABABAB"

@@ -16,12 +16,15 @@
   <ItemGroup>
     <None Remove="resources\DesktopMode.png" />
     <None Remove="resources\DesktopMode_light.png" />
+    <None Remove="resources\icons\about.png" />
     <None Remove="resources\icons\add.png" />
     <None Remove="resources\icons\add_hover.png" />
     <None Remove="resources\icons\add_normal.png" />
     <None Remove="resources\icons\back.png" />
+    <None Remove="resources\icons\backup.png" />
     <None Remove="resources\icons\back_hover.png" />
     <None Remove="resources\icons\back_normal.png" />
+    <None Remove="resources\icons\bulleted.png" />
     <None Remove="resources\icons\close.png" />
     <None Remove="resources\icons\delete_hover.png" />
     <None Remove="resources\icons\delete_normal.png" />
@@ -29,6 +32,7 @@
     <None Remove="resources\icons\edit_hover.png" />
     <None Remove="resources\icons\edit_normal.bmp" />
     <None Remove="resources\icons\edit_normal.png" />
+    <None Remove="resources\icons\info.png" />
     <None Remove="resources\icons\locked.bmp" />
     <None Remove="resources\icons\locked.png" />
     <None Remove="resources\icons\setting.png" />
@@ -46,6 +50,9 @@
     <Content Include="resources\DesktopMode_light.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\icons\about.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\icons\add.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -58,10 +65,16 @@
     <Content Include="resources\icons\back.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="resources\icons\backup.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\icons\back_hover.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\back_normal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\bulleted.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\close.png">
@@ -83,6 +96,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\edit_normal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\info.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\setting.png">
