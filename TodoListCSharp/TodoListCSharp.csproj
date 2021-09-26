@@ -16,21 +16,67 @@
   <ItemGroup>
     <None Remove="locked.png" />
     <None Remove="resources\icons\add.png" />
+    <None Remove="resources\icons\add_hover.png" />
+    <None Remove="resources\icons\add_normal.png" />
+    <None Remove="resources\icons\back_hover.png" />
+    <None Remove="resources\icons\back_normal.png" />
+    <None Remove="resources\icons\delete_hover.png" />
+    <None Remove="resources\icons\delete_normal.png" />
+    <None Remove="resources\icons\edit_hover.bmp" />
+    <None Remove="resources\icons\edit_hover.png" />
+    <None Remove="resources\icons\edit_normal.bmp" />
+    <None Remove="resources\icons\edit_normal.png" />
     <None Remove="resources\icons\locked.bmp" />
     <None Remove="resources\icons\locked.png" />
     <None Remove="resources\icons\setting.png" />
+    <None Remove="resources\icons\totop_hover.png" />
+    <None Remove="resources\icons\totop_normal.png" />
     <None Remove="resources\icons\unlock.png" />
     <None Remove="setting.png" />
+    <None Remove="styles\add_normal.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="resources\icons\add.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="resources\icons\locked.bmp">
+    <Content Include="resources\icons\add_hover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\add_normal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\back_hover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\back_normal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\delete_hover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\delete_normal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\edit_hover.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\edit_hover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\edit_normal.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\edit_normal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\setting.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\totop_hover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\totop_normal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\unlock.png">
@@ -50,6 +96,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="setting.png" />
+    <Resource Include="styles\add_normal.png" />
   </ItemGroup>
 
 </Project>

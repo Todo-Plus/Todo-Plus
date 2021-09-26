@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="850" MinWidth="379" Height="850" Width="300">
     <StackPanel>
-        <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="White">
+        <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <StackPanel Style="{StaticResource MWTypeContainer}">
                     <Label Style="{StaticResource MWTypeChosedFont}">Todo</Label>
@@ -21,14 +21,34 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10, 0">
                 <StackPanel Orientation="Horizontal" Width="Auto">
-                    <us:IconButton Style="{StaticResource MWTopButtonStyle}" ImageSource="/resources/icons/locked.png"></us:IconButton>
-                    <us:IconButton Style="{StaticResource MWTopButtonStyle}" ImageSource="/resources/icons/setting.png"></us:IconButton>
-                    <us:IconButton Style="{StaticResource MWTopButtonStyle}" ImageSource="/resources/icons/add.png"></us:IconButton>
+                    <us:IconButton 
+                        Style="{StaticResource MWTopButtonStyle}" 
+                        ImageSource="/resources/icons/locked.png"
+                        IconDiameter="20"
+                        CircleDiameter="25"/>
+                    <us:IconButton 
+                        Style="{StaticResource MWTopButtonStyle}" 
+                        ImageSource="/resources/icons/setting.png"
+                        IconDiameter="20"
+                        CircleDiameter="25"/>
+                    <us:IconButton 
+                        Style="{StaticResource MWTopButtonStyle}" 
+                        ImageSource="/resources/icons/add.png"
+                        IconDiameter="20"
+                        CircleDiameter="25"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <ListBox Name="todoList"  ItemTemplate="{StaticResource MWTodoListBoxItem}" Height="Auto"/>
-
-
+        <ListBox 
+            HorizontalAlignment="Stretch" 
+            Name="todoList"  
+            ItemTemplate="{StaticResource MWTodoListBoxItem}" 
+            Height="Auto">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
     </StackPanel> 
 </Window> 

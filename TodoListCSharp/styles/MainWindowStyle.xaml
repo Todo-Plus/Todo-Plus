@@ -49,19 +49,38 @@
         <Setter Property="Margin" Value="5"/>
     </Style>
 
+    <Style x:Key="MWItemButtonStyle" TargetType="{x:Type us:IconButton}">
+        <Setter Property="Width" Value="30"/>
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+
 
     <!--Summary Start-->
     <!-- Main Window Control Template-->
     <!--Symmary End-->
 
-    <DataTemplate x:Key="MWTodoListBoxItem" >
-        <Grid Height="40" Margin="10, 2" Width="Auto">
+    <DataTemplate x:Key="MWTodoListBoxItem">
+        <Grid Height="30" Margin="10, 0" Background="Transparent">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <Ellipse Width="10" Height="10" Fill="#BBBBBB"/>
-                <Label Content="{Binding strTitle}" VerticalAlignment="Center" Margin="10, 0" FontSize="15"></Label>
+                <Label Content="{Binding strTitle}" VerticalAlignment="Center" Margin="5, 0" FontSize="15"></Label>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"></StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <us:IconButton x:Name="T_AddButton" Visibility="Hidden" ImageSource="/resources/icons/add_normal.png" Style="{StaticResource MWItemButtonStyle}" IconDiameter="20"></us:IconButton>
+                <us:IconButton x:Name="T_EditButton" Visibility="Hidden" ImageSource="/resources/icons/edit_normal.png" Style="{StaticResource MWItemButtonStyle}" IconDiameter="20"></us:IconButton>
+                <us:IconButton x:Name="T_DeleteButton" Visibility="Hidden" ImageSource="/resources/icons/delete_normal.png" Style="{StaticResource MWItemButtonStyle}" IconDiameter="20"></us:IconButton>
+                <us:IconButton x:Name="T_TotopButton" Visibility="Hidden" ImageSource="/resources/icons/totop_normal.png" Style="{StaticResource MWItemButtonStyle}" IconDiameter="20"></us:IconButton>
+            </StackPanel>
         </Grid>
+        <DataTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="T_AddButton" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="T_EditButton" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="T_DeleteButton" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="T_TotopButton" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </DataTemplate.Triggers>
     </DataTemplate>
 
 </ResourceDictionary>

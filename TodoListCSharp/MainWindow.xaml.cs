@@ -19,10 +19,14 @@ namespace TodoListCSharp
             InitializeComponent();
 
             List<TodoItem> list = new List<TodoItem>();
-            list.Add(new TodoItem() { 
-                iIndex = 1,
-                strTitle = "Test Item 1"
-            });
+            
+
+            for (int i = 0; i <= 40; i++) {
+                list.Add(new TodoItem() {
+                    iIndex = i,
+                    strTitle = "Test item"
+                });
+            }
 
             this.todoList.ItemsSource = list;
         }

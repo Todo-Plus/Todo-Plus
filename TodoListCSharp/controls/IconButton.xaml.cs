@@ -26,13 +26,27 @@ namespace TodoListCSharp.controls {
             get { return (ImageSource)GetValue(ImageSourceProperty); }
             set { SetValue(ImageSourceProperty, value); }
         }
+        public int IconDiameter {
+            get { return (int)GetValue(IconDiameterProperty); }
+            set { SetValue(IconDiameterProperty, value); }
+        }
+        public int CircleDiameter {
+            get { return (int)GetValue(CircleDiameterProperty); }
+            set { SetValue(CircleDiameterProperty, value); }
+        }
 
         public static readonly DependencyProperty ImageSourceProperty = DependencyProperty.Register("ImageSource",
             typeof(ImageSource), typeof(IconButton));
+        public static readonly DependencyProperty IconDiameterProperty = DependencyProperty.Register("IconDiameter",
+            typeof(int), typeof(int));
+        public static readonly DependencyProperty CircleDiameterProperty = DependencyProperty.Register("CircleDiameter",
+            typeof(int), typeof(int));
 
         private void IconButton_Loaded(object sender, RoutedEventArgs e) {
             var data = new IconButtonModel() {
-                ImageSource = ImageSource
+                ImageSource = ImageSource,
+                IconDiameter = IconDiameter,
+                CircleDiameter = CircleDiameter
             };
             this.DataContext = data;
         }
@@ -48,6 +62,8 @@ namespace TodoListCSharp.controls {
 
         public class IconButtonModel {
             public ImageSource ImageSource { get; set; }
+            public int IconDiameter { get; set; }
+            public int CircleDiameter { get; set; }
         }
     }
 }
