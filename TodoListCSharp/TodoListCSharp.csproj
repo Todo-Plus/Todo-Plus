@@ -14,6 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="resources\DesktopMode.png" />
+    <None Remove="resources\DesktopMode_light.png" />
     <None Remove="resources\icons\add.png" />
     <None Remove="resources\icons\add_hover.png" />
     <None Remove="resources\icons\add_normal.png" />
@@ -33,9 +35,17 @@
     <None Remove="resources\icons\totop_hover.png" />
     <None Remove="resources\icons\totop_normal.png" />
     <None Remove="resources\icons\unlock.png" />
+    <None Remove="resources\SideMode.png" />
+    <None Remove="resources\SideMode_light.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="resources\DesktopMode.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\DesktopMode_light.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="resources\icons\add.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -85,6 +95,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\unlock.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\SideMode.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\SideMode_light.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

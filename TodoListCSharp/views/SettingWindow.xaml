@@ -8,8 +8,74 @@
         mc:Ignorable="d"
         Title="SettingWindow" MinHeight="700" MinWidth="520" Height="700" Width="520">
     <StackPanel Background="#E8E8E8">
+        <us:Titlebar Title="Setting" Padding="10, 0" Background="White"/>
+        <!--Display Mode Draw-->
         <StackPanel Background="White">
-            <us:Titlebar Title="Setting" Margin="10, 0"/>
+            <Label Padding="10, 20, 10, 5" FontFamily="Inter" FontSize="20">Display Mode</Label>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Grid Margin="40, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Row="0" Width="192" Height="108">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/resources/DesktopMode.png"></ImageBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Grid.Row="1" 
+                           HorizontalAlignment="Center"
+                           FontSize="15">Desktop Mode</Label>
+                </Grid>
+                <Grid Margin="40, 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Row="0" Width="192" Height="108">
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="/resources/SideMode.png"></ImageBrush>
+                        </Rectangle.Fill>
+                    </Rectangle>
+                    <Label Grid.Row="1" 
+                           HorizontalAlignment="Center"
+                           FontSize="15">Side Mode</Label>
+                </Grid>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Background="White" Margin="0, 20">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <Image Margin="20, 10"
+                    Source="/resources/icons/info.png"></Image>
+                <Label VerticalAlignment="Center"
+                       FontSize="20"
+                       Foreground="#ABABAB"
+                       >General Setting</Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <Image Margin="22, 10"
+                    Source="/resources/icons/bulleted.png"></Image>
+                <Label VerticalAlignment="Center"
+                       FontSize="20"
+                       Foreground="#ABABAB"
+                       >Appearance Setting</Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <Image Margin="20, 10"
+                    Source="/resources/icons/backup .png"></Image>
+                <Label VerticalAlignment="Center"
+                       FontSize="20"
+                       Foreground="#ABABAB"
+                       >Backup Setting</Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <Image Margin="20, 10"
+                    Source="/resources/icons/about.png"></Image>
+                <Label VerticalAlignment="Center"
+                       FontSize="20"
+                       Foreground="#ABABAB"
+                       >About</Label>
+            </StackPanel>
         </StackPanel>
     </StackPanel>
 </Window>
