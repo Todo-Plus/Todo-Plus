@@ -10,16 +10,23 @@
     <StackPanel>
         <Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <local:IconButton IconDiameter="35" CircleDiameter="40" ImageSource="/resources/icons/back.png" HoverIcon="/resources/icons/back.png"/>
+                <local:IconButton x:Name="ReturnButton"
+                                  IconDiameter="25" 
+                                  CircleDiameter="30" 
+                                  ImageSource="/resources/icons/back.png" 
+                                  HoverIcon="/resources/icons/back.png"/>
                 <Label x:Name="T_TitleDesc" 
                        Content="{Binding Title}" 
                        Margin="5" 
                        FontFamily="Inter" 
-                       FontSize="30" 
+                       FontSize="25" 
                        VerticalAlignment="Center"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <local:IconButton IconDiameter="35" CircleDiameter="40" ImageSource="/resources/icons/close.png" HoverIcon="/resources/icons/close.png"/>
+                <local:IconButton IconDiameter="25" 
+                                  CircleDiameter="30" 
+                                  ImageSource="/resources/icons/close.png" 
+                                  HoverIcon="/resources/icons/close.png"/>
             </StackPanel>
         </Grid>
     </StackPanel>

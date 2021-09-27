@@ -39,5 +39,13 @@ namespace TodoListCSharp.controls {
             };
             this.DataContext = data;
         }
+
+        private void ReturnButtonClicked(object sender, RoutedEventArgs e) {
+            return;
+        }
+
+        private void CloseButtonClicked(object sender, RoutedEventArgs e) {
+            this.Close();
+        }
     }
 }

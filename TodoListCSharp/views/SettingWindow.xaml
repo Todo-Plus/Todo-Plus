@@ -43,6 +43,7 @@
                 </Grid>
             </StackPanel>
         </StackPanel>
+        <!--Todo: 封装组件，提供函数-->
         <StackPanel Background="White" Margin="0, 20">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
                 <Image Margin="20, 10"

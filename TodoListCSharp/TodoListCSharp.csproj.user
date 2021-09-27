@@ -10,6 +10,9 @@
     <Compile Update="controls\IconButton.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="controls\MenuItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="controls\Titlebar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -28,6 +31,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="controls\IconButton.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="controls\MenuItem.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="controls\Titlebar.xaml">

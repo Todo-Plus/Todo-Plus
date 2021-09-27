@@ -49,6 +49,7 @@ namespace TodoListCSharp
 
         private void OpenSettingWindow(object sender, RoutedEventArgs e) {
             if (oSettingWindow != null) {
+                oSettingWindow.Show();
                 return;
             }
 

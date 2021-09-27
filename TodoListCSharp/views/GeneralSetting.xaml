@@ -4,9 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TodoListCSharp.views"
+        xmlns:us="clr-namespace:TodoListCSharp.controls"
         mc:Ignorable="d"
         Title="GeneralSetting" MinHeight="560" MinWidth="416" Height="560" Width="416">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <us:Titlebar Title="General" Background="White"/>
+        <StackPanel>
+            <!-- Tabs and Add Button-->
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label FontFamily="Inter" FontSize="12">Tabs</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button>Add</Button>
+                </StackPanel>
+            </Grid>
+            
+            <!-- Todo: Show Tabs-->
+        </StackPanel>
+    </StackPanel>
 </Window>
