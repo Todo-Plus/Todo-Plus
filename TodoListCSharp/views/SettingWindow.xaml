@@ -6,9 +6,18 @@
         xmlns:local="clr-namespace:TodoListCSharp.views"
         xmlns:us="clr-namespace:TodoListCSharp.controls"
         mc:Ignorable="d"
-        Title="SettingWindow" MinHeight="700" MinWidth="520" Height="700" Width="520">
+        Title="SettingWindow" 
+        MinHeight="700" 
+        MinWidth="520" 
+        Height="700" 
+        Width="520"
+        Closed="SettingWindow_OnClosed">
     <StackPanel Background="#E8E8E8">
-        <us:Titlebar Title="Setting" Padding="10, 0" Background="White"/>
+        <us:Titlebar x:Name="titlebar"
+                     Title="Setting" 
+                     Padding="10, 0" 
+                     Background="White" 
+                     />
         <!--Display Mode Draw-->
         <StackPanel Background="White">
             <Label Padding="10, 20, 10, 10" FontFamily="Inter" FontSize="20">Display Mode</Label>
@@ -43,40 +52,13 @@
                 </Grid>
             </StackPanel>
         </StackPanel>
-        <!--Todo: 封装组件，提供函数-->
         <StackPanel Background="White" Margin="0, 20">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Image Margin="20, 10"
-                    Source="/resources/icons/info.png"></Image>
-                <Label VerticalAlignment="Center"
-                       FontSize="20"
-                       Foreground="#ABABAB"
-                       >General Setting</Label>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Image Margin="22, 10"
-                    Source="/resources/icons/bulleted.png"></Image>
-                <Label VerticalAlignment="Center"
-                       FontSize="20"
-                       Foreground="#ABABAB"
-                       >Appearance Setting</Label>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Image Margin="20, 10"
-                    Source="/resources/icons/backup.png"></Image>
-                <Label VerticalAlignment="Center"
-                       FontSize="20"
-                       Foreground="#ABABAB"
-                       >Backup Setting</Label>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Image Margin="20, 10"
-                    Source="/resources/icons/about.png"></Image>
-                <Label VerticalAlignment="Center"
-                       FontSize="20"
-                       Foreground="#ABABAB"
-                       >About</Label>
-            </StackPanel>
+            <us:MenuItem IconSource="/resources/icons/info.png"
+                         Text="General Setting"
+                         x:Name="InfoMenuItem"/>
+            <us:MenuItem IconSource="/resources/icons/bulleted.png" Text="Appearance Setting"></us:MenuItem>
+            <us:MenuItem IconSource="/resources/icons/backup.png" Text="Backup Setting"></us:MenuItem>
+            <us:MenuItem IconSource="/resources/icons/about.png" Text="About Setting"></us:MenuItem>
         </StackPanel>
     </StackPanel>
 </Window>

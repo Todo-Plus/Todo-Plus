@@ -74,8 +74,7 @@ namespace TodoListCSharp.controls {
                 Click(sender, e);
             }
         }
-
-
+        
         public class IconButtonModel {
             public ImageSource ImageSource { get; set; }
             public ImageSource HoverIcon { get; set; }

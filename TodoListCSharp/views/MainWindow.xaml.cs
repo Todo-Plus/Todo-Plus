@@ -11,31 +11,27 @@ namespace TodoListCSharp
     /// </summary>
     public partial class MainWindow : Window
     {
-        // DllImport Define
+        // !! DllImport Define
 
         [DllImport("user32.dll", CharSet = CharSet.Auto)]
         public static extern System.IntPtr FindWindow([MarshalAs(UnmanagedType.LPTStr)] string lpClassName, [MarshalAs(UnmanagedType.LPTStr)] string lpWindowName);
         [DllImport("user32.dll")]
         public static extern System.IntPtr SetParent(System.IntPtr hWndChild, System.IntPtr hWndNewParent);
 
-        // Property Define
+        // !! Property Define
 
         private SettingWindow oSettingWindow = null;
 
-        // Functions Define and Implement
+        // !! Functions Define and Implement
         public MainWindow() {
             InitializeComponent();
-
             List<TodoItem> list = new List<TodoItem>();
-            
-
-            for (int i = 0; i <= 40; i++) {
+            for (int i = 0; i <= 20; i++) {
                 list.Add(new TodoItem() {
                     iIndex = i,
                     strTitle = "Test item"
                 });
             }
-
             this.todoList.ItemsSource = list;
         }
 
@@ -55,9 +51,18 @@ namespace TodoListCSharp
 
             oSettingWindow = new SettingWindow();
             oSettingWindow.Show();
+            // Set callback function
+            oSettingWindow.settingWindowClosed += SettingWindow_OnClosed;
             oSettingWindow.Owner = this;
         }
+        
+        // Set SettingWindow while close windows
+        private void SettingWindow_OnClosed() {
+            oSettingWindow = null;
+        }
     }
+    
+    // !! subClass Define
 
     public class TodoItem {
         // todo： 修改为private并且设置对应的函数

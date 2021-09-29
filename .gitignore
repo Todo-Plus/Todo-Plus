@@ -83,3 +83,5 @@ v15/
 .gitignore
 
 # !!! Other ignore add at there
+.idea/
+.vs/
