@@ -17,8 +17,18 @@ namespace TodoListCSharp.views {
     /// GeneralSetting.xaml 的交互逻辑
     /// </summary>
     public partial class GeneralSetting : Window {
+        // !! Events & delegate Define
+        public delegate void ClosedCallbackFunc();
+        public event ClosedCallbackFunc closedCallbackFunc;
+        
         public GeneralSetting() {
             InitializeComponent();
+        }
+
+        private void GeneralSetting_onClosed(object sender, EventArgs e) {
+            if (closedCallbackFunc != null) {
+                closedCallbackFunc();
+            }
         }
     }
 }

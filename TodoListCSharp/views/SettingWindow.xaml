@@ -56,7 +56,9 @@
             <us:MenuItem IconSource="/resources/icons/info.png"
                          Text="General Setting"
                          x:Name="InfoMenuItem"/>
-            <us:MenuItem IconSource="/resources/icons/bulleted.png" Text="Appearance Setting"></us:MenuItem>
+            <us:MenuItem IconSource="/resources/icons/bulleted.png" 
+                         Text="Appearance Setting"
+                         x:Name="AppearanceMenuItem"/>
             <us:MenuItem IconSource="/resources/icons/backup.png" Text="Backup Setting"></us:MenuItem>
             <us:MenuItem IconSource="/resources/icons/about.png" Text="About Setting"></us:MenuItem>
         </StackPanel>

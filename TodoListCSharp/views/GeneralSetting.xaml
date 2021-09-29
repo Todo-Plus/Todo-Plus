@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:TodoListCSharp.views"
         xmlns:us="clr-namespace:TodoListCSharp.controls"
         mc:Ignorable="d"
+        Closed="GeneralSetting_onClosed"
         Title="GeneralSetting" MinHeight="560" MinWidth="416" Height="560" Width="416">
     <StackPanel>
         <us:Titlebar Title="General" Background="White"/>

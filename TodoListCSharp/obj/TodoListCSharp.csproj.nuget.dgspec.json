@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\repo\\TodoListCSharp\\TodoListCSharp\\TodoListCSharp.csproj": {}
+    "G:\\repos\\TodoListCSharp\\TodoListCSharp\\TodoListCSharp.csproj": {}
   },
   "projects": {
-    "D:\\repo\\TodoListCSharp\\TodoListCSharp\\TodoListCSharp.csproj": {
+    "G:\\repos\\TodoListCSharp\\TodoListCSharp\\TodoListCSharp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\repo\\TodoListCSharp\\TodoListCSharp\\TodoListCSharp.csproj",
+        "projectUniqueName": "G:\\repos\\TodoListCSharp\\TodoListCSharp\\TodoListCSharp.csproj",
         "projectName": "TodoListCSharp",
-        "projectPath": "D:\\repo\\TodoListCSharp\\TodoListCSharp\\TodoListCSharp.csproj",
+        "projectPath": "G:\\repos\\TodoListCSharp\\TodoListCSharp\\TodoListCSharp.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\repo\\TodoListCSharp\\TodoListCSharp\\obj\\",
+        "outputPath": "G:\\repos\\TodoListCSharp\\TodoListCSharp\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "J:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -57,7 +61,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

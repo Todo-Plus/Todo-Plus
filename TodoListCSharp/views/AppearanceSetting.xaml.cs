@@ -17,8 +17,18 @@ namespace TodoListCSharp.views {
     /// AppearanceSetting.xaml 的交互逻辑
     /// </summary>
     public partial class AppearanceSetting : Window {
+        
+        // delegate & events
+        public delegate void ClosedCallbackFunc();
+        public event ClosedCallbackFunc closedCallbackFunc;
         public AppearanceSetting() {
             InitializeComponent();
+        }
+
+        private void AppearanceSetting_OnClosed(object? sender, EventArgs e) {
+            if (closedCallbackFunc != null) {
+                closedCallbackFunc();
+            }
         }
     }
 }

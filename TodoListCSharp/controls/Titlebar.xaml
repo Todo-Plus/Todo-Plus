@@ -14,7 +14,8 @@
                                   IconDiameter="25" 
                                   CircleDiameter="30" 
                                   ImageSource="/resources/icons/back.png" 
-                                  HoverIcon="/resources/icons/back.png"/>
+                                  HoverIcon="/resources/icons/back.png"
+                                  Click="TitleBar_onReturnButtonClicked"/>
                 <Label x:Name="T_TitleDesc" 
                        Content="{Binding Title}" 
                        Margin="5" 
@@ -26,7 +27,8 @@
                 <local:IconButton IconDiameter="25" 
                                   CircleDiameter="30" 
                                   ImageSource="/resources/icons/close.png" 
-                                  HoverIcon="/resources/icons/close.png"/>
+                                  HoverIcon="/resources/icons/close.png"
+                                  Click="TitleBar_onCloseButtonClicked"/>
             </StackPanel>
         </Grid>
     </StackPanel>

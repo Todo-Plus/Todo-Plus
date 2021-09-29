@@ -37,6 +37,7 @@ namespace TodoListCSharp.views {
             // Set Close Button Callback Function
             this.titlebar.CloseButtonClicked += SettingWindowClose;
             this.InfoMenuItem.Click += OpenGeneralSettingWindow;
+            this.AppearanceMenuItem.Click += OpenAppearanceSettingWindow;
         }
         private void SettingWindow_OnClosed(object sender, EventArgs e)
         {
@@ -59,6 +60,20 @@ namespace TodoListCSharp.views {
         }
 
         private void CloseGeneralSettingWindow() {
+            oGeneralSettingWindow = null;
+        }
+
+        private void OpenAppearanceSettingWindow(object sender, EventArgs e) {
+            if (oAppearanceSettingWindow != null) {
+                return;
+            }
+            oAppearanceSettingWindow = new AppearanceSetting();
+            oAppearanceSettingWindow.Show();
+            oAppearanceSettingWindow.closedCallbackFunc += CloseAppearanceSettingWindow;
+            oAppearanceSettingWindow.Owner = this;
+        }
+        
+        private void CloseAppearanceSettingWindow() {
             oGeneralSettingWindow = null;
         }
     }
