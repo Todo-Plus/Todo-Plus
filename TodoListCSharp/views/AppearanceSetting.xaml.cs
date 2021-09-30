@@ -30,5 +30,9 @@ namespace TodoListCSharp.views {
                 closedCallbackFunc();
             }
         }
+
+        private void Slider_MouseMove(object sender, MouseEventArgs e) {
+            return ;
+        }
     }
 }

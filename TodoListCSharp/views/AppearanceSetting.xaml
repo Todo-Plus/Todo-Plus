@@ -62,8 +62,9 @@
                     IsSnapToTickEnabled="True"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Width="350"/>
-                <Label FontSize="15" Margin="10, 0">20</Label>
+                    Width="350"
+                    MouseMove="Slider_MouseMove"/>
+                <Label FontSize="15" Margin="10, 0" x:Name="showPercent">20</Label>
             </StackPanel>
             
             <!--Font Setting-->
