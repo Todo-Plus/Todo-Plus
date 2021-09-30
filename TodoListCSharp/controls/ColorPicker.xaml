@@ -61,6 +61,7 @@
                     </Ellipse.Effect>
                 </Ellipse>
             </StackPanel>
+            <!-- Todo: Add Select line and callback function-->
         </Grid>
     </Grid>
 </UserControl>

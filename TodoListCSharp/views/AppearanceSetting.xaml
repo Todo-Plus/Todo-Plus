@@ -7,45 +7,45 @@
         xmlns:us="clr-namespace:TodoListCSharp.controls"
         mc:Ignorable="d"
         Closed="AppearanceSetting_OnClosed"
-        Title="AppearanceSetting" MinHeight="560" MinWidth="416" Height="560" Width="416">
+        Title="AppearanceSetting" MinHeight="560" MinWidth="418" Height="560" Width="418">
     <StackPanel>
         <us:Titlebar Title="Appearance" Background="White"/>
         <StackPanel>
             <!--Color Setting-->
             <StackPanel Orientation="Horizontal">
-                <Label FontFamily="Inter" FontSize="16" VerticalAlignment="Center">Color</Label>
+                <Label FontFamily="Inter" FontSize="18" VerticalAlignment="Center" Margin="5, 0">Color</Label>
                 <!--Todo: Dynamic Add Color Ellipse-->
-                <Ellipse Width="16" Height="16" Margin="5, 0" Fill="Bisque">
+                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
                     <Ellipse.Effect>
                         <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
                     </Ellipse.Effect>
                 </Ellipse>
-                <Ellipse Width="16" Height="16" Margin="5, 0" Fill="Bisque">
+                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
                     <Ellipse.Effect>
                         <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
                     </Ellipse.Effect>
                 </Ellipse>
-                <Ellipse Width="16" Height="16" Margin="5, 0" Fill="Bisque">
+                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
                     <Ellipse.Effect>
                         <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
                     </Ellipse.Effect>
                 </Ellipse>
-                <Ellipse Width="16" Height="16" Margin="5, 0" Fill="Bisque">
+                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
                     <Ellipse.Effect>
                         <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
                     </Ellipse.Effect>
                 </Ellipse>
-                <Ellipse Width="16" Height="16" Margin="5, 0" Fill="Bisque">
+                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
                     <Ellipse.Effect>
                         <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
                     </Ellipse.Effect>
                 </Ellipse>
-                <Ellipse Width="16" Height="16" Margin="5, 0" Fill="Bisque">
+                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
                     <Ellipse.Effect>
                         <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
                     </Ellipse.Effect>
                 </Ellipse>
-                <Ellipse Width="16" Height="16" Margin="5, 0" Fill="Bisque">
+                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
                     <Ellipse.Effect>
                         <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
                     </Ellipse.Effect>
