@@ -13,7 +13,10 @@
         </Grid.RowDefinitions>
 
         <Grid>
-            <Canvas x:Name="canvas" Width="256" Height="144" Background="Black" MouseLeftButtonDown="Canvas_OnMouseLeftButtonDown">
+            <Canvas x:Name="canvas" 
+                    Width="256" Height="144" 
+                    Background="Black" 
+                    MouseMove="Canvas_OnMouseMove">
                 <Rectangle  Width="256" Height="144">
                     <Rectangle.Fill>
                         <LinearGradientBrush>

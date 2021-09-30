@@ -27,7 +27,8 @@ namespace TodoListCSharp.controls {
             this.CoreColor.Color = DefaultColor;
         }
 
-        private void Canvas_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+        private void Canvas_OnMouseMove(object sender, MouseEventArgs e) {
+            if (Mouse.LeftButton != MouseButtonState.Pressed) return;
             Point postion = e.GetPosition((IInputElement) sender);
             double left = 2 * postion.X - Width;
             double top = 2 * postion.Y - Height;
