@@ -8,9 +8,9 @@
         mc:Ignorable="d"
         Closed="AppearanceSetting_OnClosed"
         Title="AppearanceSetting" MinHeight="560" MinWidth="418" Height="560" Width="418">
-    <StackPanel>
+    <StackPanel Background="#E8E8E8">
         <us:Titlebar Title="Appearance" Background="White"/>
-        <StackPanel>
+        <StackPanel Background="White">
             <!--Color Setting-->
             <StackPanel Orientation="Horizontal">
                 <Label FontFamily="Inter" FontSize="18" VerticalAlignment="Center" Margin="5, 0">Color</Label>
@@ -52,6 +52,35 @@
                 </Ellipse>
             </StackPanel>
             <us:ColorPicker></us:ColorPicker>
+            
+            <!-- Transparency ScrollBar-->
+            <Label FontFamily="Inter" FontSize="18" VerticalAlignment="Center" Margin="5, 0">Transparency</Label>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10, 0">
+                <Slider 
+                    Maximum="100" 
+                    TickFrequency="1" 
+                    IsSnapToTickEnabled="True"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Width="350"/>
+                <Label FontSize="15" Margin="10, 0">20</Label>
+            </StackPanel>
+            
+            <!--Font Setting-->
+            <StackPanel Orientation="Horizontal" Margin="5, 10" HorizontalAlignment="Stretch">
+                <Grid Width="Auto">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Label>Font Size</Label>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Label>Font Family</Label>
+                    </Grid>
+                </Grid>
+            </StackPanel>
         </StackPanel>
     </StackPanel>
 </Window>
