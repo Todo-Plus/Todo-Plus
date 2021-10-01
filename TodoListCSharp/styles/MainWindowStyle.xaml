@@ -43,18 +43,19 @@
     </Style>
 
     <!--Main Window Top button style-->
-    <Style x:Key="MWTopButtonStyle" TargetType="{x:Type us:IconButton}">
-        <Setter Property="Width" Value="35"/>
-        <Setter Property="Height" Value="35"/>
-        <Setter Property="Margin" Value="5"/>
-    </Style>
-
     <Style x:Key="MWItemButtonStyle" TargetType="{x:Type us:IconButton}">
         <Setter Property="Width" Value="30"/>
         <Setter Property="Height" Value="30"/>
         <Setter Property="Margin" Value="0"/>
     </Style>
-
+    
+    <Style x:Key="MWTitleIconButtonStyle" TargetType="{x:Type us:IconButton}">
+        <Setter Property="Width" Value="35"/>
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="IconDiameter" Value="30"/>
+        <Setter Property="CircleDiameter" Value="32"/>
+    </Style>
 
     <!--Summary Start-->
     <!-- Main Window Control Template-->

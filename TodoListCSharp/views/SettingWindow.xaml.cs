@@ -38,6 +38,7 @@ namespace TodoListCSharp.views {
             this.titlebar.CloseButtonClicked += SettingWindowClose;
             this.InfoMenuItem.Click += OpenGeneralSettingWindow;
             this.AppearanceMenuItem.Click += OpenAppearanceSettingWindow;
+            this.BackupMenuItem.Click += openBackupSettingWindow;
         }
         private void SettingWindow_OnClosed(object sender, EventArgs e)
         {
@@ -75,6 +76,21 @@ namespace TodoListCSharp.views {
         
         private void CloseAppearanceSettingWindow() {
             oGeneralSettingWindow = null;
+        }
+
+        private void openBackupSettingWindow(object sender, EventArgs e) {
+            if (oBackupSettingWindow != null) {
+                return;
+            }
+
+            oBackupSettingWindow = new BackupSetting();
+            oBackupSettingWindow.Show();
+            oBackupSettingWindow.closedCallbackFunc += CloseBackupSettingWindow;
+            oBackupSettingWindow.Owner = this;
+        }
+
+        private void CloseBackupSettingWindow() {
+            oBackupSettingWindow = null;
         }
     }
 }
