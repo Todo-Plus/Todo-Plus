@@ -63,7 +63,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Width="350"
-                    MouseMove="Slider_MouseMove"/>
+                    Thumb.DragCompleted="AppearanceSetting_onDragOver"/>
                 <Label FontSize="15" Margin="10, 0" x:Name="showPercent">20</Label>
             </StackPanel>
             
