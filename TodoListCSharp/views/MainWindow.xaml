@@ -34,7 +34,8 @@
                     <us:IconButton 
                         Style="{StaticResource MWTitleIconButtonStyle}" 
                         ImageSource="/resources/icons/add.png"
-                        HoverIcon="/resources/icons/add.png"/>
+                        HoverIcon="/resources/icons/add.png"
+                        Click="OpenItemAddWindow"/>
                 </StackPanel>
             </StackPanel>
         </Grid>

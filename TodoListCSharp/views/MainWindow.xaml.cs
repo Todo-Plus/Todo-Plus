@@ -21,6 +21,7 @@ namespace TodoListCSharp
         // !! Property Define
 
         private SettingWindow oSettingWindow = null;
+        private ItemAddWindow oItemAddWindow = null;
 
         // !! Functions Define and Implement
         public MainWindow() {
@@ -55,10 +56,28 @@ namespace TodoListCSharp
             oSettingWindow.settingWindowClosed += SettingWindow_OnClosed;
             oSettingWindow.Owner = this;
         }
+
+        private void OpenItemAddWindow(object sender, RoutedEventArgs e) {
+            if (oItemAddWindow != null) {
+                oItemAddWindow.Show();
+                return;
+            }
+
+            oItemAddWindow = new ItemAddWindow();
+            oItemAddWindow.Show();
+            
+            // Set Callback Function
+            oItemAddWindow.closeCallbackFunc += ItemAddWindow_onClosed;
+            oItemAddWindow.Owner = this;
+        }
         
         // Set SettingWindow while close windows
         private void SettingWindow_OnClosed() {
             oSettingWindow = null;
+        }
+
+        private void ItemAddWindow_onClosed() {
+            oItemAddWindow = null;
         }
     }
     

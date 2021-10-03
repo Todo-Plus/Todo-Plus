@@ -25,6 +25,7 @@
     <None Remove="resources\icons\back_hover.png" />
     <None Remove="resources\icons\back_normal.png" />
     <None Remove="resources\icons\bulleted.png" />
+    <None Remove="resources\icons\calendar.png" />
     <None Remove="resources\icons\close.png" />
     <None Remove="resources\icons\delete_hover.png" />
     <None Remove="resources\icons\delete_normal.png" />
@@ -75,6 +76,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\bulleted.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\calendar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\close.png">
