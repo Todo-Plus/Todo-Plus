@@ -65,7 +65,7 @@
         <Grid Height="30" Margin="10, 0" Background="Transparent">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <Ellipse Width="10" Height="10" Fill="#BBBBBB"/>
-                <Label Content="{Binding strTitle}" VerticalAlignment="Center" Margin="5, 0" FontSize="15"></Label>
+                <Label Content="{Binding Title}" VerticalAlignment="Center" Margin="5, 0" FontSize="15"></Label>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <us:IconButton x:Name="T_AddButton" Visibility="Hidden" 

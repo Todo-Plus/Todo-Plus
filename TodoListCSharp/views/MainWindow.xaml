@@ -41,7 +41,8 @@
         </Grid>
         <ListBox 
             HorizontalAlignment="Stretch" 
-            Name="todoList"  
+            Name="todoList"
+            ItemsSource="oShowTodoList"
             ItemTemplate="{StaticResource MWTodoListBoxItem}" 
             Height="Auto">
             <ListBox.ItemContainerStyle>

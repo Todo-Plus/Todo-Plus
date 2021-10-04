@@ -2,7 +2,10 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Linq;
 using TodoListCSharp.views;
+using TodoListCSharp.core;
+using TodoListCSharp.utils;
 
 namespace TodoListCSharp
 {
@@ -22,18 +25,23 @@ namespace TodoListCSharp
 
         private SettingWindow oSettingWindow = null;
         private ItemAddWindow oItemAddWindow = null;
+        private ItemList oTodoItemList = null;
+        private List<TodoItem> oShowTodoList = null;
 
         // !! Functions Define and Implement
         public MainWindow() {
             InitializeComponent();
-            List<TodoItem> list = new List<TodoItem>();
-            for (int i = 0; i <= 20; i++) {
-                list.Add(new TodoItem() {
-                    iIndex = i,
-                    strTitle = "Test item"
-                });
+
+            BinaryIO io = new BinaryIO();
+            int ret = io.FileToList(Constants.ITEM_FILEPATH, ref oTodoItemList);
+            if (ret != 0) {
+                // todo: 定义错误并进行提示
+                throw new Exception();
             }
-            this.todoList.ItemsSource = list;
+
+            oShowTodoList = oTodoItemList.GetItemList();
+            // todo: delete debug information
+            System.Console.WriteLine(oShowTodoList.Count);
         }
 
         private void ButtonClickedLockWindow(object sender, RoutedEventArgs e) {
@@ -68,6 +76,7 @@ namespace TodoListCSharp
             
             // Set Callback Function
             oItemAddWindow.closeCallbackFunc += ItemAddWindow_onClosed;
+            oItemAddWindow.AddItemToList += AddItemToList;
             oItemAddWindow.Owner = this;
         }
         
@@ -79,15 +88,13 @@ namespace TodoListCSharp
         private void ItemAddWindow_onClosed() {
             oItemAddWindow = null;
         }
+
+        private void AddItemToList(ref TodoItem item) {
+            int ret = oTodoItemList.AppendItem(item);
+            oShowTodoList = oTodoItemList.GetItemList();
+            // 懒加载，每次添加直接扔到列表，顶置或者中间修改再进行直接的更新
+        }
     }
     
     // !! subClass Define
-
-    public class TodoItem {
-        // todo： 修改为private并且设置对应的函数
-        public int iIndex { set; get; }
-        public string strTitle { set; get; }
-        public string strDesc { set; get; }
-        public bool bDone { set; get; }
-    }
 }

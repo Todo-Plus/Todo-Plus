@@ -15,24 +15,27 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="15 10">
             <Rectangle Height="Auto" Width="2" Fill="#59ADFF"/>
             <Label FontSize="20" Margin="5 0">Title</Label>
-            <TextBox Width="540"></TextBox>
+            <TextBox Width="540" x:Name="TitleInput"></TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="150" Margin="15 10">
             <Rectangle Height="Auto" Width="2" Fill="#59ADFF"/>
             <Label FontSize="20" Margin="5 0">Desc</Label>
-            <TextBox Width="535"></TextBox>
+            <TextBox Width="535" x:Name="DescInput"></TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="15 10">
             <Rectangle Height="Auto" Width="2" Fill="#59ADFF"/>
             <Label FontSize="20" Margin="5 0">Tab</Label>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="15 10">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="15 10" Visibility="Hidden">
             <Rectangle Height="Auto" Width="2" Fill="#59ADFF"/>
             <Label FontSize="20" Margin="5 0" VerticalAlignment="Center">Datetime</Label>
             <Image Width="25" Height="25" Source="/resources/icons/calendar.png"></Image>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="30" Margin="10 15">
-            <Button Width="70" Margin="5 0" Background="#3196e2" Foreground="White">Done</Button>
+            <Button Width="70" Margin="5 0" 
+                    Background="#3196e2" 
+                    Foreground="White"
+                    Click="DoneButton_onClick">Done</Button>
             <Button Width="70" Margin="5 0" Background="#E23131" Foreground="White">Cancel</Button>
         </StackPanel>
     </StackPanel>
