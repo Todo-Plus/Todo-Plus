@@ -4,8 +4,8 @@ namespace TodoListCSharp.core {
     [Serializable]
     public class TodoItem {
         private int Index { get; set; }
-        private string Title { get; set; }
-        private string Desc { get; set; }
+        public string Title { get; set; }
+        public string Desc { get; set; }
         private bool Done { get; set; }
         private int Tag { get; set; }
         private int prority { get; set; }

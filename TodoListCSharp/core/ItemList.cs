@@ -23,7 +23,7 @@ namespace TodoListCSharp.core {
             ref ItemUnit oNowItemUnit = ref ListStart;
             
             while (oNowItemUnit != null) {
-                oRetList.Append(oNowItemUnit.GetItem());
+                oRetList.Add(oNowItemUnit.GetItem());
                 oNowItemUnit = oNowItemUnit.GetNext();
             }
             
@@ -37,7 +37,7 @@ namespace TodoListCSharp.core {
         public int AppendItem(TodoItem item) {
             ItemUnit newItem = new ItemUnit(item);
             if (ListEnd != null) ListEnd.SetNext(newItem);
-            ListEnd = newItem;
+            ListEnd = ListStart = newItem;
             return 0;
         }
 

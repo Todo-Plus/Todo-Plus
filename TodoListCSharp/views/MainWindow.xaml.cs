@@ -31,7 +31,9 @@ namespace TodoListCSharp
         // !! Functions Define and Implement
         public MainWindow() {
             InitializeComponent();
+        }
 
+        private void MainWindow_onLoaded(object sender, EventArgs e) {
             BinaryIO io = new BinaryIO();
             int ret = io.FileToList(Constants.ITEM_FILEPATH, ref oTodoItemList);
             if (ret != 0) {
@@ -40,10 +42,8 @@ namespace TodoListCSharp
             }
 
             oShowTodoList = oTodoItemList.GetItemList();
-            // todo: delete debug information
-            System.Console.WriteLine(oShowTodoList.Count);
+            todoList.ItemsSource = oShowTodoList;
         }
-
         private void ButtonClickedLockWindow(object sender, RoutedEventArgs e) {
 
         }
@@ -91,8 +91,9 @@ namespace TodoListCSharp
 
         private void AddItemToList(ref TodoItem item) {
             int ret = oTodoItemList.AppendItem(item);
-            oShowTodoList = oTodoItemList.GetItemList();
+            oShowTodoList.Add(item);
             // 懒加载，每次添加直接扔到列表，顶置或者中间修改再进行直接的更新
+            todoList.Items.Refresh();
         }
     }
     
