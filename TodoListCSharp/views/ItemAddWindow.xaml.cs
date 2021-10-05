@@ -18,6 +18,7 @@ namespace TodoListCSharp.views {
             InitializeComponent();
 
             this.titlebar.ReturnButton.Visibility = Visibility.Collapsed;
+            this.titlebar.CloseButtonClicked += CloseItemAddWindow;
         }
 
         private void ItemAddWindow_onClosed(object sender, EventArgs e) {
@@ -32,6 +33,10 @@ namespace TodoListCSharp.views {
             TodoItem item = new TodoItem(title, desc);
             AddItemToList(ref item);
             this.Close();
+        }
+
+        private void CloseItemAddWindow(object sender, EventArgs e) {
+            Close();
         }
     }
 }

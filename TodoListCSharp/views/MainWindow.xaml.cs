@@ -3,6 +3,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Interop;
 using TodoListCSharp.views;
 using TodoListCSharp.core;
 using TodoListCSharp.utils;
@@ -16,11 +17,6 @@ namespace TodoListCSharp
     {
         // !! DllImport Define
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        public static extern System.IntPtr FindWindow([MarshalAs(UnmanagedType.LPTStr)] string lpClassName, [MarshalAs(UnmanagedType.LPTStr)] string lpWindowName);
-        [DllImport("user32.dll")]
-        public static extern System.IntPtr SetParent(System.IntPtr hWndChild, System.IntPtr hWndNewParent);
-
         // !! Property Define
 
         private SettingWindow oSettingWindow = null;
@@ -29,6 +25,7 @@ namespace TodoListCSharp
         private ItemList oDoneItemList = null;
         private List<TodoItem> oShowTodoList = null;
         private Constants.MainWindowStatu statu = Constants.MainWindowStatu.TODO;
+        private Constants.MainWindowLockStatu locked = Constants.MainWindowLockStatu.DRAGABLE;
 
         // !! Functions Define and Implement
         public MainWindow() {
@@ -61,11 +58,30 @@ namespace TodoListCSharp
             if (statu == Constants.MainWindowStatu.DONE) return;
             SwitchItemList();
         }
+
+        private void LockWindowButton_onClicked(object sender, RoutedEventArgs e) {
+            if (locked == Constants.MainWindowLockStatu.DRAGABLE) {
+                locked = Constants.MainWindowLockStatu.LOCKED;
+                return;
+            }
+
+            locked = Constants.MainWindowLockStatu.DRAGABLE;
+        }
+        
+        /// <summary>
+        /// 主窗口列表事件——事项完成
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ItemDoneButton_onClicked(object sender, EventArgs e) {
+            
+        }
         private void ButtonClickedLockWindow(object sender, RoutedEventArgs e) {
 
         }
 
         private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            if (locked == Constants.MainWindowLockStatu.LOCKED) return;
             base.DragMove();
         }
 

@@ -8,5 +8,10 @@
             TODO,
             DONE
         }
+        
+        public enum MainWindowLockStatu {
+            DRAGABLE,
+            LOCKED
+        }
     }
 }

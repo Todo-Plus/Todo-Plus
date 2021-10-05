@@ -7,7 +7,7 @@
         xmlns:us="clr-namespace:TodoListCSharp.controls"
         mc:Ignorable="d"
         Loaded="MainWindow_onLoaded"
-        Title="MainWindow" MinHeight="850" MinWidth="379" Height="850" Width="300">
+        Title="MainWindow" MinHeight="550" MinWidth="320" Height="850" Width="379">
     <StackPanel>
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -26,6 +26,7 @@
                         Style="{StaticResource MWTitleIconButtonStyle}" 
                         ImageSource="/resources/icons/locked.png"
                         HoverIcon="/resources/icons/locked.png"
+                        Click="LockWindowButton_onClicked"
                     />
                     <us:IconButton 
                         Style="{StaticResource MWTitleIconButtonStyle}" 

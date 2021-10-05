@@ -11,24 +11,29 @@
         MaxHeight="448" MaxWidth="635"
         Title="ItemAddWindow">
     <StackPanel HorizontalAlignment="Stretch">
-        <us:Titlebar x:Name="titlebar" Title="New Item" Margin="5 0"/>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="15 10">
+        <us:Titlebar x:Name="titlebar" Title="New Item" Margin="10 0"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="20 10">
             <Rectangle Height="Auto" Width="2" Fill="#59ADFF"/>
-            <Label FontSize="20" Margin="5 0">Title</Label>
-            <TextBox Width="540" x:Name="TitleInput"></TextBox>
+            <Label FontSize="16" Margin="5 0">Title</Label>
+            <TextBox Width="540" x:Name="TitleInput" 
+                     VerticalAlignment="Center"
+                     FontSize="13" Padding="5"
+                     BorderThickness="0 0 0 1"></TextBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="150" Margin="15 10">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="150" Margin="20 10">
             <Rectangle Height="Auto" Width="2" Fill="#59ADFF"/>
-            <Label FontSize="20" Margin="5 0">Desc</Label>
-            <TextBox Width="535" x:Name="DescInput"></TextBox>
+            <Label FontSize="16" Margin="5 0">Desc</Label>
+            <TextBox Width="535" x:Name="DescInput" 
+                     FontSize="13" Padding="5"
+                     BorderThickness="0 0 0 1"></TextBox>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="15 10">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="20 10">
             <Rectangle Height="Auto" Width="2" Fill="#59ADFF"/>
-            <Label FontSize="20" Margin="5 0">Tab</Label>
+            <Label FontSize="16" Margin="5 0">Tab</Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="15 10" Visibility="Hidden">
             <Rectangle Height="Auto" Width="2" Fill="#59ADFF"/>
-            <Label FontSize="20" Margin="5 0" VerticalAlignment="Center">Datetime</Label>
+            <Label FontSize="16" Margin="5 0" VerticalAlignment="Center">Datetime</Label>
             <Image Width="25" Height="25" Source="/resources/icons/calendar.png"></Image>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="30" Margin="10 15">
@@ -36,7 +41,10 @@
                     Background="#3196e2" 
                     Foreground="White"
                     Click="DoneButton_onClick">Done</Button>
-            <Button Width="70" Margin="5 0" Background="#E23131" Foreground="White">Cancel</Button>
+            <Button Width="70" Margin="5 0" 
+                    Background="#E23131" 
+                    Foreground="White"
+                    Click="CloseItemAddWindow">Cancel</Button>
         </StackPanel>
     </StackPanel>
 </Window>
