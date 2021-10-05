@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:TodoListCSharp"
         xmlns:us="clr-namespace:TodoListCSharp.controls"
         mc:Ignorable="d"
         Loaded="MainWindow_onLoaded"
@@ -13,46 +12,92 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <StackPanel Style="{StaticResource MWTypeContainer}" MouseLeftButtonDown="TodoButton_onClicked">
                     <Label x:Name="TodoLabel" Style="{DynamicResource MWTypeChosedFont}">Todo</Label>
-                    <Label x:Name="TodoLine" Style="{StaticResource MWTypeUnderlineChosed}"></Label>
+                    <Label x:Name="TodoLine" Style="{StaticResource MWTypeUnderlineChosed}" />
                 </StackPanel>
                 <StackPanel Style="{StaticResource MWTypeContainer}" MouseLeftButtonDown="DoneButton_onClicked">
                     <Label x:Name="DoneLabel" Style="{StaticResource MWTypeUnchosedFont}">Done</Label>
-                    <Label x:Name="DoneLine" Style="{StaticResource MWTypeUnderlineUnchosed}"></Label>
-                </StackPanel> 
+                    <Label x:Name="DoneLine" Style="{StaticResource MWTypeUnderlineUnchosed}" />
+                </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10, 0">
                 <StackPanel Orientation="Horizontal" Width="Auto">
-                    <us:IconButton 
-                        Style="{StaticResource MWTitleIconButtonStyle}" 
+                    <us:IconButton
+                        Style="{StaticResource MWTitleIconButtonStyle}"
                         ImageSource="/resources/icons/locked.png"
                         HoverIcon="/resources/icons/locked.png"
-                        Click="LockWindowButton_onClicked"
-                    />
-                    <us:IconButton 
-                        Style="{StaticResource MWTitleIconButtonStyle}" 
+                        Click="LockWindowButton_onClicked" />
+                    <us:IconButton
+                        Style="{StaticResource MWTitleIconButtonStyle}"
                         ImageSource="/resources/icons/setting.png"
                         HoverIcon="/resources/icons/setting.png"
-                        Click="OpenSettingWindow"/>
-                    <us:IconButton 
-                        Style="{StaticResource MWTitleIconButtonStyle}" 
+                        Click="OpenSettingWindow" />
+                    <us:IconButton
+                        Style="{StaticResource MWTitleIconButtonStyle}"
                         ImageSource="/resources/icons/add.png"
                         HoverIcon="/resources/icons/add.png"
-                        Click="OpenItemAddWindow"/>
+                        Click="OpenItemAddWindow" />
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <ListBox 
-            HorizontalAlignment="Stretch" 
+        <ListBox
+            HorizontalAlignment="Stretch"
             Name="todoList"
             ItemsSource="oShowTodoList"
-            ItemTemplate="{StaticResource MWTodoListBoxItem}" 
+
             Height="Auto"
             BorderThickness="0">
+            <!-- todo: 添加对应函数给按钮 -->
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
             </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="30" Margin="10, 0" Background="Transparent">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Ellipse Width="10" Height="10" Fill="#BBBBBB" />
+                            <Label Content="{Binding Title}" VerticalAlignment="Center" Margin="5, 0" FontSize="15" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <us:IconButton x:Name="T_AddButton" Visibility="Hidden"
+                                           ItemIndex="{Binding Index}"
+                                           ImageSource="/resources/icons/add_normal.png"
+                                           HoverIcon="/resources/icons/add_hover.png"
+                                           Style="{StaticResource MWItemButtonStyle}"
+                                           IconDiameter="20"
+                                           Click="ItemDoneButton_onClicked" />
+                            <us:IconButton x:Name="T_EditButton" Visibility="Hidden"
+                                           ItemIndex="{Binding Index}"
+                                           ImageSource="/resources/icons/edit_normal.png"
+                                           HoverIcon="/resources/icons/edit_hover.png"
+                                           Style="{StaticResource MWItemButtonStyle}"
+                                           IconDiameter="20" />
+                            <us:IconButton x:Name="T_DeleteButton" Visibility="Hidden"
+                                           ItemIndex="{Binding Index}"
+                                           ImageSource="/resources/icons/delete_normal.png"
+                                           HoverIcon="/resources/icons/delete_hover.png"
+                                           Style="{StaticResource MWItemButtonStyle}"
+                                           IconDiameter="20" 
+                                           Click="ItemDeleteButton_onClicked"/>
+                            <us:IconButton x:Name="T_TotopButton" Visibility="Hidden"
+                                           ItemIndex="{Binding Index}"
+                                           ImageSource="/resources/icons/totop_normal.png"
+                                           HoverIcon="/resources/icons/totop_hover.png"
+                                           Style="{StaticResource MWItemButtonStyle}"
+                                           IconDiameter="20" />
+                        </StackPanel>
+                    </Grid>
+                    <DataTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="T_AddButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="T_EditButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="T_DeleteButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="T_TotopButton" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </DataTemplate.Triggers>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
-    </StackPanel> 
-</Window> 
+    </StackPanel>
+</Window>

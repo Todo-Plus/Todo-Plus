@@ -3,7 +3,7 @@
 namespace TodoListCSharp.core {
     [Serializable]
     public class TodoItem {
-        private int Index { get; set; }
+        public int Index { get; set; }
         public string Title { get; set; }
         public string Desc { get; set; }
         private bool Done { get; set; }

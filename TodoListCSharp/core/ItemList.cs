@@ -36,9 +36,56 @@ namespace TodoListCSharp.core {
 
         public int AppendItem(TodoItem item) {
             ItemUnit newItem = new ItemUnit(item);
-            if (ListEnd != null) ListEnd.SetNext(newItem);
-            ListEnd = ListStart = newItem;
+            if (ListEnd != null) {
+                ListEnd.SetNext(newItem);
+                ListEnd = ListEnd.GetNext();
+            }
+            else ListEnd = ListStart = newItem;
             return 0;
+        }
+
+        public int DoneItem(int iItemIndex, ref ItemList oDoneList) {
+            ItemUnit oNowItem = ListStart;
+            ItemUnit oBeforeItem = null;
+            while (oNowItem != null) {
+                if (oNowItem.GetItem().Index == iItemIndex) {
+                    TodoItem item = oNowItem.GetItem();
+                    // todo: switch item`s statu
+                    if (oBeforeItem == null) {
+                        ListStart = oNowItem.GetNext();
+                        oDoneList.AppendItem(item);
+                        return 0;
+                    }
+
+                    oBeforeItem.SetNext(oNowItem.GetNext());
+                    oDoneList.AppendItem(item);
+                    return 0;
+                }
+
+                oBeforeItem = oNowItem;
+                oNowItem = oNowItem.GetNext();
+            }
+
+            return -1;
+        }
+
+        public int DeleteItem(int iItemIndex) {
+            ItemUnit oNowItem = ListStart;
+            ItemUnit oBeforeItem = null;
+            while (oNowItem != null) {
+                if (oNowItem.GetItem().Index == iItemIndex) {
+                    TodoItem item = oNowItem.GetItem();
+                    if (oBeforeItem == null) {
+                        ListStart = oNowItem.GetNext();
+                        return 0;
+                    }
+                    oBeforeItem.SetNext(oNowItem.GetNext());
+                    return 0;
+                }
+                oBeforeItem = oNowItem;
+                oNowItem = oNowItem.GetNext();
+            }
+            return -1;
         }
 
         public void SetListStart(ItemUnit start) {

@@ -4,6 +4,7 @@ using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Interop;
+using TodoListCSharp.controls;
 using TodoListCSharp.views;
 using TodoListCSharp.core;
 using TodoListCSharp.utils;
@@ -26,6 +27,7 @@ namespace TodoListCSharp
         private List<TodoItem> oShowTodoList = null;
         private Constants.MainWindowStatu statu = Constants.MainWindowStatu.TODO;
         private Constants.MainWindowLockStatu locked = Constants.MainWindowLockStatu.DRAGABLE;
+        private int iMaxIndex = 0;
 
         // !! Functions Define and Implement
         public MainWindow() {
@@ -67,15 +69,28 @@ namespace TodoListCSharp
 
             locked = Constants.MainWindowLockStatu.DRAGABLE;
         }
-        
+
         /// <summary>
         /// 主窗口列表事件——事项完成
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ItemDoneButton_onClicked(object sender, EventArgs e) {
-            
+        private void ItemDoneButton_onClicked(object sender, RoutedEventArgs e) {
+            IconButton button = (IconButton) sender;
+            oTodoItemList.DoneItem(button.ItemIndex, ref oDoneItemList);
+            oShowTodoList = oTodoItemList.GetItemList();
+            todoList.ItemsSource = oShowTodoList;
+            todoList.Items.Refresh();
         }
+
+        private void ItemDeleteButton_onClicked(object sender, RoutedEventArgs e) {
+            IconButton button = (IconButton) sender;
+            oTodoItemList.DeleteItem(button.ItemIndex);
+            oShowTodoList = oTodoItemList.GetItemList();
+            todoList.ItemsSource = oShowTodoList;
+            todoList.Items.Refresh();
+        }
+
         private void ButtonClickedLockWindow(object sender, RoutedEventArgs e) {
 
         }
@@ -123,7 +138,9 @@ namespace TodoListCSharp
         }
 
         private void AddItemToList(ref TodoItem item) {
+            item.SetIndex(iMaxIndex);
             int ret = oTodoItemList.AppendItem(item);
+            iMaxIndex++;
             oShowTodoList.Add(item);
             // 懒加载，每次添加直接扔到列表，顶置或者中间修改再进行直接的更新
             todoList.Items.Refresh();

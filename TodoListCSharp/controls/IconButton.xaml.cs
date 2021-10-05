@@ -40,6 +40,10 @@ namespace TodoListCSharp.controls {
             get { return (int)GetValue(CircleDiameterProperty); }
             set { SetValue(CircleDiameterProperty, value); }
         }
+        public int ItemIndex {
+            get { return (int)GetValue(ItemIndexProperty); }
+            set { SetValue(ItemIndexProperty, value); }
+        }
 
         /// <summary>
         /// 自定义属性注册
@@ -56,13 +60,16 @@ namespace TodoListCSharp.controls {
             typeof(int), typeof(IconButton));
         public static readonly DependencyProperty CircleDiameterProperty = DependencyProperty.Register("CircleDiameter",
             typeof(int), typeof(IconButton));
+        public static readonly DependencyProperty ItemIndexProperty = DependencyProperty.Register("ItemIndex", typeof(int),
+            typeof(IconButton));
 
         private void IconButton_Loaded(object sender, RoutedEventArgs e) {
             var data = new IconButtonModel() {
                 ImageSource = ImageSource,
                 IconDiameter = IconDiameter,
                 CircleDiameter = CircleDiameter,
-                HoverIcon = HoverIcon
+                HoverIcon = HoverIcon,
+                ItemIndex = ItemIndex
             };
             this.DataContext = data;
         }
@@ -71,7 +78,7 @@ namespace TodoListCSharp.controls {
         public event ClickEventArgs Click;
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e) {
             if (Click != null) {
-                Click(sender, e);
+                Click(this, e);
             }
         }
         
@@ -80,6 +87,7 @@ namespace TodoListCSharp.controls {
             public ImageSource HoverIcon { get; set; }
             public int IconDiameter { get; set; }
             public int CircleDiameter { get; set; }
+            public int ItemIndex { get; set; }
         }
     }
 }
