@@ -26,7 +26,9 @@ namespace TodoListCSharp
         private SettingWindow oSettingWindow = null;
         private ItemAddWindow oItemAddWindow = null;
         private ItemList oTodoItemList = null;
+        private ItemList oDoneItemList = null;
         private List<TodoItem> oShowTodoList = null;
+        private Constants.MainWindowStatu statu = Constants.MainWindowStatu.TODO;
 
         // !! Functions Define and Implement
         public MainWindow() {
@@ -35,14 +37,29 @@ namespace TodoListCSharp
 
         private void MainWindow_onLoaded(object sender, EventArgs e) {
             BinaryIO io = new BinaryIO();
-            int ret = io.FileToList(Constants.ITEM_FILEPATH, ref oTodoItemList);
+            int ret = io.FileToList(Constants.TODOITEM_FILEPATH, ref oTodoItemList);
             if (ret != 0) {
                 // todo: 定义错误并进行提示
                 throw new Exception();
             }
 
+            ret = io.FileToList(Constants.DONEITEM_FILEPATH, ref oDoneItemList);
+            if (ret != 0) {
+                throw new Exception();
+            }
+
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
+        }
+
+        private void TodoButton_onClicked(object sender, EventArgs e) {
+            if (statu == Constants.MainWindowStatu.TODO) return;
+            SwitchItemList();
+        }
+
+        private void DoneButton_onClicked(object sender, EventArgs e) {
+            if (statu == Constants.MainWindowStatu.DONE) return;
+            SwitchItemList();
         }
         private void ButtonClickedLockWindow(object sender, RoutedEventArgs e) {
 
@@ -94,6 +111,30 @@ namespace TodoListCSharp
             oShowTodoList.Add(item);
             // 懒加载，每次添加直接扔到列表，顶置或者中间修改再进行直接的更新
             todoList.Items.Refresh();
+        }
+
+        private void SwitchItemList() {
+            if (statu == Constants.MainWindowStatu.TODO) {
+                oShowTodoList = oDoneItemList.GetItemList();
+                TodoLabel.Style = (Style)FindResource("MWTypeUnchosedFont");
+                DoneLabel.Style = (Style)FindResource("MWTypeChosedFont");
+                TodoLine.Style = (Style) FindResource("MWTypeUnderlineUnchosed");
+                DoneLine.Style = (Style) FindResource("MWTypeUnderlineChosed");
+                statu = Constants.MainWindowStatu.DONE;
+                // 不会自动同步，需要手动重新绑定
+                todoList.ItemsSource = oShowTodoList;
+                todoList.Items.Refresh();
+            }
+            else {
+                oShowTodoList = oTodoItemList.GetItemList();
+                TodoLabel.Style = (Style)FindResource("MWTypeChosedFont");
+                DoneLabel.Style = (Style)FindResource("MWTypeUnchosedFont");
+                TodoLine.Style = (Style) FindResource("MWTypeUnderlineChosed");
+                DoneLine.Style = (Style) FindResource("MWTypeUnderlineUnchosed");
+                statu = Constants.MainWindowStatu.TODO;
+                todoList.ItemsSource = oShowTodoList;
+                todoList.Items.Refresh();
+            }
         }
     }
     

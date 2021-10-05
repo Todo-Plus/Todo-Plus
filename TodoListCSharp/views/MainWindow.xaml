@@ -11,13 +11,13 @@
     <StackPanel>
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <StackPanel Style="{StaticResource MWTypeContainer}">
-                    <Label Style="{StaticResource MWTypeChosedFont}">Todo</Label>
-                    <Label Style="{StaticResource MWTypeUnderlineChosed}"></Label>
+                <StackPanel Style="{StaticResource MWTypeContainer}" MouseLeftButtonDown="TodoButton_onClicked">
+                    <Label x:Name="TodoLabel" Style="{DynamicResource MWTypeChosedFont}">Todo</Label>
+                    <Label x:Name="TodoLine" Style="{StaticResource MWTypeUnderlineChosed}"></Label>
                 </StackPanel>
-                <StackPanel Style="{StaticResource MWTypeContainer}">
-                    <Label Style="{StaticResource MWTypeUnchosedFont}">Done</Label>
-                    <Label Style="{StaticResource MWTypeUnderlineUnchosed}"></Label>
+                <StackPanel Style="{StaticResource MWTypeContainer}" MouseLeftButtonDown="DoneButton_onClicked">
+                    <Label x:Name="DoneLabel" Style="{StaticResource MWTypeUnchosedFont}">Done</Label>
+                    <Label x:Name="DoneLine" Style="{StaticResource MWTypeUnderlineUnchosed}"></Label>
                 </StackPanel> 
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10, 0">
@@ -45,7 +45,8 @@
             Name="todoList"
             ItemsSource="oShowTodoList"
             ItemTemplate="{StaticResource MWTodoListBoxItem}" 
-            Height="Auto">
+            Height="Auto"
+            BorderThickness="0">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>

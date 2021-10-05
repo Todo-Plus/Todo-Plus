@@ -20,7 +20,7 @@ namespace TodoListCSharp.core {
         // 返回链表转换为的列表，由于项目数量比较少，所以O(n)每一次转换足够
         public List<TodoItem> GetItemList() {
             List<TodoItem> oRetList = new List<TodoItem>();
-            ref ItemUnit oNowItemUnit = ref ListStart;
+            ItemUnit oNowItemUnit = ListStart;
             
             while (oNowItemUnit != null) {
                 oRetList.Add(oNowItemUnit.GetItem());
