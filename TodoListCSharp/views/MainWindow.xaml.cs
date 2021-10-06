@@ -77,7 +77,7 @@ namespace TodoListCSharp
         /// <param name="e"></param>
         private void ItemDoneButton_onClicked(object sender, RoutedEventArgs e) {
             IconButton button = (IconButton) sender;
-            oTodoItemList.DoneItem(button.ItemIndex, ref oDoneItemList);
+            oTodoItemList.DoneItem(button.Index, ref oDoneItemList);
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
@@ -85,7 +85,15 @@ namespace TodoListCSharp
 
         private void ItemDeleteButton_onClicked(object sender, RoutedEventArgs e) {
             IconButton button = (IconButton) sender;
-            oTodoItemList.DeleteItem(button.ItemIndex);
+            oTodoItemList.DeleteItem(button.Index);
+            oShowTodoList = oTodoItemList.GetItemList();
+            todoList.ItemsSource = oShowTodoList;
+            todoList.Items.Refresh();
+        }
+
+        public void StickItemButton_onClicked(object sender, RoutedEventArgs e) {
+            IconButton button = (IconButton) sender;
+            oTodoItemList.SetItemToTop(button.Index);
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();

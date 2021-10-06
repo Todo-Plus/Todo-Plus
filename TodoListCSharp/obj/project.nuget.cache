@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DC5uXsxo2MlRrgloHOXPSUv6Q9PQ3KPLraxs+5ErX08l3RSxJNkF5s4Ls1PPfh042EE2e2KELqg7TjddL39Sww==",
+  "dgSpecHash": "Hfn74HwR3vbLnvD5ep+B4AADdAysJ9u1939pr9QC1tVNmayLaR4DdTXfCY8XluPfywyr8407H0qqAqVC64p+PQ==",
   "success": true,
-  "projectFilePath": "D:\\repo\\TodoListCSharp\\TodoListCSharp\\TodoListCSharp.csproj",
+  "projectFilePath": "D:\\repo\\Todo-Plus\\TodoListCSharp\\TodoListCSharp.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

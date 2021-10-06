@@ -13,5 +13,10 @@
             DRAGABLE,
             LOCKED
         }
+        
+        public enum TodoItemStatu {
+            TODO,
+            DONE
+        }
     }
 }

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\repo\\TodoListCSharp\\TodoListCSharp\\TodoListCSharp.csproj",
+      "projectUniqueName": "D:\\repo\\Todo-Plus\\TodoListCSharp\\TodoListCSharp.csproj",
       "projectName": "TodoListCSharp",
-      "projectPath": "D:\\repo\\TodoListCSharp\\TodoListCSharp\\TodoListCSharp.csproj",
+      "projectPath": "D:\\repo\\Todo-Plus\\TodoListCSharp\\TodoListCSharp.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "D:\\repo\\TodoListCSharp\\TodoListCSharp\\obj\\",
+      "outputPath": "D:\\repo\\Todo-Plus\\TodoListCSharp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",

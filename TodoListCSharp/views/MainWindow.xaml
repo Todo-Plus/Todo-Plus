@@ -42,8 +42,6 @@
         <ListBox
             HorizontalAlignment="Stretch"
             Name="todoList"
-            ItemsSource="oShowTodoList"
-
             Height="Auto"
             BorderThickness="0">
             <!-- todo: 添加对应函数给按钮 -->
@@ -61,36 +59,44 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <us:IconButton x:Name="T_AddButton" Visibility="Hidden"
-                                           ItemIndex="{Binding Index}"
+                                           Index="{Binding Index}"
                                            ImageSource="/resources/icons/add_normal.png"
                                            HoverIcon="/resources/icons/add_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20"
                                            Click="ItemDoneButton_onClicked" />
+                            <us:IconButton x:Name="T_BackButton" Visibility="Hidden"
+                                           Index="{Binding Index}"
+                                           ImageSource="/resources/icons/back_normal.png"
+                                           HoverIcon="/resources/icons/back_hover.png"
+                                           Style="{StaticResource MWItemButtonStyle}"
+                                           IconDiameter="20"/>
                             <us:IconButton x:Name="T_EditButton" Visibility="Hidden"
-                                           ItemIndex="{Binding Index}"
+                                           Index="{Binding Index}"
                                            ImageSource="/resources/icons/edit_normal.png"
                                            HoverIcon="/resources/icons/edit_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20" />
                             <us:IconButton x:Name="T_DeleteButton" Visibility="Hidden"
-                                           ItemIndex="{Binding Index}"
+                                           Index="{Binding Index}"
                                            ImageSource="/resources/icons/delete_normal.png"
                                            HoverIcon="/resources/icons/delete_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20" 
                                            Click="ItemDeleteButton_onClicked"/>
                             <us:IconButton x:Name="T_TotopButton" Visibility="Hidden"
-                                           ItemIndex="{Binding Index}"
+                                           Index="{Binding Index}"
                                            ImageSource="/resources/icons/totop_normal.png"
                                            HoverIcon="/resources/icons/totop_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
-                                           IconDiameter="20" />
+                                           IconDiameter="20" 
+                                           Click="StickItemButton_onClicked"/>
                         </StackPanel>
                     </Grid>
                     <DataTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="T_AddButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="T_BackButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="T_EditButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="T_DeleteButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="T_TotopButton" Property="Visibility" Value="Visible" />

@@ -37,12 +37,12 @@ namespace TodoListCSharp.controls {
             set { SetValue(IconDiameterProperty, value); }
         }
         public int CircleDiameter {
-            get { return (int)GetValue(CircleDiameterProperty); }
+            get { return (int) GetValue(CircleDiameterProperty); }
             set { SetValue(CircleDiameterProperty, value); }
         }
-        public int ItemIndex {
-            get { return (int)GetValue(ItemIndexProperty); }
-            set { SetValue(ItemIndexProperty, value); }
+        public int Index {
+            get => (int)GetValue(IndexProperty);
+            set => SetValue(IndexProperty, value);
         }
 
         /// <summary>
@@ -60,8 +60,8 @@ namespace TodoListCSharp.controls {
             typeof(int), typeof(IconButton));
         public static readonly DependencyProperty CircleDiameterProperty = DependencyProperty.Register("CircleDiameter",
             typeof(int), typeof(IconButton));
-        public static readonly DependencyProperty ItemIndexProperty = DependencyProperty.Register("ItemIndex", typeof(int),
-            typeof(IconButton));
+        public static readonly DependencyProperty IndexProperty = DependencyProperty.Register("Index",
+            typeof(int), typeof(IconButton));
 
         private void IconButton_Loaded(object sender, RoutedEventArgs e) {
             var data = new IconButtonModel() {
@@ -69,7 +69,7 @@ namespace TodoListCSharp.controls {
                 IconDiameter = IconDiameter,
                 CircleDiameter = CircleDiameter,
                 HoverIcon = HoverIcon,
-                ItemIndex = ItemIndex
+                Index = Index
             };
             this.DataContext = data;
         }
@@ -87,7 +87,7 @@ namespace TodoListCSharp.controls {
             public ImageSource HoverIcon { get; set; }
             public int IconDiameter { get; set; }
             public int CircleDiameter { get; set; }
-            public int ItemIndex { get; set; }
+            public int Index { get; set; }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace TodoListCSharp.utils {
         /// <param name="path">对应的文件路径，如果不存在，则返回空列表</param>
         /// <param name="output">项目列表，通过项目列表获取得到List进行序列化</param>
         /// <returns>
-        /// 0 - 正常读取文件
+        /// 0 - 正常运行，不影响运行逻辑
         /// 10001 - 文件不存在
         /// </returns>
         public int FileToList(string path, ref ItemList output) {
