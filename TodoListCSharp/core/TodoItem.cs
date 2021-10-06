@@ -6,7 +6,7 @@ namespace TodoListCSharp.core {
         public int Index { get; set; }
         public string Title { get; set; }
         public string Desc { get; set; }
-        private bool Done { get; set; }
+        private Constants.TodoItemStatu Statu { get; set; }
         private int Tag { get; set; }
         private int prority { get; set; }
         private DateTime Deadline { get; set; }

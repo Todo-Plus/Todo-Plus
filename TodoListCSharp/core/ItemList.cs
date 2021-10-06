@@ -88,6 +88,26 @@ namespace TodoListCSharp.core {
             return -1;
         }
 
+        public int SetItemToTop(int iItemIndex) {
+            ItemUnit oNowItem = ListStart;
+            ItemUnit oBeforeItem = null;
+            while (oNowItem != null) {
+                if (oNowItem.GetItem().Index == iItemIndex) {
+                    TodoItem item = oNowItem.GetItem();
+                    if (oBeforeItem == null) {
+                        return 0;
+                    }
+                    oBeforeItem.SetNext(oNowItem.GetNext());
+                    oNowItem.SetNext(ListStart);
+                    ListStart = oNowItem;
+                    return 0;
+                }
+                oBeforeItem = oNowItem;
+                oNowItem = oNowItem.GetNext();
+            }
+            return -1;
+        }
+
         public void SetListStart(ItemUnit start) {
             ListStart = start;
         }
