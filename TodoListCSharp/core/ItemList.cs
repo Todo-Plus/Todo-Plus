@@ -43,8 +43,14 @@ namespace TodoListCSharp.core {
             else ListEnd = ListStart = newItem;
             return 0;
         }
-
-        public int DoneItem(int iItemIndex, ref ItemList oDoneList) {
+        
+        /// <summary>
+        /// 完成或回溯事项
+        /// </summary>
+        /// <param name="iItemIndex"></param>
+        /// <param name="oDstList"></param>
+        /// <returns></returns>
+        public int DoneOrRevertItem(int iItemIndex, ref ItemList oDstList) {
             ItemUnit oNowItem = ListStart;
             ItemUnit oBeforeItem = null;
             while (oNowItem != null) {
@@ -53,12 +59,16 @@ namespace TodoListCSharp.core {
                     // todo: switch item`s statu
                     if (oBeforeItem == null) {
                         ListStart = oNowItem.GetNext();
-                        oDoneList.AppendItem(item);
+                        // item list empty
+                        if (ListStart == null) {
+                            ListEnd = null;
+                        }
+                        oDstList.AppendItem(item);
                         return 0;
                     }
 
                     oBeforeItem.SetNext(oNowItem.GetNext());
-                    oDoneList.AppendItem(item);
+                    oDstList.AppendItem(item);
                     return 0;
                 }
 

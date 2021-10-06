@@ -3,6 +3,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using System.Windows.Interop;
 using TodoListCSharp.controls;
 using TodoListCSharp.views;
@@ -17,7 +18,19 @@ namespace TodoListCSharp
     public partial class MainWindow : Window
     {
         // !! DllImport Define
+        
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern int SetWindowLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
 
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr FindWindow(string lpWindowClass, string lpWindowName);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string className, string windowTitle);
+
+
+        const int GWL_HWNDPARENT = -8;
+        
         // !! Property Define
 
         private SettingWindow oSettingWindow = null;
@@ -35,6 +48,11 @@ namespace TodoListCSharp
         }
 
         private void MainWindow_onLoaded(object sender, EventArgs e) {
+            IntPtr hprog = FindWindow("Progman", "Program Manager");
+
+            SetWindowLong(new System.Windows.Interop.WindowInteropHelper(this).Handle, GWL_HWNDPARENT, hprog);
+
+            
             BinaryIO io = new BinaryIO();
             int ret = io.FileToList(Constants.TODOITEM_FILEPATH, ref oTodoItemList);
             if (ret != 0) {
@@ -77,8 +95,16 @@ namespace TodoListCSharp
         /// <param name="e"></param>
         private void ItemDoneButton_onClicked(object sender, RoutedEventArgs e) {
             IconButton button = (IconButton) sender;
-            oTodoItemList.DoneItem(button.Index, ref oDoneItemList);
+            oTodoItemList.DoneOrRevertItem(button.Index, ref oDoneItemList);
             oShowTodoList = oTodoItemList.GetItemList();
+            todoList.ItemsSource = oShowTodoList;
+            todoList.Items.Refresh();
+        }
+
+        private void ItemRevertButton_onClicked(object sender, RoutedEventArgs e) {
+            IconButton button = (IconButton) sender;
+            oDoneItemList.DoneOrRevertItem(button.Index, ref oTodoItemList);
+            oShowTodoList = oDoneItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
         }
@@ -157,8 +183,8 @@ namespace TodoListCSharp
         private void SwitchItemList() {
             if (statu == Constants.MainWindowStatu.TODO) {
                 oShowTodoList = oDoneItemList.GetItemList();
-                TodoLabel.Style = (Style)FindResource("MWTypeUnchosedFont");
-                DoneLabel.Style = (Style)FindResource("MWTypeChosedFont");
+                TodoLabel.Style = (Style) FindResource("MWTypeUnchosedFont");
+                DoneLabel.Style = (Style) FindResource("MWTypeChosedFont");
                 TodoLine.Style = (Style) FindResource("MWTypeUnderlineUnchosed");
                 DoneLine.Style = (Style) FindResource("MWTypeUnderlineChosed");
                 statu = Constants.MainWindowStatu.DONE;
@@ -168,14 +194,21 @@ namespace TodoListCSharp
             }
             else {
                 oShowTodoList = oTodoItemList.GetItemList();
-                TodoLabel.Style = (Style)FindResource("MWTypeChosedFont");
-                DoneLabel.Style = (Style)FindResource("MWTypeUnchosedFont");
+                TodoLabel.Style = (Style) FindResource("MWTypeChosedFont");
+                DoneLabel.Style = (Style) FindResource("MWTypeUnchosedFont");
                 TodoLine.Style = (Style) FindResource("MWTypeUnderlineChosed");
                 DoneLine.Style = (Style) FindResource("MWTypeUnderlineUnchosed");
                 statu = Constants.MainWindowStatu.TODO;
                 todoList.ItemsSource = oShowTodoList;
                 todoList.Items.Refresh();
             }
+        }
+
+        protected override void OnKeyDown(KeyEventArgs e) {
+            if (Keyboard.Modifiers == ModifierKeys.Windows) {
+                e.Handled = true;
+            }
+            else base.OnKeyDown(e);
         }
     }
     

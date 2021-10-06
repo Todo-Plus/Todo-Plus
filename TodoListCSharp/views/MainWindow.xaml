@@ -70,7 +70,8 @@
                                            ImageSource="/resources/icons/back_normal.png"
                                            HoverIcon="/resources/icons/back_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
-                                           IconDiameter="20"/>
+                                           IconDiameter="20"
+                                           Click="ItemRevertButton_onClicked"/>
                             <us:IconButton x:Name="T_EditButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/edit_normal.png"
