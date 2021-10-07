@@ -20,16 +20,12 @@ namespace TodoListCSharp
         // !! DllImport Define
         
         [DllImport("user32.dll", SetLastError = true)]
-        static extern int SetWindowLong(IntPtr hWnd, int nIndex, IntPtr dwNewLong);
+        static extern UInt64 GetWindowLong(IntPtr hWnd, int nIndex);
 
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern IntPtr FindWindow(string lpWindowClass, string lpWindowName);
-
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string className, string windowTitle);
-
-
-        const int GWL_HWNDPARENT = -8;
+        [DllImport("user32.dll")]
+        static extern int SetWindowLong(IntPtr hWnd, int nIndex, UInt64 dwNewLong);
+        [DllImport("user32.dll")]
+        static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
         
         // !! Property Define
 
@@ -48,11 +44,16 @@ namespace TodoListCSharp
         }
 
         private void MainWindow_onLoaded(object sender, EventArgs e) {
-            IntPtr hprog = FindWindow("Progman", "Program Manager");
-
-            SetWindowLong(new System.Windows.Interop.WindowInteropHelper(this).Handle, GWL_HWNDPARENT, hprog);
-
+            const int GWL_STYLE = (-16);
+            const UInt64 WS_CHILD = 0x40000000;
+            IntPtr hWnd = new WindowInteropHelper(this).Handle;
+            UInt64 iWindowStyle = GetWindowLong(hWnd, GWL_STYLE);
+            SetWindowLong(hWnd, GWL_STYLE,
+                (iWindowStyle| WS_CHILD));
             
+            IntPtr desktopHandle = Utils.SearchDesktopHandle();
+            SetParent(hWnd, desktopHandle);
+
             BinaryIO io = new BinaryIO();
             int ret = io.FileToList(Constants.TODOITEM_FILEPATH, ref oTodoItemList);
             if (ret != 0) {
@@ -80,6 +81,7 @@ namespace TodoListCSharp
         }
 
         private void LockWindowButton_onClicked(object sender, RoutedEventArgs e) {
+
             if (locked == Constants.MainWindowLockStatu.DRAGABLE) {
                 locked = Constants.MainWindowLockStatu.LOCKED;
                 return;
@@ -202,13 +204,6 @@ namespace TodoListCSharp
                 todoList.ItemsSource = oShowTodoList;
                 todoList.Items.Refresh();
             }
-        }
-
-        protected override void OnKeyDown(KeyEventArgs e) {
-            if (Keyboard.Modifiers == ModifierKeys.Windows) {
-                e.Handled = true;
-            }
-            else base.OnKeyDown(e);
         }
     }
     
