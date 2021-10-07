@@ -37,6 +37,10 @@ namespace TodoListCSharp
         private Constants.MainWindowStatu statu = Constants.MainWindowStatu.TODO;
         private Constants.MainWindowLockStatu locked = Constants.MainWindowLockStatu.DRAGABLE;
         private int iMaxIndex = 0;
+        
+        private IntPtr hMainWindowHandle = IntPtr.Zero;
+        public Visibility eDoneButtonStatu { get; set; }
+        public Visibility eTodoButtonStatu { get; set; }
 
         // !! Functions Define and Implement
         public MainWindow() {
@@ -46,13 +50,16 @@ namespace TodoListCSharp
         private void MainWindow_onLoaded(object sender, EventArgs e) {
             const int GWL_STYLE = (-16);
             const UInt64 WS_CHILD = 0x40000000;
-            IntPtr hWnd = new WindowInteropHelper(this).Handle;
-            UInt64 iWindowStyle = GetWindowLong(hWnd, GWL_STYLE);
-            SetWindowLong(hWnd, GWL_STYLE,
+            hMainWindowHandle = new WindowInteropHelper(this).Handle;
+            UInt64 iWindowStyle = GetWindowLong(hMainWindowHandle, GWL_STYLE);
+            SetWindowLong(hMainWindowHandle, GWL_STYLE,
                 (iWindowStyle| WS_CHILD));
             
             IntPtr desktopHandle = Utils.SearchDesktopHandle();
-            SetParent(hWnd, desktopHandle);
+            SetParent(hMainWindowHandle, desktopHandle);
+
+            eTodoButtonStatu = Visibility.Visible;
+            eDoneButtonStatu = Visibility.Collapsed;
 
             BinaryIO io = new BinaryIO();
             int ret = io.FileToList(Constants.TODOITEM_FILEPATH, ref oTodoItemList);
@@ -68,6 +75,13 @@ namespace TodoListCSharp
 
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
+            todoList.Items.Refresh();
+        }
+
+        public void MainWindow_onClosed(object sender, EventArgs e) {
+            BinaryIO io = new BinaryIO();
+            io.ListToFile(ref oTodoItemList, Constants.TODOITEM_FILEPATH);
+            io.ListToFile(ref oDoneItemList, Constants.DONEITEM_FILEPATH);
         }
 
         private void TodoButton_onClicked(object sender, EventArgs e) {
@@ -125,10 +139,6 @@ namespace TodoListCSharp
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
-        }
-
-        private void ButtonClickedLockWindow(object sender, RoutedEventArgs e) {
-
         }
 
         private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
@@ -189,6 +199,8 @@ namespace TodoListCSharp
                 DoneLabel.Style = (Style) FindResource("MWTypeChosedFont");
                 TodoLine.Style = (Style) FindResource("MWTypeUnderlineUnchosed");
                 DoneLine.Style = (Style) FindResource("MWTypeUnderlineChosed");
+                eTodoButtonStatu = Visibility.Collapsed;
+                eDoneButtonStatu = Visibility.Visible;
                 statu = Constants.MainWindowStatu.DONE;
                 // 不会自动同步，需要手动重新绑定
                 todoList.ItemsSource = oShowTodoList;
@@ -200,6 +212,8 @@ namespace TodoListCSharp
                 DoneLabel.Style = (Style) FindResource("MWTypeUnchosedFont");
                 TodoLine.Style = (Style) FindResource("MWTypeUnderlineChosed");
                 DoneLine.Style = (Style) FindResource("MWTypeUnderlineUnchosed");
+                eTodoButtonStatu = Visibility.Visible;
+                eDoneButtonStatu = Visibility.Collapsed;
                 statu = Constants.MainWindowStatu.TODO;
                 todoList.ItemsSource = oShowTodoList;
                 todoList.Items.Refresh();

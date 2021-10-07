@@ -4,9 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:us="clr-namespace:TodoListCSharp.controls"
+        xmlns:converter="clr-namespace:TodoListCSharp.converter"
         mc:Ignorable="d"
         Loaded="MainWindow_onLoaded"
-        Title="MainWindow" MinHeight="550" MinWidth="320" Height="850" Width="379">
+        x:Name="ApplicationMainWindow"
+        Title="MainWindow" MinHeight="550" MinWidth="320" Height="550" Width="320">
+    <Window.Resources>
+        <converter:WindowStatuToVisibiltyConverterForTodo x:Key="ConverterForTodo"></converter:WindowStatuToVisibiltyConverterForTodo>
+    </Window.Resources>
+    
     <StackPanel>
         <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -58,13 +64,15 @@
                             <Label Content="{Binding Title}" VerticalAlignment="Center" Margin="5, 0" FontSize="15" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <!-- visibility = "Visiible" if mouseon && Statu == "to_do"-->
                             <us:IconButton x:Name="T_AddButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/add_normal.png"
                                            HoverIcon="/resources/icons/add_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20"
-                                           Click="ItemDoneButton_onClicked" />
+                                           Click="ItemDoneButton_onClicked">
+                            </us:IconButton>
                             <us:IconButton x:Name="T_BackButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/back_normal.png"
@@ -96,11 +104,17 @@
                     </Grid>
                     <DataTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="T_AddButton" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="T_BackButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="T_AddButton" Property="Visibility" 
+                                    Value="{Binding ElementName=ApplicationMainWindow,
+                                    Path=eTodoButtonStatu}" />
+                            <Setter TargetName="T_BackButton" Property="Visibility" 
+                                    Value="{Binding ElementName=ApplicationMainWindow,
+                                    Path=eDoneButtonStatu}" />
                             <Setter TargetName="T_EditButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="T_DeleteButton" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="T_TotopButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="T_TotopButton" Property="Visibility"
+                                    Value="{Binding ElementName=ApplicationMainWindow,
+                                    Path=eTodoButtonStatu}"/>
                         </Trigger>
                     </DataTemplate.Triggers>
                 </DataTemplate>

@@ -4,17 +4,16 @@ using System.IO;
 using System.Linq;
 using TodoListCSharp.core;
 namespace TodoListCSharp.core {
+    /// <summary>
+    /// todo： 链表的实现还需要再优化一下，保证在链表为空的时候能够继续进行序列化
+    /// </summary>
     public class ItemList {
         private ItemUnit ListStart;
         private ItemUnit ListEnd;
 
         public ItemList(TodoItem item) {
             ItemUnit newItem = new ItemUnit(item);
-            ListStart = newItem;
-        }
-        
-        public void SetItemToTop(ref ItemUnit ChosedItem) {
-            return ;
+            ListStart = ListEnd = newItem;
         }
 
         // 返回链表转换为的列表，由于项目数量比较少，所以O(n)每一次转换足够
@@ -47,8 +46,8 @@ namespace TodoListCSharp.core {
         /// <summary>
         /// 完成或回溯事项
         /// </summary>
-        /// <param name="iItemIndex"></param>
-        /// <param name="oDstList"></param>
+        /// <param name="iItemIndex">事项编号</param>
+        /// <param name="oDstList">放入的目标链表（todolist/donelist）</param>
         /// <returns></returns>
         public int DoneOrRevertItem(int iItemIndex, ref ItemList oDstList) {
             ItemUnit oNowItem = ListStart;
