@@ -227,9 +227,9 @@ namespace TodoListCSharp
 
         public void AppearanceTransparencyChange(int value) {
             double alpha = value / 100.0;
-            this.TitleBarGrid.Opacity = alpha;
-            this.ApplicationMainWindow.Opacity = alpha;
-            this.ApplicationMainWindow.Opacity = alpha;
+
+            this.ApplicationMainWindow.Background = new SolidColorBrush(Colors.White);
+            this.ApplicationMainWindow.Background.Opacity = alpha;
         }
     }
     

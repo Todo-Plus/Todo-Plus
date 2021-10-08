@@ -22,7 +22,7 @@
     </Window.Resources>
     
     <StackPanel>
-        <Grid x:Name="TitleBarGrid" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="White">
+        <Grid x:Name="TitleBarGrid" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <StackPanel Style="{StaticResource MWTypeContainer}" MouseLeftButtonDown="TodoButton_onClicked">
                     <Label x:Name="TodoLabel" Style="{DynamicResource MWTypeChosedFont}">Todo</Label>
@@ -54,6 +54,7 @@
             </StackPanel>
         </Grid>
         <ListBox
+            Background="Transparent"
             HorizontalAlignment="Stretch"
             Name="todoList"
             Height="Auto"
