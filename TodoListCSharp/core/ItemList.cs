@@ -29,6 +29,14 @@ namespace TodoListCSharp.core {
             return oRetList;
         }
 
+        public List<TodoItem> GetItemListForSerializer() {
+            List<TodoItem> oRetList = GetItemList();
+            TodoItem item = new TodoItem(String.Empty, String.Empty);
+            item.SetIndex(-1);
+            oRetList.Insert(0, item);
+            return oRetList;
+        }
+
         public ItemList() {
             
         }

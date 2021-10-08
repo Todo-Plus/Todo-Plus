@@ -7,6 +7,7 @@
         xmlns:converter="clr-namespace:TodoListCSharp.converter"
         mc:Ignorable="d"
         Loaded="MainWindow_onLoaded"
+        Closed="MainWindow_onClosed"
         x:Name="ApplicationMainWindow"
         Title="MainWindow" MinHeight="550" MinWidth="320" Height="550" Width="320">
     <Window.Resources>

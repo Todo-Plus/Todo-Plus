@@ -36,10 +36,12 @@ namespace TodoListCSharp.utils {
             // 序列器已过期，后续改为其他方法
             List<TodoItem> list = serializer.Deserialize(loadFile) as List<TodoItem>;
 
-            if (list == null || list.Count == 0) {
-                return -1;
+            if (list.Count == 1) {
+                output = new ItemList();
+                return 0;
             }
             
+            list.RemoveAt(0);
             output = new ItemList(list[0]);
             for (int i = 1; i < list.Count; i++) {
                 output.AppendItem(list[i]);
@@ -49,9 +51,9 @@ namespace TodoListCSharp.utils {
         }
 
         public int ListToFile(ref ItemList input, string path) {
-            FileStream outputFile = new FileStream(path, FileMode.CreateNew, FileAccess.Write);
+            FileStream outputFile = new FileStream(path, FileMode.Create, FileAccess.Write);
             IFormatter serializer = new BinaryFormatter();
-            List<TodoItem> list = input.GetItemList();
+            List<TodoItem> list = input.GetItemListForSerializer();
             serializer.Serialize(outputFile, list);
 
             return 0;
