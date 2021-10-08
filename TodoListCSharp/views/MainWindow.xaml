@@ -6,16 +6,23 @@
         xmlns:us="clr-namespace:TodoListCSharp.controls"
         xmlns:converter="clr-namespace:TodoListCSharp.converter"
         mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="White"
         Loaded="MainWindow_onLoaded"
         Closed="MainWindow_onClosed"
         x:Name="ApplicationMainWindow"
         Title="MainWindow" MinHeight="550" MinWidth="320" Height="550" Width="320">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-1" />
+    </WindowChrome.WindowChrome>
+    
     <Window.Resources>
         <converter:WindowStatuToVisibiltyConverterForTodo x:Key="ConverterForTodo"></converter:WindowStatuToVisibiltyConverterForTodo>
     </Window.Resources>
     
     <StackPanel>
-        <Grid MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
+        <Grid x:Name="TitleBarGrid" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="White">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                 <StackPanel Style="{StaticResource MWTypeContainer}" MouseLeftButtonDown="TodoButton_onClicked">
                     <Label x:Name="TodoLabel" Style="{DynamicResource MWTypeChosedFont}">Todo</Label>

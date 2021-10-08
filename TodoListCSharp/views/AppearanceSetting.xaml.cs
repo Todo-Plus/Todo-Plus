@@ -18,22 +18,52 @@ namespace TodoListCSharp.views {
     /// AppearanceSetting.xaml 的交互逻辑
     /// </summary>
     public partial class AppearanceSetting : Window {
+
+        public int iShowPercent { get; set; }
         
-        // delegate & events
+        private bool bDragging = false;
+
+        // !! delegate & events
         public delegate void ClosedCallbackFunc();
         public event ClosedCallbackFunc closedCallbackFunc;
+
+        public delegate void SliderValueChangeCallbackFunc(int value);
+
+        public event SliderValueChangeCallbackFunc SliderValueChangeCallback;
+        
+        // !! Functions
         public AppearanceSetting() {
             InitializeComponent();
         }
 
-        private void AppearanceSetting_OnClosed(object? sender, EventArgs e) {
+        private void AppearanceSetting_OnClosed(object sender, EventArgs e) {
             if (closedCallbackFunc != null) {
                 closedCallbackFunc();
             }
         }
 
+        private void SetShowPercentValue(int value) {
+            iShowPercent = value;
+            this.PercentLabel.Content = iShowPercent;
+
+            if (SliderValueChangeCallback != null) {
+                SliderValueChangeCallback(value);
+            }
+        }
+
         private void AppearanceSetting_onDragOver(object sender, DragCompletedEventArgs e) {
-            System.Console.WriteLine(1);
+            SetShowPercentValue((int)((Slider)sender).Value);
+            bDragging = false;
+        }
+
+        private void AppearanceSetting_onDragStart(object sender, DragStartedEventArgs e) {
+            bDragging = true;
+        }
+
+        private void AppearanceSetting_onValueChange(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            if (!bDragging) {
+                SetShowPercentValue((int)e.NewValue);
+            }
         }
     }
 }

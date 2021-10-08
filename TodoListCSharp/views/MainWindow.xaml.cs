@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
 using TodoListCSharp.controls;
 using TodoListCSharp.views;
 using TodoListCSharp.core;
 using TodoListCSharp.utils;
+using Color = System.Drawing.Color;
 
 namespace TodoListCSharp
 {
@@ -156,6 +158,7 @@ namespace TodoListCSharp
             oSettingWindow.Show();
             // Set callback function
             oSettingWindow.settingWindowClosed += SettingWindow_OnClosed;
+            oSettingWindow.TransparencyChangeCallback += AppearanceTransparencyChange;
             oSettingWindow.Owner = this;
         }
 
@@ -218,6 +221,15 @@ namespace TodoListCSharp
                 todoList.ItemsSource = oShowTodoList;
                 todoList.Items.Refresh();
             }
+        }
+        
+        // !! MainWindow Appearance Change Functions
+
+        public void AppearanceTransparencyChange(int value) {
+            double alpha = value / 100.0;
+            this.TitleBarGrid.Opacity = alpha;
+            this.ApplicationMainWindow.Opacity = alpha;
+            this.ApplicationMainWindow.Opacity = alpha;
         }
     }
     

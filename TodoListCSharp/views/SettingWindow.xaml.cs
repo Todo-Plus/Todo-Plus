@@ -29,6 +29,12 @@ namespace TodoListCSharp.views {
         public delegate void SettingWindowClosed();
         public event SettingWindowClosed settingWindowClosed;
         
+        // Appearance Setting Window Delegates
+
+        public delegate void TransparencyChangeCallbackFunc(int value);
+
+        public event TransparencyChangeCallbackFunc TransparencyChangeCallback;
+        
         // !! Functions Define and Implement
         public SettingWindow() {
             InitializeComponent();
@@ -71,6 +77,7 @@ namespace TodoListCSharp.views {
             oAppearanceSettingWindow = new AppearanceSetting();
             oAppearanceSettingWindow.Show();
             oAppearanceSettingWindow.closedCallbackFunc += CloseAppearanceSettingWindow;
+            oAppearanceSettingWindow.SliderValueChangeCallback += AppearanceSetting_SliderValueChange;
             oAppearanceSettingWindow.Owner = this;
         }
         
@@ -92,5 +99,12 @@ namespace TodoListCSharp.views {
         private void CloseBackupSettingWindow() {
             oBackupSettingWindow = null;
         }
+        
+        // !! delegate forward
+        private void AppearanceSetting_SliderValueChange(int value) {
+            if (TransparencyChangeCallback != null) {
+                TransparencyChangeCallback(value);
+            }
+        } 
     }
 }

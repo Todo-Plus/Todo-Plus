@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:TodoListCSharp.views"
         xmlns:us="clr-namespace:TodoListCSharp.controls"
         mc:Ignorable="d"
+        x:Name="AppearanceSettingWindow"
         Closed="AppearanceSetting_OnClosed"
         Title="AppearanceSetting" MinHeight="560" MinWidth="418" Height="560" Width="418">
     <StackPanel Background="#E8E8E8">
@@ -63,8 +64,14 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Width="350"
-                    Thumb.DragCompleted="AppearanceSetting_onDragOver"/>
-                <Label FontSize="15" Margin="10, 0" x:Name="showPercent">20</Label>
+                    Thumb.DragCompleted="AppearanceSetting_onDragOver"
+                    Thumb.DragStarted="AppearanceSetting_onDragStart"
+                    ValueChanged="AppearanceSetting_onValueChange"/>
+                <Label FontSize="15" Margin="10, 0" 
+                       x:Name="PercentLabel"
+                       Content="{Binding 
+                       ElementName=AppearanceSettingWindow,
+                       Path=iShowPercent}"/>
             </StackPanel>
             
             <!--Font Setting-->
