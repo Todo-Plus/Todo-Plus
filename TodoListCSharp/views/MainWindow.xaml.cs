@@ -39,6 +39,7 @@ namespace TodoListCSharp
         private Constants.MainWindowStatu statu = Constants.MainWindowStatu.TODO;
         private Constants.MainWindowLockStatu locked = Constants.MainWindowLockStatu.DRAGABLE;
         private int iMaxIndex = 0;
+        private Setting setting = null;
         
         private IntPtr hMainWindowHandle = IntPtr.Zero;
         public Visibility eDoneButtonStatu { get; set; }
@@ -62,6 +63,8 @@ namespace TodoListCSharp
 
             eTodoButtonStatu = Visibility.Visible;
             eDoneButtonStatu = Visibility.Collapsed;
+
+            setting = new Setting();
 
             BinaryIO io = new BinaryIO();
             int ret = io.FileToList(Constants.TODOITEM_FILEPATH, ref oTodoItemList);
@@ -157,8 +160,9 @@ namespace TodoListCSharp
             oSettingWindow = new SettingWindow();
             oSettingWindow.Show();
             // Set callback function
+            oSettingWindow.setting = setting;
             oSettingWindow.settingWindowClosed += SettingWindow_OnClosed;
-            oSettingWindow.TransparencyChangeCallback += AppearanceTransparencyChange;
+            oSettingWindow.TransparencyChangeCallback += AppearanceSettingChange;
             oSettingWindow.Owner = this;
         }
 
@@ -180,6 +184,7 @@ namespace TodoListCSharp
         // Set SettingWindow while close windows
         private void SettingWindow_OnClosed() {
             oSettingWindow = null;
+            AppearanceSettingChange(setting);
         }
 
         private void ItemAddWindow_onClosed() {
@@ -230,6 +235,14 @@ namespace TodoListCSharp
 
             this.ApplicationMainWindow.Background = new SolidColorBrush(Colors.White);
             this.ApplicationMainWindow.Background.Opacity = alpha;
+        }
+
+        public void AppearanceSettingChange(Setting setting) {
+            double alpha = setting.Alpha / 100.0;
+            this.ApplicationMainWindow.Background = new SolidColorBrush(setting.BackgroundColor);
+            this.ApplicationMainWindow.Background.Opacity = alpha;
+            
+            
         }
     }
     

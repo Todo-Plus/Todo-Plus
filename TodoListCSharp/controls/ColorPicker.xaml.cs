@@ -107,5 +107,15 @@ namespace TodoListCSharp.controls {
 
             return oRetColor;
         }
+        
+        /// <summary>
+        /// todo:颜色转换到picker状态的函数，待实现
+        /// </summary>
+        /// <param name="color"></param>
+        /// <returns></returns>
+        private int ColorToPickerStatus(Color color) {
+            return 0;
+
+        }
     }
 }

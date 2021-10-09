@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TodoListCSharp.core;
 using TodoListCSharp.views;
 
 namespace TodoListCSharp.views {
@@ -25,13 +26,15 @@ namespace TodoListCSharp.views {
         private AppearanceSetting oAppearanceSettingWindow = null;
         private BackupSetting oBackupSettingWindow = null;
         
+        public Setting setting = null;
+        
         // !! Events & delegate Define
         public delegate void SettingWindowClosed();
         public event SettingWindowClosed settingWindowClosed;
         
         // Appearance Setting Window Delegates
 
-        public delegate void TransparencyChangeCallbackFunc(int value);
+        public delegate void TransparencyChangeCallbackFunc(Setting setting);
 
         public event TransparencyChangeCallbackFunc TransparencyChangeCallback;
         
@@ -76,8 +79,9 @@ namespace TodoListCSharp.views {
             }
             oAppearanceSettingWindow = new AppearanceSetting();
             oAppearanceSettingWindow.Show();
+            oAppearanceSettingWindow.setting = setting;
             oAppearanceSettingWindow.closedCallbackFunc += CloseAppearanceSettingWindow;
-            oAppearanceSettingWindow.SliderValueChangeCallback += AppearanceSetting_SliderValueChange;
+            oAppearanceSettingWindow.AppearanceSettingChange += AppearanceSetting_ChangeSetting;
             oAppearanceSettingWindow.Owner = this;
         }
         
@@ -101,9 +105,9 @@ namespace TodoListCSharp.views {
         }
         
         // !! delegate forward
-        private void AppearanceSetting_SliderValueChange(int value) {
+        private void AppearanceSetting_ChangeSetting(Setting setting) {
             if (TransparencyChangeCallback != null) {
-                TransparencyChangeCallback(value);
+                TransparencyChangeCallback(setting);
             }
         } 
     }

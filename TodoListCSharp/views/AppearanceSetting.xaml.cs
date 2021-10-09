@@ -12,16 +12,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TodoListCSharp.core;
 
 namespace TodoListCSharp.views {
     /// <summary>
     /// AppearanceSetting.xaml 的交互逻辑
     /// </summary>
     public partial class AppearanceSetting : Window {
-
-        public int iShowPercent { get; set; }
         
         private bool bDragging = false;
+        public int iShowPercent { get; set; }
+        public Setting setting;
 
         // !! delegate & events
         public delegate void ClosedCallbackFunc();
@@ -30,7 +31,10 @@ namespace TodoListCSharp.views {
         public delegate void SliderValueChangeCallbackFunc(int value);
 
         public event SliderValueChangeCallbackFunc SliderValueChangeCallback;
-        
+
+        public delegate void AppearanceSettingChangeCallback(Setting setting);
+
+        public event AppearanceSettingChangeCallback AppearanceSettingChange;
         // !! Functions
         public AppearanceSetting() {
             InitializeComponent();
@@ -46,8 +50,13 @@ namespace TodoListCSharp.views {
             iShowPercent = value;
             this.PercentLabel.Content = iShowPercent;
 
-            if (SliderValueChangeCallback != null) {
-                SliderValueChangeCallback(value);
+            setting.Alpha = value;
+            SettingTemporaryChange();
+        }
+
+        private void SettingTemporaryChange() {
+            if (AppearanceSettingChange != null) {
+                AppearanceSettingChange(setting);
             }
         }
 

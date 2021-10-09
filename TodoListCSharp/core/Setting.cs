@@ -1,21 +1,22 @@
 ﻿using System;
-using System.Drawing;
+using System.Windows.Media;
 
 namespace TodoListCSharp.core {
+    // Setting类，单例模式，beta版本，后续进行设计
     [Serializable]
     public class Setting {
         // Appearance
-        private int Alpha;
-        private int Fontsize;
-        private string Fontfamily;
-        private Color BackgroundColor;
+        public int Alpha { get; set; }
+        public int Fontsize { get; set; }
+        public string FontFamily { get; set; }
+        public Color BackgroundColor { get; set; }
 
         public Setting() {
             // default setting
             Alpha = 100;
             Fontsize = 16;
-            Fontfamily = "Inter";
-            BackgroundColor = Color.White;
+            FontFamily = "Inter";
+            BackgroundColor = Color.FromRgb(0xFF, 0xFF, 0xFF);
         }
     }
 }
