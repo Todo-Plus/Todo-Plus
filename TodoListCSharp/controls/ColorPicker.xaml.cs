@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TodoListCSharp.utils;
 
 namespace TodoListCSharp.controls {
     /// <summary>
@@ -20,6 +22,10 @@ namespace TodoListCSharp.controls {
     public partial class ColorPicker : UserControl {
         private const int Width = 256;
         private const int Height = 144;
+        private const int ColorSliderWidth = 230;
+
+        private Color oRightTopColor;
+        private Color oSelectColor;
         
         public Color DefaultColor = Color.FromRgb(255, 0, 255);
         public ColorPicker() {
@@ -33,6 +39,35 @@ namespace TodoListCSharp.controls {
             double left = 2 * postion.X - Width;
             double top = 2 * postion.Y - Height;
             this.ClickedPos.Margin = new Thickness(left, top, 0, 0);
+
+            double fWidthPercent = postion.X / Width;
+            Debug.WriteLine(postion);
+            double fHeightPercent = postion.Y / Height;
+
+            int iStartRed = (int) (oRightTopColor.R * (1.0 - fHeightPercent));
+            int iStartGreen = (int) (oRightTopColor.G * (1.0 - fHeightPercent));
+            int iStartBlue = (int) (oRightTopColor.B * (1.0 - fHeightPercent));
+            int iEndRed = (int) (255 * (1.0 - fHeightPercent));
+            int iEndGreen = (int) (255 * (1.0 - fHeightPercent));
+            int iEndBlue = (int) (255 * (1.0 - fHeightPercent));
+
+            int iSelectRed = (int) (iEndRed - fWidthPercent * (iEndRed - iStartRed));
+            int iSelectGreen = (int) (iEndGreen - fWidthPercent * (iEndGreen - iStartGreen));
+            int iSelectBlue = (int) (iEndBlue - fWidthPercent * (iEndBlue - iStartBlue));
+
+            oSelectColor = Color.FromRgb((byte) iSelectRed, (byte) iSelectGreen, (byte) iSelectBlue);
+            // oSelectColor = Color.FromRgb((byte) iEndRed, (byte) iEndGreen, (byte) iEndBlue);
+            // oSelectColor = Color.FromRgb((byte) iStartRed, (byte) iStartGreen, (byte) iStartBlue);
+            this.ShowSelectColor.Fill = new SolidColorBrush(oSelectColor);
+        }
+
+        private void ColorSlider_onMouseMove(object sender, MouseEventArgs e) {
+            if (Mouse.LeftButton != MouseButtonState.Pressed) return;
+            Point position = e.GetPosition((IInputElement) sender);
+            double percent = position.X / ColorSliderWidth;
+            Color color = Utils.SliderPercentToColor(percent);
+            this.CoreColor.Color = color;
+            oRightTopColor = color;
         }
     }
 }

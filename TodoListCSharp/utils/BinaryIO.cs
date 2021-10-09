@@ -60,11 +60,26 @@ namespace TodoListCSharp.utils {
         }
 
         public int FileToSetting(string path, ref Setting settings) {
-            throw new System.NotImplementedException();
+            if (false == System.IO.File.Exists(path)) {
+                settings = new Setting();
+                // 文件不存在，读取默认设置
+                return 0;
+            }
+            
+            FileStream loadFile = new FileStream(path, FileMode.Open, FileAccess.Read);
+            IFormatter serializer = new BinaryFormatter();
+            
+            settings = serializer.Deserialize(loadFile) as Setting;
+
+            return 0;
         }
 
         public int SettingToFile(ref Setting settings, string path) {
-            throw new System.NotImplementedException();
+            FileStream outputFile = new FileStream(path, FileMode.Create, FileAccess.Write);
+            IFormatter serializer = new BinaryFormatter();
+            serializer.Serialize(outputFile, settings);
+
+            return 0;
         }
     }
 }

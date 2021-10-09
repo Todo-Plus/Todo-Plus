@@ -41,7 +41,7 @@
         </Grid>
         <Grid Grid.Row="1" Height="20" Margin="0, 15">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                <Rectangle Width="230" Height="Auto">
+                <Rectangle Width="230" Height="Auto" MouseMove="ColorSlider_onMouseMove">
                     <Rectangle.Fill>
                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                             <LinearGradientBrush.GradientStops>
@@ -58,7 +58,7 @@
                 </Rectangle>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Ellipse Width="20" Height="20" Fill="Green">
+                <Ellipse x:Name="ShowSelectColor" Width="20" Height="20" Fill="Green">
                     <Ellipse.Effect>
                         <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
                     </Ellipse.Effect>

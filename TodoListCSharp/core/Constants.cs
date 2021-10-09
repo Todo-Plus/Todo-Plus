@@ -18,5 +18,10 @@
             TODO,
             DONE
         }
+
+        public enum SettingBackStatus {
+            CONFIRM,
+            CANCEL
+        }
     }
 }
