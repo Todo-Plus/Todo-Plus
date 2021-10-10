@@ -76,8 +76,8 @@
                             <!-- visibility = "Visiible" if mouseon && Statu == "to_do"-->
                             <us:IconButton x:Name="T_AddButton" Visibility="Hidden"
                                            Index="{Binding Index}"
-                                           ImageSource="/resources/icons/add_normal.png"
-                                           HoverIcon="/resources/icons/add_hover.png"
+                                           ImageSource="/resources/icons/done_normal.png"
+                                           HoverIcon="/resources/icons/done_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20"
                                            Click="ItemDoneButton_onClicked">

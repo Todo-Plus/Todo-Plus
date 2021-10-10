@@ -29,6 +29,8 @@
     <None Remove="resources\icons\close.png" />
     <None Remove="resources\icons\delete_hover.png" />
     <None Remove="resources\icons\delete_normal.png" />
+    <None Remove="resources\icons\done_hover.png" />
+    <None Remove="resources\icons\done_normal.png" />
     <None Remove="resources\icons\edit_hover.bmp" />
     <None Remove="resources\icons\edit_hover.png" />
     <None Remove="resources\icons\edit_normal.bmp" />
@@ -88,6 +90,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\delete_normal.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\done_hover.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\done_normal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\edit_hover.bmp">
