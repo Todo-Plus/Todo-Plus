@@ -12,13 +12,18 @@
         <us:Titlebar Title="General" Background="White"/>
         <StackPanel>
             <!-- Tabs and Add Button-->
-            <Grid>
+            <Grid Margin="5">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label FontFamily="Inter" FontSize="12">Tabs</Label>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button>Add</Button>
+                    <Button Width="60"
+                            Foreground="White"
+                            Background="#19ff6d"
+                            FontFamily="Inter Bold"
+                            BorderThickness="0">Add</Button>
                 </StackPanel>
+                
             </Grid>
             
             <!-- Todo: Show Tabs-->

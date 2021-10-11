@@ -20,6 +20,10 @@ namespace TodoListCSharp.controls {
     /// ColorPicker.xaml 的交互逻辑
     /// </summary>
     public partial class ColorPicker : UserControl {
+        public delegate void SelectColorCallbackFunc(Color color);
+
+        public event SelectColorCallbackFunc SelectColorCallback;
+        
         private const int Width = 256;
         private const int Height = 144;
         private const int ColorSliderWidth = 230;
@@ -59,6 +63,10 @@ namespace TodoListCSharp.controls {
             // oSelectColor = Color.FromRgb((byte) iEndRed, (byte) iEndGreen, (byte) iEndBlue);
             // oSelectColor = Color.FromRgb((byte) iStartRed, (byte) iStartGreen, (byte) iStartBlue);
             this.ShowSelectColor.Fill = new SolidColorBrush(oSelectColor);
+
+            if (SelectColorCallback != null) {
+                SelectColorCallback(oSelectColor);
+            }
         }
 
         private void ColorSlider_onMouseMove(object sender, MouseEventArgs e) {

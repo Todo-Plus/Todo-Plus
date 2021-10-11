@@ -40,6 +40,10 @@ namespace TodoListCSharp.views {
             InitializeComponent();
         }
 
+        private void AppearanceSetting_onLoaded(object sender, EventArgs e) {
+            this.AppearanceColorPicker.SelectColorCallback += AppearanceSetting_onColorChange;
+        }
+
         private void AppearanceSetting_OnClosed(object sender, EventArgs e) {
             if (closedCallbackFunc != null) {
                 closedCallbackFunc();
@@ -73,6 +77,11 @@ namespace TodoListCSharp.views {
             if (!bDragging) {
                 SetShowPercentValue((int)e.NewValue);
             }
+        }
+
+        private void AppearanceSetting_onColorChange(Color color) {
+            setting.BackgroundColor = color;
+            SettingTemporaryChange();
         }
     }
 }

@@ -240,8 +240,8 @@ namespace TodoListCSharp
 
         public void AppearanceSettingChange(Setting setting) {
             double alpha = setting.Alpha / 100.0;
-            this.ApplicationMainWindow.Background = new SolidColorBrush(setting.BackgroundColor);
-            this.ApplicationMainWindow.Background.Opacity = alpha;
+            this.WindowBorder.Background = new SolidColorBrush(setting.BackgroundColor);
+            this.WindowBorder.Background.Opacity = alpha;
             
             
         }

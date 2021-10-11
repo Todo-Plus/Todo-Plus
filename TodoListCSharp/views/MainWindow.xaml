@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         WindowStyle="None"
         ResizeMode="NoResize"
-        Background="White"
+        Background="Transparent"
         Loaded="MainWindow_onLoaded"
         Closed="MainWindow_onClosed"
         x:Name="ApplicationMainWindow"
@@ -20,113 +20,116 @@
     <Window.Resources>
         <converter:WindowStatuToVisibiltyConverterForTodo x:Key="ConverterForTodo"></converter:WindowStatuToVisibiltyConverterForTodo>
     </Window.Resources>
-    
-    <StackPanel>
-        <Grid x:Name="TitleBarGrid" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <StackPanel Style="{StaticResource MWTypeContainer}" MouseLeftButtonDown="TodoButton_onClicked">
-                    <Label x:Name="TodoLabel" Style="{DynamicResource MWTypeChosedFont}">Todo</Label>
-                    <Label x:Name="TodoLine" Style="{StaticResource MWTypeUnderlineChosed}" />
+
+    <Grid>
+        <Border x:Name="WindowBorder" Background="White" CornerRadius="5"></Border>
+        <StackPanel Background="Transparent">
+            <Grid x:Name="TitleBarGrid" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <StackPanel Style="{StaticResource MWTypeContainer}" MouseLeftButtonDown="TodoButton_onClicked">
+                        <Label x:Name="TodoLabel" Style="{DynamicResource MWTypeChosedFont}">Todo</Label>
+                        <Label x:Name="TodoLine" Style="{StaticResource MWTypeUnderlineChosed}" />
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource MWTypeContainer}" MouseLeftButtonDown="DoneButton_onClicked">
+                        <Label x:Name="DoneLabel" Style="{StaticResource MWTypeUnchosedFont}">Done</Label>
+                        <Label x:Name="DoneLine" Style="{StaticResource MWTypeUnderlineUnchosed}" />
+                    </StackPanel>
                 </StackPanel>
-                <StackPanel Style="{StaticResource MWTypeContainer}" MouseLeftButtonDown="DoneButton_onClicked">
-                    <Label x:Name="DoneLabel" Style="{StaticResource MWTypeUnchosedFont}">Done</Label>
-                    <Label x:Name="DoneLine" Style="{StaticResource MWTypeUnderlineUnchosed}" />
-                </StackPanel>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10, 0">
-                <StackPanel Orientation="Horizontal" Width="Auto">
-                    <us:IconButton
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10, 0">
+                    <StackPanel Orientation="Horizontal" Width="Auto">
+                        <us:IconButton
                         Style="{StaticResource MWTitleIconButtonStyle}"
                         ImageSource="/resources/icons/locked.png"
                         HoverIcon="/resources/icons/locked.png"
                         Click="LockWindowButton_onClicked" />
-                    <us:IconButton
+                        <us:IconButton
                         Style="{StaticResource MWTitleIconButtonStyle}"
                         ImageSource="/resources/icons/setting.png"
                         HoverIcon="/resources/icons/setting.png"
                         Click="OpenSettingWindow" />
-                    <us:IconButton
+                        <us:IconButton
                         Style="{StaticResource MWTitleIconButtonStyle}"
                         ImageSource="/resources/icons/add.png"
                         HoverIcon="/resources/icons/add.png"
                         Click="OpenItemAddWindow" />
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
-        </Grid>
-        <ListBox
+            </Grid>
+            <ListBox
             Background="Transparent"
             HorizontalAlignment="Stretch"
             Name="todoList"
             Height="Auto"
             BorderThickness="0">
-            <ListBox.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                </Style>
-            </ListBox.ItemContainerStyle>
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="30" Margin="10, 0" Background="Transparent">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <Ellipse Width="10" Height="10" Fill="#BBBBBB" />
-                            <Label Content="{Binding Title}" VerticalAlignment="Center" Margin="5, 0" FontSize="15" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                            <!-- visibility = "Visiible" if mouseon && Statu == "to_do"-->
-                            <us:IconButton x:Name="T_AddButton" Visibility="Hidden"
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="30" Margin="10, 0" Background="Transparent">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Ellipse Width="10" Height="10" Fill="#BBBBBB" />
+                                <Label Content="{Binding Title}" VerticalAlignment="Center" Margin="5, 0" FontSize="15" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <!-- visibility = "Visiible" if mouseon && Statu == "to_do"-->
+                                <us:IconButton x:Name="T_AddButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/done_normal.png"
                                            HoverIcon="/resources/icons/done_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20"
                                            Click="ItemDoneButton_onClicked">
-                            </us:IconButton>
-                            <us:IconButton x:Name="T_BackButton" Visibility="Hidden"
+                                </us:IconButton>
+                                <us:IconButton x:Name="T_BackButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/back_normal.png"
                                            HoverIcon="/resources/icons/back_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20"
                                            Click="ItemRevertButton_onClicked"/>
-                            <us:IconButton x:Name="T_EditButton" Visibility="Hidden"
+                                <us:IconButton x:Name="T_EditButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/edit_normal.png"
                                            HoverIcon="/resources/icons/edit_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20" />
-                            <us:IconButton x:Name="T_DeleteButton" Visibility="Hidden"
+                                <us:IconButton x:Name="T_DeleteButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/delete_normal.png"
                                            HoverIcon="/resources/icons/delete_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20" 
                                            Click="ItemDeleteButton_onClicked"/>
-                            <us:IconButton x:Name="T_TotopButton" Visibility="Hidden"
+                                <us:IconButton x:Name="T_TotopButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/totop_normal.png"
                                            HoverIcon="/resources/icons/totop_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20" 
                                            Click="StickItemButton_onClicked"/>
-                        </StackPanel>
-                    </Grid>
-                    <DataTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="T_AddButton" Property="Visibility" 
+                            </StackPanel>
+                        </Grid>
+                        <DataTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="T_AddButton" Property="Visibility" 
                                     Value="{Binding ElementName=ApplicationMainWindow,
                                     Path=eTodoButtonStatu}" />
-                            <Setter TargetName="T_BackButton" Property="Visibility" 
+                                <Setter TargetName="T_BackButton" Property="Visibility" 
                                     Value="{Binding ElementName=ApplicationMainWindow,
                                     Path=eDoneButtonStatu}" />
-                            <Setter TargetName="T_EditButton" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="T_DeleteButton" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="T_TotopButton" Property="Visibility"
+                                <Setter TargetName="T_EditButton" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="T_DeleteButton" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="T_TotopButton" Property="Visibility"
                                     Value="{Binding ElementName=ApplicationMainWindow,
                                     Path=eTodoButtonStatu}"/>
-                        </Trigger>
-                    </DataTemplate.Triggers>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-    </StackPanel>
+                            </Trigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+    </Grid>
 </Window>
