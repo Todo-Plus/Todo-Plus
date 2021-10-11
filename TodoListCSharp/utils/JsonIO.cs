@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using TodoListCSharp.core;
 using TodoListCSharp.interfaces;
+using System.Text.Json;
 
 namespace TodoListCSharp.utils {
     public class JsonIO: IOInterface {
@@ -13,20 +15,40 @@ namespace TodoListCSharp.utils {
         /// <param name="output">输出的ItemList</param>
         /// <returns></returns>
         public int FileToList(string path, ref ItemList output) {
-            StreamReader file = null;
-            try {
-                file = File.OpenText(path);
+            if (false == System.IO.File.Exists(path)) {
+                output = new ItemList();
+                return 0;
             }
-            catch (Exception e) {
-                System.Console.WriteLine("File Not Exist");
-                return -1;
+
+            FileStream loadFile = new FileStream(path, FileMode.Open, FileAccess.Read);
+            int iFileLength = (int)loadFile.Length;
+            byte[] bFileBytes = new byte[iFileLength];
+            int ret = loadFile.Read(bFileBytes, 0, iFileLength);
+            string sJsonString = System.Text.Encoding.UTF8.GetString(bFileBytes);
+
+            List<TodoItem> list = JsonSerializer.Deserialize<List<TodoItem>>(sJsonString);
+            
+            if (list.Count == 1) {
+                output = new ItemList();
+                return 0;
+            }
+            
+            list.RemoveAt(0);
+            output = new ItemList(list[0]);
+            for (int i = 1; i < list.Count; i++) {
+                output.AppendItem(list[i]);
             }
             
             return 0;
         }
 
         public int ListToFile(ref ItemList input, string path) {
-            throw new System.NotImplementedException();
+            List<TodoItem> list = input.GetItemListForSerializer();
+            byte[] sJsonBytes = JsonSerializer.SerializeToUtf8Bytes(list);
+
+            FileStream outputFIle = new FileStream(path, FileMode.Create, FileAccess.Write);
+            outputFIle.Write(sJsonBytes);
+            return 0;
         }
 
         public int FileToSetting(string path, ref Setting settings) {

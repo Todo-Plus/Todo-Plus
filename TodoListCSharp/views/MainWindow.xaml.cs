@@ -9,6 +9,7 @@ using System.Windows.Media;
 using TodoListCSharp.controls;
 using TodoListCSharp.views;
 using TodoListCSharp.core;
+using TodoListCSharp.interfaces;
 using TodoListCSharp.utils;
 using Color = System.Drawing.Color;
 
@@ -66,7 +67,7 @@ namespace TodoListCSharp
 
             setting = new Setting();
 
-            BinaryIO io = new BinaryIO();
+            IOInterface io = new BinaryIO();
             int ret = io.FileToList(Constants.TODOITEM_FILEPATH, ref oTodoItemList);
             if (ret != 0) {
                 // todo: 定义错误并进行提示
