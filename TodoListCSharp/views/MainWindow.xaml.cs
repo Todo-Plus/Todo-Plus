@@ -54,13 +54,9 @@ namespace TodoListCSharp
         private void MainWindow_onLoaded(object sender, EventArgs e) {
             const int GWL_STYLE = (-16);
             const UInt64 WS_CHILD = 0x40000000;
-            hMainWindowHandle = new WindowInteropHelper(this).Handle;
             UInt64 iWindowStyle = GetWindowLong(hMainWindowHandle, GWL_STYLE);
             SetWindowLong(hMainWindowHandle, GWL_STYLE,
-                (iWindowStyle| WS_CHILD));
-            
-            IntPtr desktopHandle = Utils.SearchDesktopHandle();
-            SetParent(hMainWindowHandle, desktopHandle);
+                (iWindowStyle | WS_CHILD));
 
             eTodoButtonStatu = Visibility.Visible;
             eDoneButtonStatu = Visibility.Collapsed;
@@ -101,12 +97,16 @@ namespace TodoListCSharp
         }
 
         private void LockWindowButton_onClicked(object sender, RoutedEventArgs e) {
+            hMainWindowHandle = new WindowInteropHelper(this).Handle;
 
             if (locked == Constants.MainWindowLockStatu.DRAGABLE) {
+                IntPtr desktopHandle = Utils.SearchDesktopHandle();
+                SetParent(hMainWindowHandle, desktopHandle);
                 locked = Constants.MainWindowLockStatu.LOCKED;
                 return;
             }
 
+            SetParent(hMainWindowHandle, IntPtr.Zero);
             locked = Constants.MainWindowLockStatu.DRAGABLE;
         }
 
