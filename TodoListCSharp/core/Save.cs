@@ -10,5 +10,6 @@ namespace TodoListCSharp.core {
     public class Save {
         public List<TodoItem> todolist;
         public List<TodoItem> donelist;
+        public List<Tab> tabs;
     }
 }

@@ -8,19 +8,24 @@
     "net5.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
+    "J:\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\repo\\Todo-Plus\\TodoListCSharp\\TodoListCSharp.csproj",
+      "projectUniqueName": "F:\\repo\\Todo-Plus\\TodoListCSharp\\TodoListCSharp.csproj",
       "projectName": "TodoListCSharp",
-      "projectPath": "D:\\repo\\Todo-Plus\\TodoListCSharp\\TodoListCSharp.csproj",
+      "projectPath": "F:\\repo\\Todo-Plus\\TodoListCSharp\\TodoListCSharp.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "D:\\repo\\Todo-Plus\\TodoListCSharp\\obj\\",
+      "outputPath": "F:\\repo\\Todo-Plus\\TodoListCSharp\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "J:\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -63,7 +68,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

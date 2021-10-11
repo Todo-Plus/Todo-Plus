@@ -59,7 +59,6 @@
             Name="todoList"
             Height="Auto"
             BorderThickness="0">
-            <!-- todo: 添加对应函数给按钮 -->
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
