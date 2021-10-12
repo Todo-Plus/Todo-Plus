@@ -24,7 +24,7 @@
     </Window.Resources>
 
     <Grid>
-        <Border x:Name="WindowBorder" Background="White" CornerRadius="5"></Border>
+        <Border x:Name="WindowBorder" Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="#E8E8E8"></Border>
         <StackPanel Background="Transparent">
             <Grid x:Name="TitleBarGrid" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
@@ -40,20 +40,21 @@
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="10, 0">
                     <StackPanel Orientation="Horizontal" Width="Auto">
                         <us:IconButton
-                        Style="{StaticResource MWTitleIconButtonStyle}"
-                        ImageSource="/resources/icons/locked.png"
-                        HoverIcon="/resources/icons/locked.png"
-                        Click="LockWindowButton_onClicked" />
+                            Style="{StaticResource MWTitleIconButtonStyle}"
+                            x:Name="LockButton"
+                            ImageSource="/resources/icons/locked.png"
+                            HoverIcon="/resources/icons/locked.png"
+                            Click="LockWindowButton_onClicked" />
                         <us:IconButton
-                        Style="{StaticResource MWTitleIconButtonStyle}"
-                        ImageSource="/resources/icons/setting.png"
-                        HoverIcon="/resources/icons/setting.png"
-                        Click="OpenSettingWindow" />
+                            Style="{StaticResource MWTitleIconButtonStyle}"
+                            ImageSource="/resources/icons/setting.png"
+                            HoverIcon="/resources/icons/setting.png"
+                            Click="OpenSettingWindow" />
                         <us:IconButton
-                        Style="{StaticResource MWTitleIconButtonStyle}"
-                        ImageSource="/resources/icons/add.png"
-                        HoverIcon="/resources/icons/add.png"
-                        Click="OpenItemAddWindow" />
+                            Style="{StaticResource MWTitleIconButtonStyle}"
+                            ImageSource="/resources/icons/add.png"
+                            HoverIcon="/resources/icons/add.png"
+                            Click="OpenItemAddWindow" />
                     </StackPanel>
                 </StackPanel>
             </Grid>

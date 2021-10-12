@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using TodoListCSharp.controls;
 using TodoListCSharp.views;
 using TodoListCSharp.core;
@@ -152,7 +153,7 @@ namespace TodoListCSharp
             base.DragMove();
         }
 
-        private void OpenSettingWindow(object sender, RoutedEventArgs e) {
+        public void OpenSettingWindow(object sender, RoutedEventArgs e) {
             if (oSettingWindow != null) {
                 oSettingWindow.Show();
                 return;
