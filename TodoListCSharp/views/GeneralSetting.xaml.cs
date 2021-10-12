@@ -54,7 +54,7 @@ namespace TodoListCSharp.views {
             oTabAddWindow.Owner = this;
             oTabAddWindow.ConfirmButtonCallback += AddTabWindow_onConfirm;
             oTabAddWindow.CloseCallback += AddTabWindow_onClose;
-            oTabAddWindow.Show();
+            oTabAddWindow.ShowDialog();
         }
 
         private void AddTabWindow_onConfirm(string sTabTitle, Color sTabColor) {

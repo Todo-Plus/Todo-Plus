@@ -158,12 +158,11 @@ namespace TodoListCSharp
 
         public void OpenSettingWindow(object sender, RoutedEventArgs e) {
             if (oSettingWindow != null) {
-                oSettingWindow.Show();
+                oSettingWindow.ShowDialog();
                 return;
             }
 
             oSettingWindow = new SettingWindow();
-            oSettingWindow.Show();
             // Set callback function
             oSettingWindow.setting = setting;
             oSettingWindow.tabs = tabs;
@@ -171,16 +170,17 @@ namespace TodoListCSharp
             oSettingWindow.TransparencyChangeCallback += AppearanceSettingChange;
             oSettingWindow.TabAddCallback += TabAddEvent;
             oSettingWindow.Owner = this;
+            oSettingWindow.ShowDialog();
         }
 
         private void OpenItemAddWindow(object sender, RoutedEventArgs e) {
             if (oItemAddWindow != null) {
-                oItemAddWindow.Show();
+                oItemAddWindow.ShowDialog();
                 return;
             }
 
-            oItemAddWindow = new ItemAddWindow();
-            oItemAddWindow.Show();
+            oItemAddWindow = new ItemAddWindow(tabs);
+            oItemAddWindow.ShowDialog();
             
             // Set Callback Function
             oItemAddWindow.closeCallbackFunc += ItemAddWindow_onClosed;

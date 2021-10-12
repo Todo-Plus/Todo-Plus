@@ -71,7 +71,7 @@ namespace TodoListCSharp.views {
                 return;
             }
             oGeneralSettingWindow = new GeneralSetting(ref tabs);
-            oGeneralSettingWindow.Show();
+            oGeneralSettingWindow.ShowDialog();
             oGeneralSettingWindow.closedCallbackFunc += CloseGeneralSettingWindow;
             oGeneralSettingWindow.TabAddCallback += GeneralSetting_AddTab;
             oGeneralSettingWindow.Owner = this;
@@ -79,6 +79,7 @@ namespace TodoListCSharp.views {
 
         private void CloseGeneralSettingWindow() {
             oGeneralSettingWindow = null;
+            this.Activate();
         }
 
         private void OpenAppearanceSettingWindow(object sender, EventArgs e) {
@@ -95,6 +96,7 @@ namespace TodoListCSharp.views {
         
         private void CloseAppearanceSettingWindow() {
             oGeneralSettingWindow = null;
+            this.Activate();
         }
 
         private void openBackupSettingWindow(object sender, EventArgs e) {
@@ -110,6 +112,7 @@ namespace TodoListCSharp.views {
 
         private void CloseBackupSettingWindow() {
             oBackupSettingWindow = null;
+            this.Activate();
         }
         
         // !! delegate forward

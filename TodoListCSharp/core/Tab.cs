@@ -5,6 +5,8 @@ namespace TodoListCSharp.core {
         public int Id { set; get; }
         public string Name { set; get; }
         public Color Color { set; get; }
+        
+        public System.Drawing.Color ShowColor { set; get; }
 
         public Tab(int _id, string _name, Color _color) {
             Id = _id;

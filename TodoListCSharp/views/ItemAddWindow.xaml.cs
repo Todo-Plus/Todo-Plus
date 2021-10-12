@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using TodoListCSharp.core;
 
@@ -14,11 +15,13 @@ namespace TodoListCSharp.views {
 
         public event AddItemToListFunc AddItemToList;
         
-        public ItemAddWindow() {
+        public ItemAddWindow(List<Tab> tabs) {
             InitializeComponent();
 
             this.titlebar.ReturnButton.Visibility = Visibility.Collapsed;
             this.titlebar.CloseButtonClicked += CloseItemAddWindow;
+
+            this.ComboBox.ItemsSource = tabs;
         }
 
         private void ItemAddWindow_onClosed(object sender, EventArgs e) {
