@@ -5,18 +5,18 @@ using TodoListCSharp.utils;
 
 namespace TodoListCSharp.views {
     public partial class TabAddWindow : Window {
-
         private Color oSelectColor = Color.FromRgb(255, 255, 255);
-        
+
         public TabAddWindow() {
             InitializeComponent();
 
             this.titlebar.ReturnButton.Visibility = Visibility.Collapsed;
         }
-        
+
         public delegate void ConfirmButtonCallbackFunc(string sTabTitle, Color sTabColor);
 
         public event ConfirmButtonCallbackFunc ConfirmButtonCallback;
+
         public delegate void CancelButtonCallbackFunc();
 
         public event CancelButtonCallbackFunc CancelButtonCallback;
@@ -29,6 +29,7 @@ namespace TodoListCSharp.views {
             if (ConfirmButtonCallback != null) {
                 ConfirmButtonCallback(this.TitleTextBox.Text, oSelectColor);
             }
+
             this.CloseMessageWindow(sender, e);
         }
 
@@ -36,6 +37,7 @@ namespace TodoListCSharp.views {
             if (CancelButtonCallback != null) {
                 CancelButtonCallback();
             }
+
             this.CloseMessageWindow(sender, e);
         }
 
@@ -53,6 +55,10 @@ namespace TodoListCSharp.views {
             if (CloseCallback != null) {
                 CloseCallback();
             }
+        }
+
+        private void CloseButton_onClicked(object sender, RoutedEventArgs e) {
+            this.Close();
         }
     }
 }

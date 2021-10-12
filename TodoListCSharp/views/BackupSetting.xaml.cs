@@ -19,12 +19,19 @@ namespace TodoListCSharp.views {
     public partial class BackupSetting : Window {
         // delegate & events
         public delegate void ClosedCallbackFunc();
+
         public event ClosedCallbackFunc closedCallbackFunc;
+
         public BackupSetting() {
             InitializeComponent();
+            this.titlebar.ReturnButton.Visibility = Visibility.Collapsed;
         }
 
-        private void BackupSetting_OnClosed(object? sender, EventArgs e) {
+        private void CloseButton_onClicked(object sender, RoutedEventArgs e) {
+            this.Close();
+        }
+
+        private void BackupSetting_OnClosed(object sender, EventArgs e) {
             if (closedCallbackFunc != null) {
                 closedCallbackFunc();
             }

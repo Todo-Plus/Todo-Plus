@@ -6,7 +6,5 @@
         xmlns:local="clr-namespace:TodoListCSharp.views"
         mc:Ignorable="d"
         Title="DebugWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+    <Grid />
 </Window>

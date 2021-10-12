@@ -19,13 +19,13 @@ namespace TodoListCSharp.views {
     /// AppearanceSetting.xaml 的交互逻辑
     /// </summary>
     public partial class AppearanceSetting : Window {
-        
         private bool bDragging = false;
         public int iShowPercent { get; set; }
         public Setting setting;
 
         // !! delegate & events
         public delegate void ClosedCallbackFunc();
+
         public event ClosedCallbackFunc closedCallbackFunc;
 
         public delegate void SliderValueChangeCallbackFunc(int value);
@@ -35,12 +35,15 @@ namespace TodoListCSharp.views {
         public delegate void AppearanceSettingChangeCallback(Setting setting);
 
         public event AppearanceSettingChangeCallback AppearanceSettingChange;
+
         public delegate void ConfirmButtonCallbackFunc();
 
         public event ConfirmButtonCallbackFunc ConfirmButtonCallback;
+
         public delegate void CancelButtonCallbackFunc();
 
         public event CancelButtonCallbackFunc CancelButtonCallback;
+
         // !! Functions
         public AppearanceSetting() {
             InitializeComponent();
@@ -71,7 +74,7 @@ namespace TodoListCSharp.views {
         }
 
         private void AppearanceSetting_onDragOver(object sender, DragCompletedEventArgs e) {
-            SetShowPercentValue((int)((Slider)sender).Value);
+            SetShowPercentValue((int) ((Slider) sender).Value);
             bDragging = false;
         }
 
@@ -81,7 +84,7 @@ namespace TodoListCSharp.views {
 
         private void AppearanceSetting_onValueChange(object sender, RoutedPropertyChangedEventArgs<double> e) {
             if (!bDragging) {
-                SetShowPercentValue((int)e.NewValue);
+                SetShowPercentValue((int) e.NewValue);
             }
         }
 
@@ -89,11 +92,12 @@ namespace TodoListCSharp.views {
             setting.BackgroundColor = color;
             SettingTemporaryChange();
         }
-        
+
         public void ConfirmButton_onClicked(object sender, RoutedEventArgs e) {
             if (ConfirmButtonCallback != null) {
                 ConfirmButtonCallback();
             }
+
             this.CloseMessageWindow(sender, e);
         }
 
@@ -101,10 +105,15 @@ namespace TodoListCSharp.views {
             if (CancelButtonCallback != null) {
                 CancelButtonCallback();
             }
+
             this.CloseMessageWindow(sender, e);
         }
-        
+
         public void CloseMessageWindow(object sender, RoutedEventArgs e) {
+            this.Close();
+        }
+
+        private void CloseButton_onClicked(object sender, RoutedEventArgs e) {
             this.Close();
         }
     }

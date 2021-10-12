@@ -15,23 +15,22 @@ using TodoListCSharp.utils;
 using Color = System.Drawing.Color;
 using MessageBox = TodoListCSharp.views.MessageBox;
 
-namespace TodoListCSharp
-{
+namespace TodoListCSharp {
     /// <summary>
     /// 程序主窗口
     /// </summary>
-    public partial class MainWindow : Window
-    {
+    public partial class MainWindow : Window {
         // !! DllImport Define
-        
+
         [DllImport("user32.dll", SetLastError = true)]
         static extern UInt64 GetWindowLong(IntPtr hWnd, int nIndex);
 
         [DllImport("user32.dll")]
         static extern int SetWindowLong(IntPtr hWnd, int nIndex, UInt64 dwNewLong);
+
         [DllImport("user32.dll")]
         static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
-        
+
         // !! Property Define
 
         private SettingWindow oSettingWindow = null;
@@ -45,7 +44,7 @@ namespace TodoListCSharp
         private int iMaxIndex = 0;
         private Setting setting = null;
         private int iSaveVersion = 0;
-        
+
         private IntPtr hMainWindowHandle = IntPtr.Zero;
         public Visibility eDoneButtonStatu { get; set; }
         public Visibility eTodoButtonStatu { get; set; }
@@ -181,13 +180,13 @@ namespace TodoListCSharp
 
             oItemAddWindow = new ItemAddWindow(tabs);
             oItemAddWindow.ShowDialog();
-            
+
             // Set Callback Function
             oItemAddWindow.closeCallbackFunc += ItemAddWindow_onClosed;
             oItemAddWindow.AddItemToList += AddItemToList;
             oItemAddWindow.Owner = this;
         }
-        
+
         // Set SettingWindow while close windows
         private void SettingWindow_OnClosed() {
             oSettingWindow = null;
@@ -235,7 +234,7 @@ namespace TodoListCSharp
                 todoList.Items.Refresh();
             }
         }
-        
+
         // !! MainWindow Appearance Change Functions
 
         public void AppearanceTransparencyChange(int value) {
@@ -255,6 +254,6 @@ namespace TodoListCSharp
             tabs.Add(oNewTab);
         }
     }
-    
+
     // !! subClass Define
 }

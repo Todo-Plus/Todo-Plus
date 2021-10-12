@@ -6,65 +6,78 @@
         xmlns:local="clr-namespace:TodoListCSharp.views"
         xmlns:us="clr-namespace:TodoListCSharp.controls"
         mc:Ignorable="d"
-        Title="SettingWindow" 
-        MinHeight="700" 
-        MinWidth="520" 
-        Height="700" 
-        Width="520"
+        Title="SettingWindow"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        MinHeight="700" MinWidth="520"
+        Height="700" Width="520"
         ShowInTaskbar="True"
         Icon="/resources/todo.ico"
+        Background="Transparent"
         Closed="SettingWindow_OnClosed">
-    <StackPanel Background="#E8E8E8">
-        <us:Titlebar x:Name="titlebar"
-                     Title="Setting" 
-                     Padding="10, 0" 
-                     Background="White" 
-                     />
-        <!--Display Mode Draw-->
-        <StackPanel Background="White">
-            <Label Padding="10, 20, 10, 10" FontFamily="Inter" FontSize="20">Display Mode</Label>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Grid Margin="40, 10">
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Rectangle Grid.Row="0" Width="192" Height="108">
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="/resources/DesktopMode.png"></ImageBrush>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <Label Grid.Row="1" 
-                           HorizontalAlignment="Center"
-                           FontSize="15">Desktop Mode</Label>
-                </Grid>
-                <Grid Margin="40, 0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Rectangle Grid.Row="0" Width="192" Height="108">
-                        <Rectangle.Fill>
-                            <ImageBrush ImageSource="/resources/SideMode.png"></ImageBrush>
-                        </Rectangle.Fill>
-                    </Rectangle>
-                    <Label Grid.Row="1" 
-                           HorizontalAlignment="Center"
-                           FontSize="15">Side Mode</Label>
-                </Grid>
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-1" />
+    </WindowChrome.WindowChrome>
+
+    <Grid>
+        <Border x:Name="WindowBorder" Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="#E8E8E8" />
+        <StackPanel Background="Transparent">
+            <!-- Todo: 修正样式颜色-->
+            <us:Titlebar x:Name="titlebar"
+                         Title="Setting"
+                         Padding="10, 0"
+                         Background="Transparent"
+                         CloseButtonClicked="CloseButton_onClicked" />
+            <!--Display Mode Draw-->
+            <StackPanel Background="Transparent">
+                <Label Padding="10, 20, 10, 10" FontFamily="Inter" FontSize="20">Display Mode</Label>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Grid Margin="40, 10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Rectangle Grid.Row="0" Width="192" Height="108">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/resources/DesktopMode_light.png" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Label Grid.Row="1"
+                               HorizontalAlignment="Center"
+                               FontSize="15">
+                            Desktop Mode
+                        </Label>
+                    </Grid>
+                    <Grid Margin="40, 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Rectangle Grid.Row="0" Width="192" Height="108">
+                            <Rectangle.Fill>
+                                <ImageBrush ImageSource="/resources/SideMode.png" />
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Label Grid.Row="1"
+                               HorizontalAlignment="Center"
+                               FontSize="15">
+                            Side Mode
+                        </Label>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Background="Transparent" Margin="0, 20">
+                <us:MenuItem IconSource="/resources/icons/info.png"
+                             Text="General Setting"
+                             x:Name="InfoMenuItem" />
+                <us:MenuItem IconSource="/resources/icons/bulleted.png"
+                             Text="Appearance Setting"
+                             x:Name="AppearanceMenuItem" />
+                <us:MenuItem IconSource="/resources/icons/backup.png"
+                             Text="Backup Setting"
+                             x:Name="BackupMenuItem" />
+                <us:MenuItem IconSource="/resources/icons/about.png" Text="About Setting" />
             </StackPanel>
         </StackPanel>
-        <StackPanel Background="White" Margin="0, 20">
-            <us:MenuItem IconSource="/resources/icons/info.png"
-                         Text="General Setting"
-                         x:Name="InfoMenuItem"/>
-            <us:MenuItem IconSource="/resources/icons/bulleted.png" 
-                         Text="Appearance Setting"
-                         x:Name="AppearanceMenuItem"/>
-            <us:MenuItem IconSource="/resources/icons/backup.png" 
-                         Text="Backup Setting"
-                         x:Name="BackupMenuItem"/>
-            <us:MenuItem IconSource="/resources/icons/about.png" Text="About Setting"></us:MenuItem>
-        </StackPanel>
-    </StackPanel>
+    </Grid>
 </Window>

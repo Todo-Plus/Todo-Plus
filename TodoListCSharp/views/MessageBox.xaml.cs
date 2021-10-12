@@ -2,13 +2,14 @@
 
 namespace TodoListCSharp.views {
     public partial class MessageBox : Window {
-
         public delegate void ConfirmButtonCallbackFunc();
 
         public event ConfirmButtonCallbackFunc ConfirmButtonCallback;
+
         public delegate void CancelButtonCallbackFunc();
 
         public event CancelButtonCallbackFunc CancelButtonCallback;
+
         public MessageBox(string context) {
             InitializeComponent();
             this.context.Text = context;
@@ -20,6 +21,7 @@ namespace TodoListCSharp.views {
             if (ConfirmButtonCallback != null) {
                 ConfirmButtonCallback();
             }
+
             this.CloseMessageWindow(sender, e);
         }
 
@@ -27,6 +29,7 @@ namespace TodoListCSharp.views {
             if (CancelButtonCallback != null) {
                 CancelButtonCallback();
             }
+
             this.CloseMessageWindow(sender, e);
         }
 

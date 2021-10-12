@@ -8,6 +8,6 @@
         mc:Ignorable="d"
         Title="ColorPickerWindow" Height="270" Width="300">
     <Grid>
-        <us:ColorPicker></us:ColorPicker>
+        <us:ColorPicker />
     </Grid>
 </Window>

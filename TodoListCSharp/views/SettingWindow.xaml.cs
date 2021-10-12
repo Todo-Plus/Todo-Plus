@@ -18,50 +18,51 @@ namespace TodoListCSharp.views {
     /// <summary>
     /// SettingWindow.xaml 的交互逻辑
     /// </summary>
-
     public partial class SettingWindow : Window {
         // !! Property Define
 
         private GeneralSetting oGeneralSettingWindow = null;
         private AppearanceSetting oAppearanceSettingWindow = null;
         private BackupSetting oBackupSettingWindow = null;
-        
+
         public Setting setting = null;
         public List<Tab> tabs;
-        
+
         // !! Events & delegate Define
         public delegate void SettingWindowClosed();
+
         public event SettingWindowClosed settingWindowClosed;
-        
+
         // Appearance Setting Window Delegates
 
         public delegate void TransparencyChangeCallbackFunc(Setting setting);
 
         public event TransparencyChangeCallbackFunc TransparencyChangeCallback;
-        
+
         // General Setting Window Delegates
 
         public delegate void TabAddCallbackFunc(Tab oNewTab);
 
         public event TabAddCallbackFunc TabAddCallback;
-        
+
         // !! Functions Define and Implement
         public SettingWindow() {
             InitializeComponent();
             titlebar.CollapseReturnButton();
-            
+
             // Set Close Button Callback Function
             this.titlebar.CloseButtonClicked += SettingWindowClose;
             this.InfoMenuItem.Click += OpenGeneralSettingWindow;
             this.AppearanceMenuItem.Click += OpenAppearanceSettingWindow;
             this.BackupMenuItem.Click += openBackupSettingWindow;
         }
-        private void SettingWindow_OnClosed(object sender, EventArgs e)
-        {
-            if (settingWindowClosed != null)  {
+
+        private void SettingWindow_OnClosed(object sender, EventArgs e) {
+            if (settingWindowClosed != null) {
                 settingWindowClosed();
             }
         }
+
         private void SettingWindowClose(object sender, EventArgs e) {
             this.Close();
         }
@@ -70,6 +71,7 @@ namespace TodoListCSharp.views {
             if (oGeneralSettingWindow != null) {
                 return;
             }
+
             oGeneralSettingWindow = new GeneralSetting(ref tabs);
             oGeneralSettingWindow.ShowDialog();
             oGeneralSettingWindow.closedCallbackFunc += CloseGeneralSettingWindow;
@@ -86,6 +88,7 @@ namespace TodoListCSharp.views {
             if (oAppearanceSettingWindow != null) {
                 return;
             }
+
             oAppearanceSettingWindow = new AppearanceSetting();
             oAppearanceSettingWindow.Show();
             oAppearanceSettingWindow.setting = setting;
@@ -93,7 +96,7 @@ namespace TodoListCSharp.views {
             oAppearanceSettingWindow.AppearanceSettingChange += AppearanceSetting_ChangeSetting;
             oAppearanceSettingWindow.Owner = this;
         }
-        
+
         private void CloseAppearanceSettingWindow() {
             oGeneralSettingWindow = null;
             this.Activate();
@@ -114,7 +117,7 @@ namespace TodoListCSharp.views {
             oBackupSettingWindow = null;
             this.Activate();
         }
-        
+
         // !! delegate forward
         private void AppearanceSetting_ChangeSetting(Setting setting) {
             if (TransparencyChangeCallback != null) {
@@ -126,6 +129,10 @@ namespace TodoListCSharp.views {
             if (TabAddCallback != null) {
                 TabAddCallback(oNewTab);
             }
+        }
+
+        private void CloseButton_onClicked(object sender, RoutedEventArgs e) {
+            this.Close();
         }
     }
 }

@@ -21,6 +21,7 @@ namespace TodoListCSharp.views {
     public partial class GeneralSetting : Window {
         // !! Events & delegate Define
         public delegate void ClosedCallbackFunc();
+
         public event ClosedCallbackFunc closedCallbackFunc;
 
         public delegate void TabAddCallbackFunc(Tab oNewTab);
@@ -33,13 +34,15 @@ namespace TodoListCSharp.views {
         public GeneralSetting(ref List<Tab> tabs) {
             InitializeComponent();
 
+            this.titlebar.ReturnButton.Visibility = Visibility.Collapsed;
+
             int length = tabs.Count;
             for (int i = 0; i < length; i++) {
                 this.WrapPanel.Children.Add(
                     Generator.TabViewGridGenerate(tabs[i].Name, tabs[i].Color));
             }
 
-            iTabLastestIndex = length > 0 ? tabs[length - 1].Id  + 1 : 0;
+            iTabLastestIndex = length > 0 ? tabs[length - 1].Id + 1 : 0;
         }
 
         private void GeneralSetting_onClosed(object sender, EventArgs e) {
@@ -65,7 +68,11 @@ namespace TodoListCSharp.views {
                 TabAddCallback(oNewTab);
             }
         }
-        
+
+        private void CloseButton_onClicked(object sender, RoutedEventArgs e) {
+            this.Close();
+        }
+
         private void AddTabWindow_onClose() {
             oTabAddWindow = null;
             this.Activate();

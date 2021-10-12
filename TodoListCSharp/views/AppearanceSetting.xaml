@@ -6,138 +6,148 @@
         xmlns:local="clr-namespace:TodoListCSharp.views"
         xmlns:us="clr-namespace:TodoListCSharp.controls"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Background="Transparent"
         x:Name="AppearanceSettingWindow"
         Loaded="AppearanceSetting_onLoaded"
         Closed="AppearanceSetting_OnClosed"
         Title="AppearanceSetting" MinHeight="560" MinWidth="418" Height="560" Width="418">
-    <StackPanel Background="#E8E8E8">
-        <us:Titlebar Title="Appearance" Background="White"/>
-        <StackPanel Background="White">
-            <!--Color Setting-->
-            <StackPanel Orientation="Horizontal">
-                <Label FontFamily="Inter" FontSize="18" VerticalAlignment="Center" Margin="5, 0">Color</Label>
-                <!--Todo: Dynamic Add Color Ellipse-->
-                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
-                    <Ellipse.Effect>
-                        <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
-                    </Ellipse.Effect>
-                </Ellipse>
-                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
-                    <Ellipse.Effect>
-                        <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
-                    </Ellipse.Effect>
-                </Ellipse>
-                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
-                    <Ellipse.Effect>
-                        <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
-                    </Ellipse.Effect>
-                </Ellipse>
-                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
-                    <Ellipse.Effect>
-                        <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
-                    </Ellipse.Effect>
-                </Ellipse>
-                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
-                    <Ellipse.Effect>
-                        <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
-                    </Ellipse.Effect>
-                </Ellipse>
-                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
-                    <Ellipse.Effect>
-                        <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
-                    </Ellipse.Effect>
-                </Ellipse>
-                <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
-                    <Ellipse.Effect>
-                        <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
-                    </Ellipse.Effect>
-                </Ellipse>
-            </StackPanel>
-            <us:ColorPicker x:Name="AppearanceColorPicker"></us:ColorPicker>
-            
-            <!-- Transparency ScrollBar-->
-            <Label FontFamily="Inter" FontSize="18" VerticalAlignment="Center" Margin="5, 0">Transparency</Label>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10, 0">
-                <Slider 
-                    Maximum="100" 
-                    TickFrequency="1" 
-                    IsSnapToTickEnabled="True"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center"
-                    Width="350"
-                    Thumb.DragCompleted="AppearanceSetting_onDragOver"
-                    Thumb.DragStarted="AppearanceSetting_onDragStart"
-                    ValueChanged="AppearanceSetting_onValueChange"/>
-                <Label FontSize="15" Margin="10, 0" 
-                       x:Name="PercentLabel"
-                       Content="{Binding 
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-1" />
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Border x:Name="WindowBorder" Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="#E8E8E8" />
+        <StackPanel Background="Transparent">
+            <us:Titlebar Title="Appearance" Background="Transparent" Margin="5"
+                         CloseButtonClicked="CloseButton_onClicked" />
+            <StackPanel Background="Transparent">
+                <!--Color Setting-->
+                <StackPanel Orientation="Horizontal">
+                    <Label FontFamily="Inter" FontSize="18" VerticalAlignment="Center" Margin="5, 0">Color</Label>
+                    <!--Todo: Dynamic Add Color Ellipse-->
+                    <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
+                        <Ellipse.Effect>
+                            <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+                    <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
+                        <Ellipse.Effect>
+                            <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+                    <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
+                        <Ellipse.Effect>
+                            <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+                    <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
+                        <Ellipse.Effect>
+                            <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+                    <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
+                        <Ellipse.Effect>
+                            <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+                    <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
+                        <Ellipse.Effect>
+                            <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+                    <Ellipse Width="18" Height="18" Margin="5, 0" Fill="Bisque">
+                        <Ellipse.Effect>
+                            <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1" />
+                        </Ellipse.Effect>
+                    </Ellipse>
+                </StackPanel>
+                <us:ColorPicker x:Name="AppearanceColorPicker" />
+
+                <!-- Transparency ScrollBar-->
+                <Label FontFamily="Inter" FontSize="18" VerticalAlignment="Center" Margin="5, 0">Transparency</Label>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10, 0">
+                    <Slider
+                        Maximum="100"
+                        TickFrequency="1"
+                        IsSnapToTickEnabled="True"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Width="350"
+                        Thumb.DragCompleted="AppearanceSetting_onDragOver"
+                        Thumb.DragStarted="AppearanceSetting_onDragStart"
+                        ValueChanged="AppearanceSetting_onValueChange" />
+                    <Label FontSize="15" Margin="10, 0"
+                           x:Name="PercentLabel"
+                           Content="{Binding 
                        ElementName=AppearanceSettingWindow,
-                       Path=iShowPercent}"/>
-            </StackPanel>
-            
-            <!--Font Setting-->
-            <StackPanel Orientation="Horizontal" Margin="5, 10" HorizontalAlignment="Stretch">
-                <Grid Width="Auto">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition></ColumnDefinition>
-                        <ColumnDefinition></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Grid Grid.Column="0">
-                        <Label>Font Size</Label>
+                       Path=iShowPercent}" />
+                </StackPanel>
+
+                <!--Font Setting-->
+                <StackPanel Orientation="Horizontal" Margin="5, 10" HorizontalAlignment="Stretch">
+                    <Grid Width="Auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Label>Font Size</Label>
+                        </Grid>
+                        <Grid Grid.Column="1">
+                            <Label>Font Family</Label>
+                        </Grid>
                     </Grid>
-                    <Grid Grid.Column="1">
-                        <Label>Font Family</Label>
-                    </Grid>
-                </Grid>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Foreground="White" Margin="10" Click="ConfirmButton_onClicked">
-                    Confirm
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border 
-                                Name="T_ConfirmBorder"
-                                BorderBrush="{TemplateBinding Control.BorderBrush}" 
-                                CornerRadius="15"
-                                Width="100"
-                                Height="30"
-                                Background="MediumSeaGreen">
-                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" 
-                                                  HorizontalAlignment="Center" 
-                                                  VerticalAlignment="Center" ></ContentPresenter>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="T_ConfirmBorder" Property="Background" Value="Green"></Setter>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
-                <Button Foreground="White" Margin="10" Click="CancelButton_onClicked">
-                    Cancel
-                    <Button.Template>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border 
-                                Name="T_CancelBorder"
-                                BorderBrush="{TemplateBinding Control.BorderBrush}" 
-                                CornerRadius="15"
-                                Width="100"
-                                Height="30"
-                                Background="Crimson">
-                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" 
-                                                  HorizontalAlignment="Center" 
-                                                  VerticalAlignment="Center" ></ContentPresenter>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="T_CancelBorder" Property="Background" Value="Firebrick"></Setter>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Button.Template>
-                </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Foreground="White" Margin="10" Click="ConfirmButton_onClicked">
+                        Confirm
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border
+                                    Name="T_ConfirmBorder"
+                                    BorderBrush="{TemplateBinding Control.BorderBrush}"
+                                    CornerRadius="15"
+                                    Width="100"
+                                    Height="30"
+                                    Background="MediumSeaGreen">
+                                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="T_ConfirmBorder" Property="Background" Value="Green" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Foreground="White" Margin="10" Click="CancelButton_onClicked">
+                        Cancel
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border
+                                    Name="T_CancelBorder"
+                                    BorderBrush="{TemplateBinding Control.BorderBrush}"
+                                    CornerRadius="15"
+                                    Width="100"
+                                    Height="30"
+                                    Background="Crimson">
+                                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="T_CancelBorder" Property="Background" Value="Firebrick" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
-    </StackPanel>
+    </Grid>
 </Window>

@@ -6,29 +6,40 @@
         xmlns:local="clr-namespace:TodoListCSharp.views"
         xmlns:us="clr-namespace:TodoListCSharp.controls"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        Background="Transparent"
         Closed="BackupSetting_OnClosed"
         Title="BackupSetting" MinHeight="560" MinWidth="416" Height="560" Width="416">
-    <StackPanel Background="#E8E8E8" HorizontalAlignment="Stretch">
-        <us:Titlebar Title="Backup" Background="White"/>
-        <Grid Width="Auto" Background="White">
-            <Border Width="Auto" Height="40" 
-                    Background="#3196E2"
-                    CornerRadius="5"
-                    Margin="15 10">
-                <Border.Effect>
-                    <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1"></DropShadowEffect>
-                </Border.Effect>
-            </Border>
-            <TextBlock Margin="15 10"
-                       VerticalAlignment="Center"
-                       FontFamily="Fira Code"
-                       FontSize="12"
-                       Foreground="White"
-                       Width="Auto"
-                       TextWrapping="Wrap"
-                       Padding="5, 0">
-                Select a cloud to sync your encrypted database with.
-            </TextBlock>
-        </Grid>
-    </StackPanel>
+
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-1" />
+    </WindowChrome.WindowChrome>
+    <Grid>
+        <Border x:Name="WindowBorder" Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="#E8E8E8" />
+        <StackPanel Background="Transparent" HorizontalAlignment="Stretch">
+            <us:Titlebar Title="Backup" Background="Transparent" Margin="5" CloseButtonClicked="CloseButton_onClicked"
+                         x:Name="titlebar" />
+            <Grid Width="Auto" Background="White">
+                <Border Width="Auto" Height="40"
+                        Background="#3196E2"
+                        CornerRadius="5"
+                        Margin="15 10">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#DCDCDC" ShadowDepth="2" Opacity="1" />
+                    </Border.Effect>
+                </Border>
+                <TextBlock Margin="15 10"
+                           VerticalAlignment="Center"
+                           FontFamily="Fira Code"
+                           FontSize="12"
+                           Foreground="White"
+                           Width="Auto"
+                           TextWrapping="Wrap"
+                           Padding="5, 0">
+                    Select a cloud to sync your encrypted database with.
+                </TextBlock>
+            </Grid>
+        </StackPanel>
+    </Grid>
 </Window>

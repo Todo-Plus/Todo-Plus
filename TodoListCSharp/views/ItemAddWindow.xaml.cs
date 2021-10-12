@@ -14,7 +14,7 @@ namespace TodoListCSharp.views {
         public delegate void AddItemToListFunc(ref TodoItem item);
 
         public event AddItemToListFunc AddItemToList;
-        
+
         public ItemAddWindow(List<Tab> tabs) {
             InitializeComponent();
 
