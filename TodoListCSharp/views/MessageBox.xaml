@@ -3,10 +3,80 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:us="clr-namespace:TodoListCSharp.controls"
         xmlns:local="clr-namespace:TodoListCSharp.views"
         mc:Ignorable="d"
-        Title="MessageBox" Height="450" Width="800">
+        ResizeMode="NoResize"
+        SizeToContent="Height"
+        WindowStyle="None"
+        Title="MessageBox" Height="Auto" Width="600">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-1" />
+    </WindowChrome.WindowChrome>
     <Grid>
-        
+        <Border x:Name="WindowBorder" Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="#E8E8E8"></Border>
+        <StackPanel>
+            <us:Titlebar Title="Message" x:Name="titlebar" Margin="5" CloseButtonClicked="CloseMessageWindow"></us:Titlebar>
+            <StackPanel Orientation="Horizontal" Width="550" Margin="10 0">
+                <Border BorderThickness="1 0 0 0" BorderBrush="#00AEFF"></Border>
+                <TextBlock Margin="15 10"
+                    VerticalAlignment="Center"
+                    FontFamily="Fira Code"
+                    FontSize="16"
+                    Foreground="Black"
+                    Width="550"
+                    TextWrapping="Wrap"
+                    Padding="5, 0"
+                    Name="context"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Foreground="White" Margin="10" Click="ConfirmButton_onClicked">
+                    Confirm
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border 
+                                Name="T_ConfirmBorder"
+                                BorderBrush="{TemplateBinding Control.BorderBrush}" 
+                                CornerRadius="15"
+                                Width="100"
+                                Height="30"
+                                Background="MediumSeaGreen">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" 
+                                                  HorizontalAlignment="Center" 
+                                                  VerticalAlignment="Center" ></ContentPresenter>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="T_ConfirmBorder" Property="Background" Value="Green"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Foreground="White" Margin="10" Click="CancelButton_onClicked">
+                    Cancel
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border 
+                                Name="T_CancelBorder"
+                                BorderBrush="{TemplateBinding Control.BorderBrush}" 
+                                CornerRadius="15"
+                                Width="100"
+                                Height="30"
+                                Background="Crimson">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" 
+                                                  HorizontalAlignment="Center" 
+                                                  VerticalAlignment="Center" ></ContentPresenter>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="T_CancelBorder" Property="Background" Value="Firebrick"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

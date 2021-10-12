@@ -7,7 +7,6 @@
         xmlns:converter="clr-namespace:TodoListCSharp.converter"
         mc:Ignorable="d"
         WindowStyle="None"
-        ResizeMode="NoResize"
         Background="Transparent"
         Loaded="MainWindow_onLoaded"
         Closed="MainWindow_onClosed"

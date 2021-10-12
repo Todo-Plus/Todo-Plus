@@ -13,6 +13,7 @@ using TodoListCSharp.core;
 using TodoListCSharp.interfaces;
 using TodoListCSharp.utils;
 using Color = System.Drawing.Color;
+using MessageBox = TodoListCSharp.views.MessageBox;
 
 namespace TodoListCSharp
 {
