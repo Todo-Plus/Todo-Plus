@@ -80,6 +80,9 @@ namespace TodoListCSharp
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
+            
+            TabAddWindow tabAddWindow = new TabAddWindow();
+            tabAddWindow.Show();
         }
 
         public void MainWindow_onClosed(object sender, EventArgs e) {

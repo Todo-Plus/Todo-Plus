@@ -9,6 +9,7 @@
         ResizeMode="NoResize"
         SizeToContent="Height"
         WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
         Title="MessageBox" Height="Auto" Width="600">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="-1" />

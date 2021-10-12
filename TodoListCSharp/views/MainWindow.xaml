@@ -73,50 +73,57 @@
                         <Grid Height="30" Margin="10, 0" Background="Transparent">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                                 <Ellipse Width="10" Height="10" Fill="#BBBBBB" />
-                                <Label Content="{Binding Title}" VerticalAlignment="Center" Margin="5, 0" FontSize="15" />
+                                <Label Content="{Binding Title}" 
+                                       VerticalAlignment="Center" 
+                                       Margin="5, 0" 
+                                       FontSize="15" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <!-- visibility = "Visiible" if mouseon && Statu == "to_do"-->
-                                <us:IconButton x:Name="T_AddButton" Visibility="Hidden"
+                                <us:IconButton x:Name="T_DoneButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/done_normal.png"
                                            HoverIcon="/resources/icons/done_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20"
-                                           Click="ItemDoneButton_onClicked">
-                                </us:IconButton>
+                                           Click="ItemDoneButton_onClicked"
+                                           ToolTip="Done"/>
                                 <us:IconButton x:Name="T_BackButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/back_normal.png"
                                            HoverIcon="/resources/icons/back_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20"
-                                           Click="ItemRevertButton_onClicked"/>
+                                           Click="ItemRevertButton_onClicked"
+                                           ToolTip="Revert"/>
                                 <us:IconButton x:Name="T_EditButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/edit_normal.png"
                                            HoverIcon="/resources/icons/edit_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
-                                           IconDiameter="20" />
+                                           IconDiameter="20" 
+                                           ToolTip="Edit"/>
                                 <us:IconButton x:Name="T_DeleteButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/delete_normal.png"
                                            HoverIcon="/resources/icons/delete_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20" 
-                                           Click="ItemDeleteButton_onClicked"/>
+                                           Click="ItemDeleteButton_onClicked"
+                                           ToolTip="Delete"/>
                                 <us:IconButton x:Name="T_TotopButton" Visibility="Hidden"
                                            Index="{Binding Index}"
                                            ImageSource="/resources/icons/totop_normal.png"
                                            HoverIcon="/resources/icons/totop_hover.png"
                                            Style="{StaticResource MWItemButtonStyle}"
                                            IconDiameter="20" 
-                                           Click="StickItemButton_onClicked"/>
+                                           Click="StickItemButton_onClicked"
+                                           ToolTip="Set Top"/>
                             </StackPanel>
                         </Grid>
                         <DataTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="T_AddButton" Property="Visibility" 
+                                <Setter TargetName="T_DoneButton" Property="Visibility" 
                                     Value="{Binding ElementName=ApplicationMainWindow,
                                     Path=eTodoButtonStatu}" />
                                 <Setter TargetName="T_BackButton" Property="Visibility" 

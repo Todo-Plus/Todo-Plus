@@ -30,5 +30,9 @@ namespace TodoListCSharp.views {
                 closedCallbackFunc();
             }
         }
+
+        private void AddButton_onClicked(object sender, EventArgs e) {
+            
+        }
     }
 }

@@ -35,6 +35,12 @@ namespace TodoListCSharp.views {
         public delegate void AppearanceSettingChangeCallback(Setting setting);
 
         public event AppearanceSettingChangeCallback AppearanceSettingChange;
+        public delegate void ConfirmButtonCallbackFunc();
+
+        public event ConfirmButtonCallbackFunc ConfirmButtonCallback;
+        public delegate void CancelButtonCallbackFunc();
+
+        public event CancelButtonCallbackFunc CancelButtonCallback;
         // !! Functions
         public AppearanceSetting() {
             InitializeComponent();
@@ -82,6 +88,24 @@ namespace TodoListCSharp.views {
         private void AppearanceSetting_onColorChange(Color color) {
             setting.BackgroundColor = color;
             SettingTemporaryChange();
+        }
+        
+        public void ConfirmButton_onClicked(object sender, RoutedEventArgs e) {
+            if (ConfirmButtonCallback != null) {
+                ConfirmButtonCallback();
+            }
+            this.CloseMessageWindow(sender, e);
+        }
+
+        public void CancelButton_onClicked(object sender, RoutedEventArgs e) {
+            if (CancelButtonCallback != null) {
+                CancelButtonCallback();
+            }
+            this.CloseMessageWindow(sender, e);
+        }
+        
+        public void CloseMessageWindow(object sender, RoutedEventArgs e) {
+            this.Close();
         }
     }
 }
