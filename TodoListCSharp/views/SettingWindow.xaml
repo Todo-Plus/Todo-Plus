@@ -11,6 +11,8 @@
         MinWidth="520" 
         Height="700" 
         Width="520"
+        ShowInTaskbar="True"
+        Icon="/resources/todo.ico"
         Closed="SettingWindow_OnClosed">
     <StackPanel Background="#E8E8E8">
         <us:Titlebar x:Name="titlebar"

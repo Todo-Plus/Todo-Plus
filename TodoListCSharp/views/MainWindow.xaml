@@ -12,6 +12,8 @@
         Loaded="MainWindow_onLoaded"
         Closed="MainWindow_onClosed"
         x:Name="ApplicationMainWindow"
+        Icon="/resources/todo.ico"
+        ShowInTaskbar="False"
         Title="MainWindow" MinHeight="550" MinWidth="320" Height="550" Width="320">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="-1" />
