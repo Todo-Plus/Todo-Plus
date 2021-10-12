@@ -5,11 +5,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:TodoListCSharp.views"
         xmlns:us="clr-namespace:TodoListCSharp.controls"
+        xmlns:converter="clr-namespace:TodoListCSharp.converter"
         mc:Ignorable="d"
         Closed="ItemAddWindow_onClosed"
         MinHeight="448" MinWidth="635"
         MaxHeight="448" MaxWidth="635"
         Title="ItemAddWindow">
+    <Window.Resources>
+        <converter:MediaColorToBrushConverter x:Key="MediaColorToBrush"></converter:MediaColorToBrushConverter>
+    </Window.Resources>
+    
     <StackPanel HorizontalAlignment="Stretch">
         <us:Titlebar x:Name="titlebar" Title="New Item" Margin="10 0"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="20 10">
@@ -30,6 +35,20 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="20 10">
             <Rectangle Height="Auto" Width="2" Fill="#59ADFF"/>
             <Label FontSize="16" Margin="5 0">Tab</Label>
+            <ComboBox Width="120" BorderThickness="0" x:Name="ComboBox" Height="30">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="120">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Rectangle Width="15" Height="15" Fill="{Binding Color, Converter={StaticResource MediaColorToBrush}}"></Rectangle>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Label FontSize="15" Content="{Binding Name}"></Label>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="20 10">
             <Rectangle Height="Auto" Width="2" Fill="#59ADFF"/>
