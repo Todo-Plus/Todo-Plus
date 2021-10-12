@@ -38,11 +38,13 @@ namespace TodoListCSharp
         private ItemAddWindow oItemAddWindow = null;
         private ItemList oTodoItemList = null;
         private ItemList oDoneItemList = null;
+        private List<Tab> tabs = new List<Tab>();
         private List<TodoItem> oShowTodoList = null;
         private Constants.MainWindowStatu statu = Constants.MainWindowStatu.TODO;
         private Constants.MainWindowLockStatu locked = Constants.MainWindowLockStatu.DRAGABLE;
         private int iMaxIndex = 0;
         private Setting setting = null;
+        private int iSaveVersion = 0;
         
         private IntPtr hMainWindowHandle = IntPtr.Zero;
         public Visibility eDoneButtonStatu { get; set; }
@@ -80,9 +82,6 @@ namespace TodoListCSharp
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
-            
-            TabAddWindow tabAddWindow = new TabAddWindow();
-            tabAddWindow.Show();
         }
 
         public void MainWindow_onClosed(object sender, EventArgs e) {
@@ -167,8 +166,10 @@ namespace TodoListCSharp
             oSettingWindow.Show();
             // Set callback function
             oSettingWindow.setting = setting;
+            oSettingWindow.tabs = tabs;
             oSettingWindow.settingWindowClosed += SettingWindow_OnClosed;
             oSettingWindow.TransparencyChangeCallback += AppearanceSettingChange;
+            oSettingWindow.TabAddCallback += TabAddEvent;
             oSettingWindow.Owner = this;
         }
 
@@ -190,6 +191,7 @@ namespace TodoListCSharp
         // Set SettingWindow while close windows
         private void SettingWindow_OnClosed() {
             oSettingWindow = null;
+            this.Activate();
             AppearanceSettingChange(setting);
         }
 
@@ -247,8 +249,10 @@ namespace TodoListCSharp
             double alpha = setting.Alpha / 100.0;
             this.WindowBorder.Background = new SolidColorBrush(setting.BackgroundColor);
             this.WindowBorder.Background.Opacity = alpha;
-            
-            
+        }
+
+        public void TabAddEvent(Tab oNewTab) {
+            tabs.Add(oNewTab);
         }
     }
     

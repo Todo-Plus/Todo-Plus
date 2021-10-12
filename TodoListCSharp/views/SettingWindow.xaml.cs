@@ -27,6 +27,7 @@ namespace TodoListCSharp.views {
         private BackupSetting oBackupSettingWindow = null;
         
         public Setting setting = null;
+        public List<Tab> tabs;
         
         // !! Events & delegate Define
         public delegate void SettingWindowClosed();
@@ -37,6 +38,12 @@ namespace TodoListCSharp.views {
         public delegate void TransparencyChangeCallbackFunc(Setting setting);
 
         public event TransparencyChangeCallbackFunc TransparencyChangeCallback;
+        
+        // General Setting Window Delegates
+
+        public delegate void TabAddCallbackFunc(Tab oNewTab);
+
+        public event TabAddCallbackFunc TabAddCallback;
         
         // !! Functions Define and Implement
         public SettingWindow() {
@@ -63,9 +70,10 @@ namespace TodoListCSharp.views {
             if (oGeneralSettingWindow != null) {
                 return;
             }
-            oGeneralSettingWindow = new GeneralSetting();
+            oGeneralSettingWindow = new GeneralSetting(ref tabs);
             oGeneralSettingWindow.Show();
             oGeneralSettingWindow.closedCallbackFunc += CloseGeneralSettingWindow;
+            oGeneralSettingWindow.TabAddCallback += GeneralSetting_AddTab;
             oGeneralSettingWindow.Owner = this;
         }
 
@@ -109,6 +117,12 @@ namespace TodoListCSharp.views {
             if (TransparencyChangeCallback != null) {
                 TransparencyChangeCallback(setting);
             }
-        } 
+        }
+
+        private void GeneralSetting_AddTab(Tab oNewTab) {
+            if (TabAddCallback != null) {
+                TabAddCallback(oNewTab);
+            }
+        }
     }
 }

@@ -32,6 +32,10 @@ namespace TodoListCSharp.utils {
             return "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
         }
 
+        public static Color HexToMediaColor(string sColorString) {
+            return (Color)ColorConverter.ConvertFromString(sColorString);
+        }
+
         public static int TabListGetPosition(ref List<Tab> tabs, int iIndex) {
             int length = tabs.Count;
             for (int i = 0; i < length; i++) {

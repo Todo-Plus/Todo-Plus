@@ -22,6 +22,7 @@ namespace TodoListCSharp
             oTrayIcon.Icon = new System.Drawing.Icon("./resources/todo.ico");
             oTrayIcon.Visible = true;
             oTrayIcon.Text = "Todo+";
+            oTrayIcon.DoubleClick += NotifyIcon_onDoubleClick;
 
             oTrayIcon.ContextMenuStrip = new ContextMenuStrip();
             oTrayIcon.ContextMenuStrip.Items.Add("Setting", null, this.MenuItem_OpenSetting);
@@ -43,5 +44,10 @@ namespace TodoListCSharp
         private void Application_Exit(object sender, ExitEventArgs e) {
             oTrayIcon.Visible = false;
         }
+
+        private void NotifyIcon_onDoubleClick(object sender, EventArgs e) {
+            TodoListCSharp.MainWindow oMainWindow = (TodoListCSharp.MainWindow)Application.Current.MainWindow;
+            oMainWindow.Activate();
+        } 
     }
 }

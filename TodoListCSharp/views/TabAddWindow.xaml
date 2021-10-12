@@ -5,30 +5,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="clr-namespace:TodoListCSharp.views"
         xmlns:us="clr-namespace:TodoListCSharp.controls"
+        Closed="TabAddWindow_onClose"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         SizeToContent="Height"
         Title="TabAddWindow" Width="500">
     <StackPanel>
         <us:Titlebar x:Name="titlebar" Title="New Tab" Margin="5"/>
+        <us:ColorPicker SelectColorCallback="ColorPicker_onSelect"/>
         <StackPanel Orientation="Horizontal" Height="30" Margin="10">
             <Rectangle Height="Auto" Fill="#59ADFF" Width="2"/>
             <Label FontSize="18" VerticalAlignment="Center">Tab Name</Label>
-            <TextBox BorderThickness="0 0 0 1" Width="350" VerticalAlignment="Center" FontSize="15"></TextBox>
+            <TextBox x:Name="TitleTextBox" BorderThickness="0 0 0 1" Width="350" VerticalAlignment="Center" FontSize="15"></TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Height="30" Margin="10 10 10 20">
             <Rectangle Height="Auto" Fill="#59ADFF" Width="2"/>
             <Label FontSize="18" VerticalAlignment="Center" Width="100" HorizontalAlignment="Left">Color</Label>
             <Grid>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <TextBox BorderThickness="0 0 0 1" Width="350" VerticalAlignment="Center" FontSize="15"></TextBox>
+                    <TextBox x:Name="ColorTextBox" BorderThickness="0 0 0 1" Width="350" VerticalAlignment="Center" FontSize="15"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Rectangle Width="15" Height="15" Fill="#FC4850"></Rectangle>
+                    <Rectangle x:Name="ColorShow" Width="15" Height="15" Fill="#FC4850"></Rectangle>
                 </StackPanel>
             </Grid>
         </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Foreground="White" Margin="10" Click="ConfirmButton_onClicked">
                     Confirm
                     <Button.Template>
