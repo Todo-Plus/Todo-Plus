@@ -8,6 +8,7 @@ namespace TodoListCSharp.core {
     
     [Serializable]
     public class Save {
+        public int version;
         public List<TodoItem> todolist;
         public List<TodoItem> donelist;
         public List<Tab> tabs;

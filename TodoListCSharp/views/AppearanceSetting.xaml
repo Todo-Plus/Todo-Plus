@@ -90,6 +90,54 @@
                     </Grid>
                 </Grid>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Foreground="White" Margin="10" Click="ConfirmButton_onClicked">
+                    Confirm
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border 
+                                Name="T_ConfirmBorder"
+                                BorderBrush="{TemplateBinding Control.BorderBrush}" 
+                                CornerRadius="15"
+                                Width="100"
+                                Height="30"
+                                Background="MediumSeaGreen">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" 
+                                                  HorizontalAlignment="Center" 
+                                                  VerticalAlignment="Center" ></ContentPresenter>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="T_ConfirmBorder" Property="Background" Value="Green"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Foreground="White" Margin="10" Click="CancelButton_onClicked">
+                    Cancel
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border 
+                                Name="T_CancelBorder"
+                                BorderBrush="{TemplateBinding Control.BorderBrush}" 
+                                CornerRadius="15"
+                                Width="100"
+                                Height="30"
+                                Background="Crimson">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}" 
+                                                  HorizontalAlignment="Center" 
+                                                  VerticalAlignment="Center" ></ContentPresenter>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="T_CancelBorder" Property="Background" Value="Firebrick"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
         </StackPanel>
     </StackPanel>
 </Window>

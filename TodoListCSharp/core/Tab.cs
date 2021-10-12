@@ -2,8 +2,8 @@
 
 namespace TodoListCSharp.core {
     public class Tab {
-        private int Id;
-        private string Name;
-        private Color Color;
+        public int Id { set; get; }
+        public string Name { set; get; }
+        public Color Color { set; get; }
     }
 }

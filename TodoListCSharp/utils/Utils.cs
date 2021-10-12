@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Media;
 using System.Runtime.InteropServices;
+using TodoListCSharp.core;
 
 namespace TodoListCSharp.utils {
     public class Utils {
@@ -28,6 +30,17 @@ namespace TodoListCSharp.utils {
 
         public static string MediaColorToHex(Color color) {
             return "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
+        }
+
+        public static int TabListGetPosition(ref List<Tab> tabs, int iIndex) {
+            int length = tabs.Count;
+            for (int i = 0; i < length; i++) {
+                if (tabs[i].Id == iIndex) {
+                    return i;
+                }
+            }
+
+            return -1;
         }
     }
 }
