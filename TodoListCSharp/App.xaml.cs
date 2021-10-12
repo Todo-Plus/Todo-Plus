@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Forms;
 using TodoListCSharp.views;
 using Application = System.Windows.Application;
+using MessageBox = TodoListCSharp.views.MessageBox;
 
 namespace TodoListCSharp
 {
@@ -34,7 +35,9 @@ namespace TodoListCSharp
         }
 
         public void MenuItem_ExitApplication(object sender, EventArgs e) {
-            this.Shutdown();
+            MessageBox messageBox = new MessageBox("You sure you want to exit the program.");
+            messageBox.ConfirmButtonCallback += this.Shutdown;
+            messageBox.Show();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e) {
