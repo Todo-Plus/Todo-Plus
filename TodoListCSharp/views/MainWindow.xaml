@@ -8,11 +8,13 @@
         mc:Ignorable="d"
         WindowStyle="None"
         Background="Transparent"
+        ResizeMode="CanResize"
         Loaded="MainWindow_onLoaded"
         Closed="MainWindow_onClosed"
         x:Name="ApplicationMainWindow"
         Icon="/resources/todo.ico"
         ShowInTaskbar="False"
+        ShowActivated="False"
         Title="MainWindow" MinHeight="550" MinWidth="320" Height="550" Width="320">
     <WindowChrome.WindowChrome>
         <WindowChrome GlassFrameThickness="-1" />
@@ -23,7 +25,7 @@
     </Window.Resources>
 
     <Grid>
-        <Border x:Name="WindowBorder" Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="#E8E8E8" />
+        <Border x:Name="MainWindowBorder" Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="Transparent" />
         <StackPanel Background="Transparent">
             <Grid x:Name="TitleBarGrid" MouseLeftButtonDown="Grid_MouseLeftButtonDown" Background="Transparent">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">

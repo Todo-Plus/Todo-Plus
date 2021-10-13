@@ -24,5 +24,13 @@
             CONFIRM,
             CANCEL
         }
+        
+        public enum SettingStatu {
+            MAIN,
+            GENERAL,
+            APPEARANCE,
+            BACKUP,
+            ABOUT
+        }
     }
 }
