@@ -11,8 +11,9 @@
         WindowStyle="None"
         Background="Transparent"
         Closed="ItemAddWindow_onClosed"
-        MinHeight="448" MinWidth="635"
-        MaxHeight="448" MaxWidth="635"
+        MinWidth="635"
+        MaxWidth="635"
+        SizeToContent="Height"
         Title="ItemAddWindow">
     <Window.Resources>
         <converter:HexStringToMediaColorBrush x:Key="MediaColorToBrush" />
@@ -34,7 +35,7 @@
                          FontSize="13" Padding="5"
                          BorderThickness="0 0 0 1" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="150" Margin="20 10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="100" Margin="20 10">
                 <Rectangle Height="Auto" Width="2" Fill="#59ADFF" />
                 <Label FontSize="16" Margin="5 0">Desc</Label>
                 <TextBox Width="535" x:Name="DescInput"
@@ -71,18 +72,52 @@
                             DisplayDateStart="1/01/90" DisplayDateEnd="12/31/25"
                             FirstDayOfWeek="Monday" />
             </StackPanel>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="30" Margin="10 5">
-                <Button Width="70" Margin="5 0"
-                        Background="#3196e2"
-                        Foreground="White"
-                        Click="DoneButton_onClick">
-                    Done
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Margin="10 5">
+                <Button Foreground="White" Margin="10" Click="ConfirmButton_onClicked">
+                    Confirm
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                                Name="T_ConfirmBorder"
+                                BorderBrush="{TemplateBinding Control.BorderBrush}"
+                                CornerRadius="15"
+                                Width="100"
+                                Height="30"
+                                Background="MediumSeaGreen">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="T_ConfirmBorder" Property="Background" Value="Green" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
-                <Button Width="70" Margin="5 0"
-                        Background="#E23131"
-                        Foreground="White"
-                        Click="CloseItemAddWindow">
+                <Button Foreground="White" Margin="10" Click="CancelButton_onClicked">
                     Cancel
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                                Name="T_CancelBorder"
+                                BorderBrush="{TemplateBinding Control.BorderBrush}"
+                                CornerRadius="15"
+                                Width="100"
+                                Height="30"
+                                Background="Crimson">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="T_CancelBorder" Property="Background" Value="Firebrick" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
                 </Button>
             </StackPanel>
         </StackPanel>

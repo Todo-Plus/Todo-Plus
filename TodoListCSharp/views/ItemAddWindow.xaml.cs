@@ -30,11 +30,22 @@ namespace TodoListCSharp.views {
             }
         }
 
-        private void DoneButton_onClick(object sender, EventArgs e) {
+        private void ConfirmButton_onClicked(object sender, EventArgs e) {
             string title = TitleInput.Text;
             string desc = DescInput.Text;
+
+            if (title == String.Empty) {
+                MessageBox messageBox = new MessageBox("Please input title for item.");
+                messageBox.ShowDialog();
+                return;
+            }
+            
             TodoItem item = new TodoItem(title, desc);
             AddItemToList(ref item);
+            this.Close();
+        }
+
+        private void CancelButton_onClicked(object sender, EventArgs e) {
             this.Close();
         }
 

@@ -38,7 +38,7 @@ namespace TodoListCSharp
         public void MenuItem_ExitApplication(object sender, EventArgs e) {
             MessageBox messageBox = new MessageBox("You sure you want to exit the program.");
             messageBox.ConfirmButtonCallback += this.Shutdown;
-            messageBox.Show();
+            messageBox.ShowDialog();
         }
 
         private void Application_Exit(object sender, ExitEventArgs e) {

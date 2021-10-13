@@ -26,6 +26,13 @@ namespace TodoListCSharp.views {
         public CloseCallbackFunc CloseCallback;
 
         public void ConfirmButton_onClicked(object sender, RoutedEventArgs e) {
+            if (this.TitleTextBox.Text == String.Empty) {
+                MessageBox messageBox = new MessageBox("Please input the new tab`s name.");
+                Console.Beep();
+                messageBox.ShowDialog();
+                return;
+            }
+            
             if (ConfirmButtonCallback != null) {
                 ConfirmButtonCallback(this.TitleTextBox.Text, oSelectColor);
             }
