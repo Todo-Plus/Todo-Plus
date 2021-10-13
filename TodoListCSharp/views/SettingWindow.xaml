@@ -178,7 +178,7 @@
                         </Ellipse.Effect>
                     </Ellipse>
                 </StackPanel>
-                <us:ColorPicker x:Name="AppearanceColorPicker" />
+                <us:ColorPicker x:Name="AppearanceColorPicker" SelectColorCallback="AppearanceColorPicker_onColorChange"/>
 
                 <!-- Transparency ScrollBar-->
                 <Label FontFamily="Inter" FontSize="18" VerticalAlignment="Center" Margin="5, 0">Transparency</Label>

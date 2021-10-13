@@ -69,6 +69,7 @@ namespace TodoListCSharp.views {
 
         private void MainSettingWindow_onLoaded(object sender, EventArgs e) {
             AppearancePercentLabel.Content = setting.Alpha;
+            GeneralPageStackPanelInitial(tabs);
         }
 
         private void SettingWindow_OnClosed(object sender, EventArgs e) {
@@ -181,58 +182,13 @@ namespace TodoListCSharp.views {
             
         }
 
+        private void AppearanceColorPicker_onColorChange(Color color) {
+            setting.BackgroundColor = color;
+            AppearanceSettingChange(setting);
+        }
+
         private void AppearanceCancelButton_onClicked(object sender, RoutedEventArgs e) {
             // todo: 清空页面状态
-        }
-        private void OpenGeneralSettingWindow(object sender, EventArgs e) {
-            if (oGeneralSettingWindow != null) {
-                return;
-            }
-
-            oGeneralSettingWindow = new GeneralSetting(ref tabs);
-            oGeneralSettingWindow.closedCallbackFunc += CloseGeneralSettingWindow;
-            oGeneralSettingWindow.TabAddCallback += GeneralSetting_AddTab;
-            oGeneralSettingWindow.Owner = this;
-            oGeneralSettingWindow.ShowDialog();
-        }
-
-        private void CloseGeneralSettingWindow() {
-            oGeneralSettingWindow = null;
-            this.Activate();
-        }
-
-        private void OpenAppearanceSettingWindow(object sender, EventArgs e) {
-            if (oAppearanceSettingWindow != null) {
-                return;
-            }
-
-            oAppearanceSettingWindow = new AppearanceSetting();
-            oAppearanceSettingWindow.Show();
-            oAppearanceSettingWindow.setting = setting;
-            oAppearanceSettingWindow.closedCallbackFunc += CloseAppearanceSettingWindow;
-            oAppearanceSettingWindow.AppearanceSettingChange += AppearanceSettingChange;
-            oAppearanceSettingWindow.Owner = this;
-        }
-
-        private void CloseAppearanceSettingWindow() {
-            oGeneralSettingWindow = null;
-            this.Activate();
-        }
-
-        private void openBackupSettingWindow(object sender, EventArgs e) {
-            if (oBackupSettingWindow != null) {
-                return;
-            }
-
-            oBackupSettingWindow = new BackupSetting();
-            oBackupSettingWindow.Show();
-            oBackupSettingWindow.closedCallbackFunc += CloseBackupSettingWindow;
-            oBackupSettingWindow.Owner = this;
-        }
-
-        private void CloseBackupSettingWindow() {
-            oBackupSettingWindow = null;
-            this.Activate();
         }
 
         // !! delegate forward

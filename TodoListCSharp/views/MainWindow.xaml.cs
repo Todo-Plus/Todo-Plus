@@ -79,17 +79,6 @@ namespace TodoListCSharp {
             tabs = save.tabs;
             iSaveVersion = save.version;
 
-            // IOInterface io = new BinaryIO();
-            // int ret = io.FileToList(Constants.TODOITEM_FILEPATH, ref oTodoItemList);
-            // if (ret != 0) {
-            //     throw new Exception();
-            // }
-            //
-            // ret = io.FileToList(Constants.DONEITEM_FILEPATH, ref oDoneItemList);
-            // if (ret != 0) {
-            //     throw new Exception();
-            // }
-
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
@@ -120,21 +109,20 @@ namespace TodoListCSharp {
             hMainWindowHandle = new WindowInteropHelper(this).Handle;
 
             if (locked == Constants.MainWindowLockStatu.DRAGABLE) {
+                locked = Constants.MainWindowLockStatu.LOCKED;
                 IntPtr desktopHandle = Utils.SearchDesktopHandle();
                 SetParent(hMainWindowHandle, desktopHandle);
-                locked = Constants.MainWindowLockStatu.LOCKED;
+                this.ApplicationMainWindow.ResizeMode = ResizeMode.NoResize;
                 return;
             }
-
-            SetParent(hMainWindowHandle, IntPtr.Zero);
             locked = Constants.MainWindowLockStatu.DRAGABLE;
+            this.ApplicationMainWindow.ResizeMode = ResizeMode.CanResize;
+            SetParent(hMainWindowHandle, IntPtr.Zero);
         }
 
         /// <summary>
         /// 主窗口列表事件——事项完成
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void ItemDoneButton_onClicked(object sender, RoutedEventArgs e) {
             IconButton button = (IconButton) sender;
             oTodoItemList.DoneOrRevertItem(button.Index, ref oDoneItemList);
@@ -179,7 +167,6 @@ namespace TodoListCSharp {
             }
 
             oSettingWindow = new SettingWindow();
-            // Set callback function
             oSettingWindow.setting = setting;
             oSettingWindow.tabs = tabs;
             oSettingWindow.settingWindowClosed += SettingWindow_OnClosed;
@@ -264,8 +251,8 @@ namespace TodoListCSharp {
 
         public void AppearanceSettingChange(Setting setting) {
             double alpha = setting.Alpha / 100.0;
-            this.WindowBorder.Background = new SolidColorBrush(setting.BackgroundColor);
-            this.WindowBorder.Background.Opacity = alpha;
+            this.MainWindowBorder.Background = new SolidColorBrush(setting.BackgroundColor);
+            this.MainWindowBorder.Background.Opacity = alpha;
         }
 
         public void TabAddEvent(Tab oNewTab) {
