@@ -183,7 +183,7 @@ namespace TodoListCSharp {
             oSettingWindow.setting = setting;
             oSettingWindow.tabs = tabs;
             oSettingWindow.settingWindowClosed += SettingWindow_OnClosed;
-            oSettingWindow.TransparencyChangeCallback += AppearanceSettingChange;
+            oSettingWindow.AppearanceSettingChangeCallback += AppearanceSettingChange;
             oSettingWindow.TabAddCallback += TabAddEvent;
             oSettingWindow.Owner = this;
             // 算是一个坑，使用showdialog的之前一定要先初始化数据
