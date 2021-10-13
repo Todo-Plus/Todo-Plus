@@ -66,17 +66,29 @@ namespace TodoListCSharp {
 
             setting = new Setting();
 
+            Save save = null;
             IOInterface io = new BinaryIO();
-            int ret = io.FileToList(Constants.TODOITEM_FILEPATH, ref oTodoItemList);
+            int ret = io.FileToSave(Constants.SAVE_FILEPATH, ref save);
+
             if (ret != 0) {
-                // todo: 定义错误并进行提示
                 throw new Exception();
             }
 
-            ret = io.FileToList(Constants.DONEITEM_FILEPATH, ref oDoneItemList);
-            if (ret != 0) {
-                throw new Exception();
-            }
+            oTodoItemList = Utils.ListToItemListForIO(save.todolist);
+            oDoneItemList = Utils.ListToItemListForIO(save.donelist);
+            tabs = save.tabs;
+            iSaveVersion = save.version;
+
+            // IOInterface io = new BinaryIO();
+            // int ret = io.FileToList(Constants.TODOITEM_FILEPATH, ref oTodoItemList);
+            // if (ret != 0) {
+            //     throw new Exception();
+            // }
+            //
+            // ret = io.FileToList(Constants.DONEITEM_FILEPATH, ref oDoneItemList);
+            // if (ret != 0) {
+            //     throw new Exception();
+            // }
 
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
@@ -84,9 +96,14 @@ namespace TodoListCSharp {
         }
 
         public void MainWindow_onClosed(object sender, EventArgs e) {
-            BinaryIO io = new BinaryIO();
-            io.ListToFile(ref oTodoItemList, Constants.TODOITEM_FILEPATH);
-            io.ListToFile(ref oDoneItemList, Constants.DONEITEM_FILEPATH);
+            IOInterface io = new BinaryIO();
+            Save save = new Save();
+            save.todolist = oTodoItemList.GetItemListForSerializer();
+            save.donelist = oDoneItemList.GetItemListForSerializer();
+            save.tabs = tabs;
+            save.version = iSaveVersion + 1;
+
+            io.SaveToFile(ref save, Constants.SAVE_FILEPATH);
         }
 
         private void TodoButton_onClicked(object sender, EventArgs e) {
@@ -169,6 +186,7 @@ namespace TodoListCSharp {
             oSettingWindow.TransparencyChangeCallback += AppearanceSettingChange;
             oSettingWindow.TabAddCallback += TabAddEvent;
             oSettingWindow.Owner = this;
+            // 算是一个坑，使用showdialog的之前一定要先初始化数据
             oSettingWindow.ShowDialog();
         }
 
@@ -179,12 +197,12 @@ namespace TodoListCSharp {
             }
 
             oItemAddWindow = new ItemAddWindow(tabs);
-            oItemAddWindow.ShowDialog();
 
             // Set Callback Function
             oItemAddWindow.closeCallbackFunc += ItemAddWindow_onClosed;
             oItemAddWindow.AddItemToList += AddItemToList;
             oItemAddWindow.Owner = this;
+            oItemAddWindow.ShowDialog();
         }
 
         // Set SettingWindow while close windows

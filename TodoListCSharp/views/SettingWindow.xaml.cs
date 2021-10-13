@@ -73,10 +73,10 @@ namespace TodoListCSharp.views {
             }
 
             oGeneralSettingWindow = new GeneralSetting(ref tabs);
-            oGeneralSettingWindow.ShowDialog();
             oGeneralSettingWindow.closedCallbackFunc += CloseGeneralSettingWindow;
             oGeneralSettingWindow.TabAddCallback += GeneralSetting_AddTab;
             oGeneralSettingWindow.Owner = this;
+            oGeneralSettingWindow.ShowDialog();
         }
 
         private void CloseGeneralSettingWindow() {
