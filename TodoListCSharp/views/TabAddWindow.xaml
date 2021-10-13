@@ -7,78 +7,87 @@
         xmlns:us="clr-namespace:TodoListCSharp.controls"
         Closed="TabAddWindow_onClose"
         mc:Ignorable="d"
+        WindowStyle="None"
+        Background="Transparent"
         ResizeMode="NoResize"
         SizeToContent="Height"
         Title="TabAddWindow" Width="500">
-    <StackPanel>
-        <us:Titlebar x:Name="titlebar" Title="New Tab" Margin="5" CloseButtonClicked="CloseButton_onClicked" />
-        <us:ColorPicker SelectColorCallback="ColorPicker_onSelect" />
-        <StackPanel Orientation="Horizontal" Height="30" Margin="10">
-            <Rectangle Height="Auto" Fill="#59ADFF" Width="2" />
-            <Label FontSize="18" VerticalAlignment="Center">Tab Name</Label>
-            <TextBox x:Name="TitleTextBox" BorderThickness="0 0 0 1" Width="350" VerticalAlignment="Center"
-                     FontSize="15" />
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-1" />
+    </WindowChrome.WindowChrome>
+    
+    <Grid>
+        <Border x:Name="WindowBorder" Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="#E8E8E8" />
+        <StackPanel>
+            <us:Titlebar x:Name="titlebar" Title="New Tab" Margin="5" CloseButtonClicked="CloseButton_onClicked" />
+            <us:ColorPicker SelectColorCallback="ColorPicker_onSelect" />
+            <StackPanel Orientation="Horizontal" Height="30" Margin="10">
+                <Rectangle Height="Auto" Fill="#59ADFF" Width="2" />
+                <Label FontSize="18" VerticalAlignment="Center">Tab Name</Label>
+                <TextBox x:Name="TitleTextBox" BorderThickness="0 0 0 1" Width="350" VerticalAlignment="Center"
+                         FontSize="15" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="30" Margin="10 10 10 20">
+                <Rectangle Height="Auto" Fill="#59ADFF" Width="2" />
+                <Label FontSize="18" VerticalAlignment="Center" Width="100" HorizontalAlignment="Left">Color</Label>
+                <Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <TextBox x:Name="ColorTextBox" BorderThickness="0 0 0 1" Width="350" VerticalAlignment="Center"
+                                 FontSize="15" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Rectangle x:Name="ColorShow" Width="15" Height="15" Fill="#FC4850" />
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Foreground="White" Margin="10" Click="ConfirmButton_onClicked">
+                    Confirm
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                                Name="T_ConfirmBorder"
+                                BorderBrush="{TemplateBinding Control.BorderBrush}"
+                                CornerRadius="15"
+                                Width="100"
+                                Height="30"
+                                Background="MediumSeaGreen">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="T_ConfirmBorder" Property="Background" Value="Green" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Foreground="White" Margin="10" Click="CancelButton_onClicked">
+                    Cancel
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                                Name="T_CancelBorder"
+                                BorderBrush="{TemplateBinding Control.BorderBrush}"
+                                CornerRadius="15"
+                                Width="100"
+                                Height="30"
+                                Background="Crimson">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="T_CancelBorder" Property="Background" Value="Firebrick" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Height="30" Margin="10 10 10 20">
-            <Rectangle Height="Auto" Fill="#59ADFF" Width="2" />
-            <Label FontSize="18" VerticalAlignment="Center" Width="100" HorizontalAlignment="Left">Color</Label>
-            <Grid>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                    <TextBox x:Name="ColorTextBox" BorderThickness="0 0 0 1" Width="350" VerticalAlignment="Center"
-                             FontSize="15" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Rectangle x:Name="ColorShow" Width="15" Height="15" Fill="#FC4850" />
-                </StackPanel>
-            </Grid>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Foreground="White" Margin="10" Click="ConfirmButton_onClicked">
-                Confirm
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border
-                            Name="T_ConfirmBorder"
-                            BorderBrush="{TemplateBinding Control.BorderBrush}"
-                            CornerRadius="15"
-                            Width="100"
-                            Height="30"
-                            Background="MediumSeaGreen">
-                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
-                                              HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="T_ConfirmBorder" Property="Background" Value="Green" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Button Foreground="White" Margin="10" Click="CancelButton_onClicked">
-                Cancel
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border
-                            Name="T_CancelBorder"
-                            BorderBrush="{TemplateBinding Control.BorderBrush}"
-                            CornerRadius="15"
-                            Width="100"
-                            Height="30"
-                            Background="Crimson">
-                            <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
-                                              HorizontalAlignment="Center"
-                                              VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="T_CancelBorder" Property="Background" Value="Firebrick" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-        </StackPanel>
-    </StackPanel>
+    </Grid>
 </Window>
