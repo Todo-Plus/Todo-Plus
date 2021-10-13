@@ -28,6 +28,7 @@ namespace TodoListCSharp.controls {
         private const int Height = 144;
         private const int ColorSliderWidth = 230;
 
+        private Point oLastClickedPosition;
         private Color oRightTopColor;
         private Color oSelectColor;
         
@@ -37,16 +38,15 @@ namespace TodoListCSharp.controls {
             this.CoreColor.Color = DefaultColor;
         }
 
-        private void Canvas_OnMouseMove(object sender, MouseEventArgs e) {
-            if (Mouse.LeftButton != MouseButtonState.Pressed) return;
-            Point postion = e.GetPosition((IInputElement) sender);
-            double left = 2 * postion.X - Width;
-            double top = 2 * postion.Y - Height;
+        private void RectPositionToColor(Point position) {
+            oLastClickedPosition = position;
+            double left = 2 * position.X - Width;
+            double top = 2 * position.Y - Height;
             this.ClickedPos.Margin = new Thickness(left, top, 0, 0);
 
-            double fWidthPercent = postion.X / Width;
-            Debug.WriteLine(postion);
-            double fHeightPercent = postion.Y / Height;
+            double fWidthPercent = position.X / Width;
+            Debug.WriteLine(position);
+            double fHeightPercent = position.Y / Height;
 
             int iStartRed = (int) (oRightTopColor.R * (1.0 - fHeightPercent));
             int iStartGreen = (int) (oRightTopColor.G * (1.0 - fHeightPercent));
@@ -69,6 +69,12 @@ namespace TodoListCSharp.controls {
             }
         }
 
+        private void Canvas_OnMouseMove(object sender, MouseEventArgs e) {
+            if (Mouse.LeftButton != MouseButtonState.Pressed) return;
+            Point position = e.GetPosition((IInputElement) sender);
+            RectPositionToColor(position);
+        }
+
         private void ColorSlider_onMouseMove(object sender, MouseEventArgs e) {
             if (Mouse.LeftButton != MouseButtonState.Pressed) return;
             Point position = e.GetPosition((IInputElement) sender);
@@ -76,6 +82,7 @@ namespace TodoListCSharp.controls {
             Color color = SliderPercentToColor(percent);
             this.CoreColor.Color = color;
             oRightTopColor = color;
+            RectPositionToColor(oLastClickedPosition);
         }
         
         private static Color SliderPercentToColor(double percent) {
