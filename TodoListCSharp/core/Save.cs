@@ -12,5 +12,12 @@ namespace TodoListCSharp.core {
         public List<TodoItem> todolist;
         public List<TodoItem> donelist;
         public List<Tab> tabs;
+
+        public Save() {
+            version = 0;
+            todolist = new List<TodoItem>();
+            donelist = new List<TodoItem>();
+            tabs = new List<Tab>();
+        }
     }
 }

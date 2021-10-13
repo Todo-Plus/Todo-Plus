@@ -39,7 +39,7 @@ namespace TodoListCSharp.views {
             int length = tabs.Count;
             for (int i = 0; i < length; i++) {
                 this.WrapPanel.Children.Add(
-                    Generator.TabViewGridGenerate(tabs[i].Name, tabs[i].Color));
+                    Generator.TabViewGridGenerate(tabs[i].Name, tabs[i].GetColor()));
             }
 
             iTabLastestIndex = length > 0 ? tabs[length - 1].Id + 1 : 0;

@@ -46,5 +46,21 @@ namespace TodoListCSharp.utils {
 
             return -1;
         }
+
+        public static ItemList ListToItemListForIO(List<TodoItem> list) {
+            ItemList oRetList = new ItemList();
+
+            if (list.Count <= 1) {
+                return oRetList;
+            }
+            
+            list.RemoveAt(0);
+            int length = list.Count;
+            for (int i = 0; i < length; i++) {
+                oRetList.AppendItem(list[i]);
+            }
+
+            return oRetList;
+        }
     }
 }

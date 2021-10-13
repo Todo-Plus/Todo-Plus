@@ -58,5 +58,13 @@ namespace TodoListCSharp.utils {
         public int SettingToFile(ref Setting settings, string path) {
             throw new System.NotImplementedException();
         }
+
+        public int FileToSave(string path, ref Save output) {
+            throw new NotImplementedException();
+        }
+
+        public int SaveToFile(ref Save input, string path) {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -79,6 +80,32 @@ namespace TodoListCSharp.utils {
             FileStream outputFile = new FileStream(path, FileMode.Create, FileAccess.Write);
             IFormatter serializer = new BinaryFormatter();
             serializer.Serialize(outputFile, settings);
+
+            return 0;
+        }
+
+        public int FileToSave(string path, ref Save output) {
+            if (false == System.IO.File.Exists(path)) {
+                output = new Save();
+
+                // 文件不存在，但是不影响后续逻辑
+                return 0;
+            }
+            FileStream loadFile = new FileStream(path, FileMode.Open, FileAccess.Read);
+            IFormatter serializer = new BinaryFormatter();
+            try {
+                output = serializer.Deserialize(loadFile) as Save;
+            }
+            catch (Exception e) {
+                output = new Save();
+            }
+            return 0;
+        }
+
+        public int SaveToFile(ref Save input, string path) {
+            FileStream outputFile = new FileStream(path, FileMode.Create, FileAccess.Write);
+            IFormatter serializer = new BinaryFormatter();
+            serializer.Serialize(outputFile, input);
 
             return 0;
         }

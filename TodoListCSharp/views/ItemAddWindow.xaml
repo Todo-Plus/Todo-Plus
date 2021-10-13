@@ -15,7 +15,7 @@
         MaxHeight="448" MaxWidth="635"
         Title="ItemAddWindow">
     <Window.Resources>
-        <converter:MediaColorToBrushConverter x:Key="MediaColorToBrush" />
+        <converter:HexStringToMediaColorBrush x:Key="MediaColorToBrush" />
     </Window.Resources>
 
     <WindowChrome.WindowChrome>
