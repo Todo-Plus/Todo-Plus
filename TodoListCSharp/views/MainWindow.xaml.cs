@@ -7,6 +7,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Microsoft.Win32;
 using TodoListCSharp.controls;
 using TodoListCSharp.views;
 using TodoListCSharp.core;
@@ -41,6 +42,9 @@ namespace TodoListCSharp {
         private List<TodoItem> oShowTodoList = null;
         private Constants.MainWindowStatu statu = Constants.MainWindowStatu.TODO;
         private Constants.MainWindowLockStatu locked = Constants.MainWindowLockStatu.DRAGABLE;
+
+        private static readonly string _regPath = @"Software\TodoPlus\";
+        
         private int iMaxIndex = 0;
         private Setting setting = null;
         private int iSaveVersion = 0;
@@ -55,6 +59,8 @@ namespace TodoListCSharp {
         }
 
         private void MainWindow_onLoaded(object sender, EventArgs e) {
+            MainSetSize(this);
+            
             const int GWL_STYLE = (-16);
             const UInt64 WS_CHILD = 0x40000000;
             UInt64 iWindowStyle = GetWindowLong(hMainWindowHandle, GWL_STYLE);
@@ -84,7 +90,12 @@ namespace TodoListCSharp {
             todoList.Items.Refresh();
         }
 
+        private void MainWindow_onClosing(object sender, EventArgs e) {
+            MainSaveSize(this, locked);
+        }
+        
         public void MainWindow_onClosed(object sender, EventArgs e) {
+
             IOInterface io = new BinaryIO();
             Save save = new Save();
             save.todolist = oTodoItemList.GetItemListForSerializer();
@@ -93,6 +104,40 @@ namespace TodoListCSharp {
             save.version = iSaveVersion + 1;
 
             io.SaveToFile(ref save, Constants.SAVE_FILEPATH);
+        }
+
+        private void MainSaveSize(Window window,Constants.MainWindowLockStatu status) {
+            Registry.CurrentUser
+                .CreateSubKey(_regPath + window.Name)
+                ?.SetValue("Bounds", window.RestoreBounds);
+            Registry.CurrentUser
+                .CreateSubKey(_regPath + window.Name)
+                ?.SetValue("LockStatus", status);
+        }
+
+        public void MainSetSize(Window window) {
+            if (window.SizeToContent != SizeToContent.Manual) {
+                return;
+            }
+
+            RegistryKey key = Registry.CurrentUser.OpenSubKey(_regPath + window.Name);
+
+            if (key != null) {
+                var WindowBounds = Rect.Parse($"{key.GetValue("Bounds")}");
+                window.Top = WindowBounds.Top;
+                window.Left = WindowBounds.Left;
+                window.Width = WindowBounds.Width;
+                window.Height = WindowBounds.Height;
+            }
+            
+            // todo：实现存在一定的问题，待修改
+            // if (key != null) {
+            //     locked = Enum.Parse<Constants.MainWindowLockStatu>(key.GetValue("LockStatus").ToString());
+            //     // 默认为可抓取状态，转到锁定状态
+            //     if (locked == Constants.MainWindowLockStatu.LOCKED) {
+            //         SwitchWindowLockStatus();
+            //     }
+            // }
         }
 
         private void TodoButton_onClicked(object sender, EventArgs e) {
@@ -105,7 +150,9 @@ namespace TodoListCSharp {
             SwitchItemList();
         }
 
-        private void LockWindowButton_onClicked(object sender, RoutedEventArgs e) {
+        private void LockWindowButton_onClicked(object sender, RoutedEventArgs e) => SwitchWindowLockStatus();
+
+        private void SwitchWindowLockStatus() {
             hMainWindowHandle = new WindowInteropHelper(this).Handle;
 
             if (locked == Constants.MainWindowLockStatu.DRAGABLE) {

@@ -11,6 +11,7 @@
         ResizeMode="CanResize"
         Loaded="MainWindow_onLoaded"
         Closed="MainWindow_onClosed"
+        Closing="MainWindow_onClosing"
         x:Name="ApplicationMainWindow"
         Icon="/resources/todo.ico"
         ShowInTaskbar="False"
