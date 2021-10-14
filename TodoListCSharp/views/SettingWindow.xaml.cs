@@ -35,6 +35,7 @@ namespace TodoListCSharp.views {
         private int iGeneralTabLastestIndex;
 
         public Setting setting = null;
+        private Setting oBackupSetting = null;
         public List<Tab> tabs;
 
         private bool bAppearanceDraging = false;
@@ -49,6 +50,14 @@ namespace TodoListCSharp.views {
         public delegate void AppearanceSettingChangeCallbackFunc(Setting setting);
 
         public event AppearanceSettingChangeCallbackFunc AppearanceSettingChangeCallback;
+
+        public delegate void RollbackSettingCallbackFunc();
+
+        public event RollbackSettingCallbackFunc RollbackSettingCallback;
+
+        public delegate void SettingConfirmCallbackFunc(Setting setting);
+
+        public event SettingConfirmCallbackFunc SettingConfirmCallback;
 
         // General Setting Window Delegates
 
@@ -88,6 +97,7 @@ namespace TodoListCSharp.views {
         private void GeneralItem_onClicked(object sender, RoutedEventArgs e) {
             MainPageStackPanel.Visibility = Visibility.Collapsed;
             GeneralPageStackPanel.Visibility = Visibility.Visible;
+            oBackupSetting = new Setting(setting);
         }
         
         /// <summary>
@@ -96,6 +106,7 @@ namespace TodoListCSharp.views {
         private void AppearanceItem_onClicked(object sender, RoutedEventArgs e) {
             MainPageStackPanel.Visibility = Visibility.Collapsed;
             AppearancePageStackPanel.Visibility = Visibility.Visible;
+            oBackupSetting = new Setting(setting);
         }
         
         /// <summary>
@@ -104,17 +115,14 @@ namespace TodoListCSharp.views {
         private void BackupItem_onClicked(object sender, RoutedEventArgs e) {
             MainPageStackPanel.Visibility = Visibility.Collapsed;
             BackupPageStackPanel.Visibility = Visibility.Visible;
+            oBackupSetting = new Setting(setting);
         }
         
         /// <summary>
         /// 从子页面返回到主页面事件,这里等同于子窗口下的Cancel按钮，如果存在状态信息需要清除
         /// </summary>
         private void ReturnButton_onClicked(object sender, RoutedEventArgs e) {
-            GeneralPageStackPanel.Visibility = Visibility.Collapsed;
-            AppearancePageStackPanel.Visibility = Visibility.Collapsed;
-            BackupPageStackPanel.Visibility = Visibility.Collapsed;
-
-            MainPageStackPanel.Visibility = Visibility.Visible;
+            ReturnMainSettingWindow();
         }
 
         /// <summary>
@@ -178,17 +186,9 @@ namespace TodoListCSharp.views {
             }
         }
 
-        private void AppearanceConfirmButton_onClicked(object sender, RoutedEventArgs e) {
-            
-        }
-
         private void AppearanceColorPicker_onColorChange(Color color) {
             setting.BackgroundColor = color;
             AppearanceSettingChange(setting);
-        }
-
-        private void AppearanceCancelButton_onClicked(object sender, RoutedEventArgs e) {
-            // todo: 清空页面状态
         }
 
         // !! delegate forward
@@ -205,7 +205,36 @@ namespace TodoListCSharp.views {
         }
 
         private void CloseButton_onClicked(object sender, RoutedEventArgs e) {
+            if (RollbackSettingCallback != null) {
+                RollbackSettingCallback();
+                setting = oBackupSetting;
+                ReturnMainSettingWindow();
+            }
             this.Close();
+        }
+
+        private void SettingCancelButton_onClicked(object sender, RoutedEventArgs e) {
+            if (RollbackSettingCallback != null) {
+                RollbackSettingCallback();
+                setting = oBackupSetting;
+                ReturnMainSettingWindow();
+            }
+        }
+
+        private void SettingConfirmButton_onClicked(object sender, RoutedEventArgs e) {
+            if (SettingConfirmCallback != null) {
+                SettingConfirmCallback(setting);
+                oBackupSetting = setting;
+                ReturnMainSettingWindow();
+            }
+        }
+
+        private void ReturnMainSettingWindow() {
+            GeneralPageStackPanel.Visibility = Visibility.Collapsed;
+            AppearancePageStackPanel.Visibility = Visibility.Collapsed;
+            BackupPageStackPanel.Visibility = Visibility.Collapsed;
+
+            MainPageStackPanel.Visibility = Visibility.Visible;
         }
     }
 }

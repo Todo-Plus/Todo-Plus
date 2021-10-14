@@ -59,8 +59,6 @@ namespace TodoListCSharp {
         }
 
         private void MainWindow_onLoaded(object sender, EventArgs e) {
-            MainSetSize(this);
-            
             const int GWL_STYLE = (-16);
             const UInt64 WS_CHILD = 0x40000000;
             UInt64 iWindowStyle = GetWindowLong(hMainWindowHandle, GWL_STYLE);
@@ -71,6 +69,9 @@ namespace TodoListCSharp {
             eDoneButtonStatu = Visibility.Collapsed;
 
             setting = new Setting();
+            setting.ReadSettingFromRegistryTable();
+            MainSetSize(this, setting);
+            MainWindowAppearanceLoadSetting(setting);
 
             Save save = null;
             IOInterface io = new BinaryIO();
@@ -91,7 +92,7 @@ namespace TodoListCSharp {
         }
 
         private void MainWindow_onClosing(object sender, EventArgs e) {
-            MainSaveSize(this, locked);
+            setting.SaveSettingToRegistryTable(this);
         }
         
         public void MainWindow_onClosed(object sender, EventArgs e) {
@@ -106,31 +107,18 @@ namespace TodoListCSharp {
             io.SaveToFile(ref save, Constants.SAVE_FILEPATH);
         }
 
-        private void MainSaveSize(Window window,Constants.MainWindowLockStatu status) {
-            Registry.CurrentUser
-                .CreateSubKey(_regPath + window.Name)
-                ?.SetValue("Bounds", window.RestoreBounds);
-            Registry.CurrentUser
-                .CreateSubKey(_regPath + window.Name)
-                ?.SetValue("LockStatus", status);
-        }
-
-        public void MainSetSize(Window window) {
-            if (window.SizeToContent != SizeToContent.Manual) {
+        public void MainSetSize(Window window, Setting setting) {
+            if (setting.WindowBounds == Rect.Empty) {
                 return;
             }
 
-            RegistryKey key = Registry.CurrentUser.OpenSubKey(_regPath + window.Name);
+            var WindowBounds = setting.WindowBounds;
+            window.Top = WindowBounds.Top;
+            window.Left = WindowBounds.Left;
+            window.Width = WindowBounds.Width;
+            window.Height = WindowBounds.Height;
 
-            if (key != null) {
-                var WindowBounds = Rect.Parse($"{key.GetValue("Bounds")}");
-                window.Top = WindowBounds.Top;
-                window.Left = WindowBounds.Left;
-                window.Width = WindowBounds.Width;
-                window.Height = WindowBounds.Height;
-            }
-            
-            // todo：实现存在一定的问题，待修改
+                // todo：实现存在一定的问题，待修改
             // if (key != null) {
             //     locked = Enum.Parse<Constants.MainWindowLockStatu>(key.GetValue("LockStatus").ToString());
             //     // 默认为可抓取状态，转到锁定状态
@@ -153,6 +141,7 @@ namespace TodoListCSharp {
         private void LockWindowButton_onClicked(object sender, RoutedEventArgs e) => SwitchWindowLockStatus();
 
         private void SwitchWindowLockStatus() {
+            MainWindowAppearanceLoadSetting(setting);
             hMainWindowHandle = new WindowInteropHelper(this).Handle;
 
             if (locked == Constants.MainWindowLockStatu.DRAGABLE) {
@@ -214,10 +203,13 @@ namespace TodoListCSharp {
             }
 
             oSettingWindow = new SettingWindow();
-            oSettingWindow.setting = setting;
+            // 备份一份设置扔给设置窗口
+            oSettingWindow.setting = new Setting(setting);
             oSettingWindow.tabs = tabs;
             oSettingWindow.settingWindowClosed += SettingWindow_OnClosed;
-            oSettingWindow.AppearanceSettingChangeCallback += AppearanceSettingChange;
+            oSettingWindow.AppearanceSettingChangeCallback += MainWindowAppearanceLoadSetting;
+            oSettingWindow.RollbackSettingCallback += MainWindowRollbackSetting;
+            oSettingWindow.SettingConfirmCallback += MainWindowConfirmSetSetting;
             oSettingWindow.TabAddCallback += TabAddEvent;
             oSettingWindow.Owner = this;
             // 算是一个坑，使用showdialog的之前一定要先初始化数据
@@ -242,8 +234,8 @@ namespace TodoListCSharp {
         // Set SettingWindow while close windows
         private void SettingWindow_OnClosed() {
             oSettingWindow = null;
+            MainWindowAppearanceLoadSetting(setting);
             this.Activate();
-            AppearanceSettingChange(setting);
         }
 
         private void ItemAddWindow_onClosed() {
@@ -288,18 +280,19 @@ namespace TodoListCSharp {
         }
 
         // !! MainWindow Appearance Change Functions
-
-        public void AppearanceTransparencyChange(int value) {
-            double alpha = value / 100.0;
-
-            this.ApplicationMainWindow.Background = new SolidColorBrush(Colors.White);
-            this.ApplicationMainWindow.Background.Opacity = alpha;
-        }
-
-        public void AppearanceSettingChange(Setting setting) {
+        private void MainWindowAppearanceLoadSetting(Setting setting) {
             double alpha = setting.Alpha / 100.0;
             this.MainWindowBorder.Background = new SolidColorBrush(setting.BackgroundColor);
             this.MainWindowBorder.Background.Opacity = alpha;
+        }
+
+        private void MainWindowConfirmSetSetting(Setting oNewSetting) {
+            setting = oNewSetting;
+            MainWindowAppearanceLoadSetting(setting);
+        }
+
+        private void MainWindowRollbackSetting() {
+            MainWindowAppearanceLoadSetting(setting);
         }
 
         public void TabAddEvent(Tab oNewTab) {

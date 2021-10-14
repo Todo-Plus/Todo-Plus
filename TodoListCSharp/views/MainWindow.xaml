@@ -46,17 +46,20 @@
                             x:Name="LockButton"
                             ImageSource="/resources/icons/locked.png"
                             HoverIcon="/resources/icons/locked.png"
-                            Click="LockWindowButton_onClicked" />
+                            Click="LockWindowButton_onClicked"
+                            ToolTip="Lock"/>
                         <us:IconButton
                             Style="{StaticResource MWTitleIconButtonStyle}"
                             ImageSource="/resources/icons/setting.png"
                             HoverIcon="/resources/icons/setting.png"
-                            Click="OpenSettingWindow" />
+                            Click="OpenSettingWindow"
+                            ToolTip="Setting"/>
                         <us:IconButton
                             Style="{StaticResource MWTitleIconButtonStyle}"
                             ImageSource="/resources/icons/add.png"
                             HoverIcon="/resources/icons/add.png"
-                            Click="OpenItemAddWindow" />
+                            Click="OpenItemAddWindow"
+                            ToolTip="Add Item"/>
                     </StackPanel>
                 </StackPanel>
             </Grid>

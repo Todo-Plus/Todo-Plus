@@ -83,6 +83,7 @@
                 <us:MenuItem IconSource="/resources/icons/about.png" Text="About Setting" />
             </StackPanel>
         </StackPanel>
+        
         <StackPanel Visibility="Collapsed" x:Name="GeneralPageStackPanel">
             <us:Titlebar Title="General" Background="Transparent" 
                          CloseButtonClicked="CloseButton_onClicked" 
@@ -131,7 +132,64 @@
                     <WrapPanel x:Name="GeneralWrapPanel" Width="{Binding ElementName=ScrollViewer, Path=Width, Mode=OneWay}" />
                 </ScrollViewer>
             </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                <CheckBox x:Name="GeneralAutoStartCheckBox" VerticalAlignment="Center"></CheckBox>
+                <Label FontFamily="Inter" FontSize="16">Auto start at boot</Label>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Center">
+                <CheckBox x:Name="GeneralCloseMessage" VerticalAlignment="Center"></CheckBox>
+                <Label FontFamily="Inter" FontSize="16">Show message when closing</Label>
+            </StackPanel>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Foreground="White" Margin="10" Click="SettingConfirmButton_onClicked">
+                        Confirm
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border
+                                    Name="T_ConfirmBorder"
+                                    BorderBrush="{TemplateBinding Control.BorderBrush}"
+                                    CornerRadius="15"
+                                    Width="100"
+                                    Height="30"
+                                    Background="MediumSeaGreen">
+                                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="T_ConfirmBorder" Property="Background" Value="Green" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Button Foreground="White" Margin="10" Click="SettingCancelButton_onClicked">
+                        Cancel
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border
+                                    Name="T_CancelBorder"
+                                    BorderBrush="{TemplateBinding Control.BorderBrush}"
+                                    CornerRadius="15"
+                                    Width="100"
+                                    Height="30"
+                                    Background="Crimson">
+                                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                                      HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center" />
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="T_CancelBorder" Property="Background" Value="Firebrick" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
         </StackPanel>
+        
         <StackPanel x:Name="AppearancePageStackPanel" Background="Transparent" Visibility="Collapsed">
             <us:Titlebar Title="Appearance" Background="Transparent" Margin="5"
                          x:Name="AppearanceTitleBar"
@@ -216,7 +274,7 @@
                     </Grid>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Foreground="White" Margin="10" Click="AppearanceConfirmButton_onClicked">
+                    <Button Foreground="White" Margin="10" Click="SettingConfirmButton_onClicked">
                         Confirm
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
@@ -239,7 +297,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <Button Foreground="White" Margin="10" Click="ReturnButton_onClicked">
+                    <Button Foreground="White" Margin="10" Click="SettingCancelButton_onClicked">
                         Cancel
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
