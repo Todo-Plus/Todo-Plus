@@ -57,6 +57,7 @@
     <None Remove="resources\icons\unlock.png" />
     <None Remove="resources\SideMode.png" />
     <None Remove="resources\SideMode_light.png" />
+    <None Remove="resources\todo.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -153,6 +154,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\SideMode_light.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\todo.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
