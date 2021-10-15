@@ -6,6 +6,8 @@ namespace TodoListCSharp.core {
         public int Index { get; set; }
         public string Title { get; set; }
         public string Desc { get; set; }
+        public string ForgeColor { get; set; }
+        public string PointColor { get; set; }
         private Constants.TodoItemStatu Statu { get; set; }
         private int Tag { get; set; }
         private int prority { get; set; }
@@ -17,6 +19,8 @@ namespace TodoListCSharp.core {
         public TodoItem(string title, string desc) {
             Title = title;
             Desc = desc;
+            PointColor = "#BBBBBB";
+            ForgeColor = "#FFFFFF";
         }
 
         public void SetIndex(int index) {

@@ -62,5 +62,18 @@ namespace TodoListCSharp.utils {
 
             return oRetList;
         }
+
+        public static Color GenerateAdaptColor(Color color) {
+            int Red = (int)color.R;
+            int Green = (int)color.G;
+            int Blue = (int)color.B;
+
+            if (Red * 0.213 + Green * 0.715 + Blue * 0.072 > 255 / 2.0) {
+                return Constants.MEDIA_COLOR_BALCK;
+            }
+            else {
+                return Constants.MEDIA_COLOR_WHITE;
+            }
+        }
     }
 }

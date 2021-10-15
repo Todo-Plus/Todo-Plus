@@ -12,6 +12,7 @@
         Loaded="MainWindow_onLoaded"
         Closed="MainWindow_onClosed"
         Closing="MainWindow_onClosing"
+        SizeChanged="MainWindow_onResize"
         x:Name="ApplicationMainWindow"
         Icon="/resources/todo.ico"
         ShowInTaskbar="False"
@@ -22,7 +23,9 @@
     </WindowChrome.WindowChrome>
 
     <Window.Resources>
-        <converter:WindowStatuToVisibiltyConverterForTodo x:Key="ConverterForTodo" />
+        <converter:HexStringToMediaColorBrush x:Key="HexStringToMediaColorBrush" />
+        <converter:HexStringToDrawColor x:Key="HexStringToDrawColor" />
+        <converter:HexStringToMediaColor x:Key="HexStringToMediaColor" />
     </Window.Resources>
 
     <Grid>
@@ -66,7 +69,8 @@
             <ListBox
                 Background="Transparent"
                 HorizontalAlignment="Stretch"
-                Name="todoList"
+                x:Name="todoList"
+                ScrollViewer.VerticalScrollBarVisibility="Visible"
                 Height="Auto"
                 BorderThickness="0">
                 <ListBox.ItemContainerStyle>
@@ -78,11 +82,13 @@
                     <DataTemplate>
                         <Grid Height="30" Margin="10, 0" Background="Transparent">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                                <Ellipse Width="10" Height="10" Fill="#BBBBBB" />
-                                <Label Content="{Binding Title}"
-                                       VerticalAlignment="Center"
-                                       Margin="5, 0"
-                                       FontSize="15" />
+                                <Ellipse Width="10" Height="10" Fill="{Binding PointColor, Converter={StaticResource HexStringToMediaColorBrush}}" />
+                                <Label 
+                                    Foreground="{Binding ForgeColor, Converter={StaticResource HexStringToMediaColorBrush}}"
+                                    Content="{Binding Title}"
+                                    VerticalAlignment="Center"
+                                    Margin="5, 0"
+                                    FontSize="15" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                                 <!-- visibility = "Visiible" if mouseon && Statu == "to_do"-->

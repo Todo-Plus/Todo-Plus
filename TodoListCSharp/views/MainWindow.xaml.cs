@@ -68,11 +68,6 @@ namespace TodoListCSharp {
             eTodoButtonStatu = Visibility.Visible;
             eDoneButtonStatu = Visibility.Collapsed;
 
-            setting = new Setting();
-            setting.ReadSettingFromRegistryTable();
-            MainSetSize(this, setting);
-            MainWindowAppearanceLoadSetting(setting);
-
             Save save = null;
             IOInterface io = new BinaryIO();
             int ret = io.FileToSave(Constants.SAVE_FILEPATH, ref save);
@@ -89,6 +84,11 @@ namespace TodoListCSharp {
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
+            
+            setting = new Setting();
+            setting.ReadSettingFromRegistryTable();
+            MainSetSize(this, setting);
+            MainWindowAppearanceLoadSetting(setting);
         }
 
         private void MainWindow_onClosing(object sender, EventArgs e) {
@@ -105,6 +105,10 @@ namespace TodoListCSharp {
             save.version = iSaveVersion + 1;
 
             io.SaveToFile(ref save, Constants.SAVE_FILEPATH);
+        }
+
+        private void MainWindow_onResize(object sender, EventArgs e) {
+            this.todoList.Height = this.Height - 80;
         }
 
         public void MainSetSize(Window window, Setting setting) {
@@ -126,6 +130,25 @@ namespace TodoListCSharp {
             //         SwitchWindowLockStatus();
             //     }
             // }
+        }
+
+        public void MainWindowAdaptBackgroundColor(System.Windows.Media.Color color) {
+            System.Windows.Media.Color TextColor = Utils.GenerateAdaptColor(color);
+
+            if (statu == Constants.MainWindowStatu.TODO) {
+                this.TodoLabel.Foreground = new SolidColorBrush(TextColor);
+                this.TodoLine.BorderBrush = new SolidColorBrush(TextColor);
+            }
+            else {
+                this.DoneLabel.Foreground = new SolidColorBrush(TextColor);
+                this.DoneLine.BorderBrush = new SolidColorBrush(TextColor);
+            }
+
+            int length = oShowTodoList.Count;
+            for (int i = 0; i < length; i++) {
+                oShowTodoList[i].ForgeColor = Utils.MediaColorToHex(TextColor);
+            }
+            todoList.Items.Refresh();
         }
 
         private void TodoButton_onClicked(object sender, EventArgs e) {
@@ -282,6 +305,7 @@ namespace TodoListCSharp {
         // !! MainWindow Appearance Change Functions
         private void MainWindowAppearanceLoadSetting(Setting setting) {
             double alpha = setting.Alpha / 100.0;
+            MainWindowAdaptBackgroundColor(setting.BackgroundColor);
             this.MainWindowBorder.Background = new SolidColorBrush(setting.BackgroundColor);
             this.MainWindowBorder.Background.Opacity = alpha;
         }
