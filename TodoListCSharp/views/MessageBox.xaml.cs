@@ -16,7 +16,10 @@ namespace TodoListCSharp.views {
 
             this.titlebar.ReturnButton.Visibility = Visibility.Collapsed;
         }
-
+        
+        /// <summary>
+        /// Confirm按钮被点击后处理回调函数
+        /// </summary>
         public void ConfirmButton_onClicked(object sender, RoutedEventArgs e) {
             if (ConfirmButtonCallback != null) {
                 ConfirmButtonCallback();
@@ -24,7 +27,10 @@ namespace TodoListCSharp.views {
 
             this.CloseMessageWindow(sender, e);
         }
-
+        
+        /// <summary>
+        /// Cancel按钮被点击后处理回调函数
+        /// </summary>
         public void CancelButton_onClicked(object sender, RoutedEventArgs e) {
             if (CancelButtonCallback != null) {
                 CancelButtonCallback();

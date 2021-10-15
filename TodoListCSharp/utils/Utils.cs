@@ -14,7 +14,11 @@ namespace TodoListCSharp.utils {
         static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string className, string windowTitle);
         [DllImport("user32.dll")]
         static extern IntPtr GetDesktopWindow();
-
+        
+        /// <summary>
+        /// 搜索桌面句柄的函数，返回桌面所在的句柄
+        /// </summary>
+        /// <returns></returns>
         public static IntPtr SearchDesktopHandle() {
             IntPtr hRoot = GetDesktopWindow();
             IntPtr hShellDll = IntPtr.Zero;
@@ -29,7 +33,10 @@ namespace TodoListCSharp.utils {
 
             return IntPtr.Zero;
         }
-
+        
+        /// <summary>
+        /// 颜色转换：string -> Color或相反
+        /// </summary>
         public static string MediaColorToHex(Color color) {
             return "#" + color.R.ToString("X2") + color.G.ToString("X2") + color.B.ToString("X2");
         }
@@ -37,7 +44,10 @@ namespace TodoListCSharp.utils {
         public static Color HexToMediaColor(string sColorString) {
             return (Color)ColorConverter.ConvertFromString(sColorString);
         }
-
+        
+        /// <summary>
+        /// 获取tab所在的position，用于tab的修改，但是目前没有实现
+        /// </summary>
         public static int TabListGetPosition(ref List<Tab> tabs, int iIndex) {
             int length = tabs.Count;
             for (int i = 0; i < length; i++) {
@@ -48,7 +58,10 @@ namespace TodoListCSharp.utils {
 
             return -1;
         }
-
+        
+        /// <summary>
+        /// 列表转换到itemlist，在IO转换时使用
+        /// </summary>
         public static ItemList ListToItemListForIO(List<TodoItem> list) {
             ItemList oRetList = new ItemList();
 
@@ -64,7 +77,8 @@ namespace TodoListCSharp.utils {
 
             return oRetList;
         }
-
+        
+        // 根据背景色得到需要的字体颜色，用于突出显示 
         public static Color GenerateAdaptColor(Color color) {
             int Red = (int)color.R;
             int Green = (int)color.G;
@@ -77,7 +91,9 @@ namespace TodoListCSharp.utils {
                 return Constants.MEDIA_COLOR_WHITE;
             }
         }
-
+        /// <summary>
+        /// 设置自启动使用的函数
+        /// </summary>
         public static string GetAppPathFromQuick(string shortcutPath) {
             if (System.IO.File.Exists(shortcutPath)) {
                 WshShell shell = new WshShell();

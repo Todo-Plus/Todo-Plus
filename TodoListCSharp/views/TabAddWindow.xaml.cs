@@ -24,7 +24,10 @@ namespace TodoListCSharp.views {
         public delegate void CloseCallbackFunc();
 
         public CloseCallbackFunc CloseCallback;
-
+        
+        /// <summary>
+        /// 如果输入的name为空，显示提示
+        /// </summary>
         public void ConfirmButton_onClicked(object sender, RoutedEventArgs e) {
             if (this.TitleTextBox.Text == String.Empty) {
                 MessageBox messageBox = new MessageBox("Please input the new tab`s name.");

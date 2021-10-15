@@ -6,15 +6,25 @@ using TodoListCSharp.core;
 namespace TodoListCSharp.views {
     public partial class ItemAddWindow : Window {
         // !! delegate & event define
-
+        
+        /// <summary>
+        /// 关闭添加Item的窗口的回调函数
+        /// </summary>
         public delegate void CloseCallbackFunc();
 
         public event CloseCallbackFunc closeCallbackFunc;
-
+        /// <summary>
+        /// 添加项目到ItemList的回调函数
+        /// </summary>
+        /// <param name="item">新的Item</param>
         public delegate void AddItemToListFunc(ref TodoItem item);
 
         public event AddItemToListFunc AddItemToList;
-
+        
+        /// <summary>
+        /// 构造函数，需要传入tab用于进行选择
+        /// </summary>
+        /// <param name="tabs">传入用于选择tab的列表</param>
         public ItemAddWindow(List<Tab> tabs) {
             InitializeComponent();
 
@@ -23,13 +33,19 @@ namespace TodoListCSharp.views {
 
             this.ComboBox.ItemsSource = tabs;
         }
-
+        
+        /// <summary>
+        /// 关闭时调用回调函数
+        /// </summary>
         private void ItemAddWindow_onClosed(object sender, EventArgs e) {
             if (closeCallbackFunc != null) {
                 closeCallbackFunc();
             }
         }
-
+        
+        /// <summary>
+        /// 确认按钮点击响应函数，如果标题为空则弹出提示框
+        /// </summary>
         private void ConfirmButton_onClicked(object sender, EventArgs e) {
             string title = TitleInput.Text;
             string desc = DescInput.Text;

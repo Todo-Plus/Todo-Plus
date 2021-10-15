@@ -30,7 +30,15 @@ namespace TodoListCSharp {
         private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         // !! Property Define
-
+        
+        /// <summary>
+        /// 声明一系列的对象：
+        /// 窗口： 设置窗口及项目添加窗口
+        /// 列表： 待办或已做事项的列表，以及用于展示的list，tab的列表
+        /// 状态： 窗口当前处于的专题，选择的是待办还是已办，窗口是否锁定
+        /// 常数： 当前最大的index值，用于标识一个item，存档的version值
+        /// </summary>
+        
         private SettingWindow oSettingWindow = null;
         private ItemAddWindow oItemAddWindow = null;
         private ItemList oTodoItemList = null;
@@ -61,7 +69,13 @@ namespace TodoListCSharp {
                 this._HwndSource = PresentationSource.FromVisual((Visual)sender) as HwndSource;
             };
         }
-
+        
+        /// <summary>
+        /// 窗口加载事件，执行对应的操作：
+        /// 1、窗体句柄初始化，设置标题栏状态
+        /// 2、读取存储的信息
+        /// 3、读取存储在注册表中的配置信息
+        /// </summary>
         private void MainWindow_onLoaded(object sender, EventArgs e) {
             const int GWL_STYLE = (-16);
             const UInt64 WS_CHILD = 0x40000000;
@@ -94,11 +108,17 @@ namespace TodoListCSharp {
             MainSetSize(this, setting);
             MainWindowAppearanceLoadSetting(setting);
         }
-
+        
+        /// <summary>
+        /// 关闭窗口时的事件函数，保存配置到注册表
+        /// </summary>
         private void MainWindow_onClosing(object sender, EventArgs e) {
             setting.SaveSettingToRegistryTable(this);
         }
-
+        
+        /// <summary>
+        /// 关闭窗口后的事件函数：将用户数据存储到磁盘
+        /// </summary>
         public void MainWindow_onClosed(object sender, EventArgs e) {
 
             IOInterface io = new BinaryIO();
@@ -110,7 +130,10 @@ namespace TodoListCSharp {
 
             io.SaveToFile(ref save, Constants.SAVE_FILEPATH);
         }
-
+        
+        /// <summary>
+        ///  窗口resize时的事件函数，用于设置listbox的高度
+        /// </summary>
         private void MainWindow_onResize(object sender, EventArgs e) {
             this.todoList.Height = this.Height - 85;
         }
@@ -125,17 +148,12 @@ namespace TodoListCSharp {
             window.Left = WindowBounds.Left;
             window.Width = WindowBounds.Width;
             window.Height = WindowBounds.Height;
-
-            // todo：实现存在一定的问题，待修改
-            // if (key != null) {
-            //     locked = Enum.Parse<Constants.MainWindowLockStatu>(key.GetValue("LockStatus").ToString());
-            //     // 默认为可抓取状态，转到锁定状态
-            //     if (locked == Constants.MainWindowLockStatu.LOCKED) {
-            //         SwitchWindowLockStatus();
-            //     }
-            // }
         }
-
+        
+        /// <summary>
+        /// 主窗口背景修改时，修改文字的颜色保证可见
+        /// </summary>
+        /// <param name="color">主窗口将要修改的颜色值</param>
         public void MainWindowAdaptBackgroundColor(System.Windows.Media.Color color) {
             System.Windows.Media.Color TextColor = Utils.GenerateAdaptColor(color);
 
@@ -152,9 +170,14 @@ namespace TodoListCSharp {
             for (int i = 0; i < length; i++) {
                 oShowTodoList[i].ForgeColor = Utils.MediaColorToHex(TextColor);
             }
+            // 修改值后刷新列表
             todoList.Items.Refresh();
         }
-
+        
+        /// <summary>
+        /// 待办或已办按钮被点击时切换到对应的列表
+        /// 使用SwitchItemList函数来进行切换
+        /// </summary>
         private void TodoButton_onClicked(object sender, EventArgs e) {
             if (statu == Constants.MainWindowStatu.TODO) return;
             SwitchItemList();
@@ -166,7 +189,11 @@ namespace TodoListCSharp {
         }
 
         private void LockWindowButton_onClicked(object sender, RoutedEventArgs e) => SwitchWindowLockStatus();
-
+        
+        
+        /// <summary>
+        /// 切换锁定状态，在点击lock按钮时处理
+        /// </summary>
         private void SwitchWindowLockStatus() {
             MainWindowAppearanceLoadSetting(setting);
             hMainWindowHandle = new WindowInteropHelper(this).Handle;
@@ -184,7 +211,7 @@ namespace TodoListCSharp {
         }
 
         /// <summary>
-        /// 主窗口列表事件——事项完成
+        /// 事项的DoneButton被点击时将其移动到对应列表
         /// </summary>
         private void ItemDoneButton_onClicked(object sender, RoutedEventArgs e) {
             IconButton button = (IconButton)sender;
@@ -193,7 +220,10 @@ namespace TodoListCSharp {
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
         }
-
+        
+        /// <summary>
+        /// 事项的RevertButton被点击时将其移动到对应列表
+        /// </summary>
         private void ItemRevertButton_onClicked(object sender, RoutedEventArgs e) {
             IconButton button = (IconButton)sender;
             oDoneItemList.DoneOrRevertItem(button.Index, ref oTodoItemList);
@@ -222,7 +252,10 @@ namespace TodoListCSharp {
             if (locked == Constants.MainWindowLockStatu.LOCKED) return;
             base.DragMove();
         }
-
+        
+        /// <summary>
+        /// 打开设置窗口，先设置一系列的回调函数用于配置响应
+        /// </summary>
         public void OpenSettingWindow(object sender, RoutedEventArgs e) {
             if (oSettingWindow != null) {
                 oSettingWindow.ShowDialog();
@@ -242,7 +275,10 @@ namespace TodoListCSharp {
             // 算是一个坑，使用showdialog的之前一定要先初始化数据
             oSettingWindow.ShowDialog();
         }
-
+        
+        /// <summary>
+        /// 打开一个Item添加窗口
+        /// </summary>
         private void OpenItemAddWindow(object sender, RoutedEventArgs e) {
             if (oItemAddWindow != null) {
                 oItemAddWindow.ShowDialog();
@@ -257,8 +293,10 @@ namespace TodoListCSharp {
             oItemAddWindow.Owner = this;
             oItemAddWindow.ShowDialog();
         }
-
-        // Set SettingWindow while close windows
+        
+        /// <summary>
+        /// 设置窗口关闭回调，将窗口设置为null，并且焦点回到当前窗口
+        /// </summary>
         private void SettingWindow_OnClosed() {
             oSettingWindow = null;
             MainWindowAppearanceLoadSetting(setting);
@@ -326,7 +364,11 @@ namespace TodoListCSharp {
         public void TabAddEvent(Tab oNewTab) {
             tabs.Add(oNewTab);
         }
-
+        
+        
+        /// <summary>
+        /// 在无边框窗口下用于进行大小调整的解决方案
+        /// </summary>
         private void ResizePressed(object sender, MouseEventArgs e) {
             FrameworkElement element = sender as FrameworkElement;
             this.Cursor = Cursors.Arrow;

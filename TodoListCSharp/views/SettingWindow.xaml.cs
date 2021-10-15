@@ -18,7 +18,14 @@ namespace TodoListCSharp.views {
     /// </summary>
     public partial class SettingWindow : Window {
         // !! Property Define
-
+        
+        /// <summary>
+        /// 一系列属性声明：
+        /// 窗口： Tab添加窗口
+        /// 常数： Tab的最大Index，用于进行编号，保证自增
+        /// 设置： 当前设置和备份设置，备份设置用于恢复状态
+        /// 列表： tabs的列表
+        /// </summary>
         private TabAddWindow oGeneralTabAddWindow;
         private int iGeneralTabLastestIndex;
 
@@ -34,21 +41,22 @@ namespace TodoListCSharp.views {
 
         // !! Events & delegate Define
         public delegate void SettingWindowClosed();
-
+        
+        // 设置窗口的回调函数
         public event SettingWindowClosed settingWindowClosed;
 
         // Appearance Setting Window Delegates
 
         public delegate void AppearanceSettingChangeCallbackFunc(Setting setting);
-
+        
+        // 外观变动时在主窗口进行显示
         public event AppearanceSettingChangeCallbackFunc AppearanceSettingChangeCallback;
-
         public delegate void RollbackSettingCallbackFunc();
-
+        // 点击取消或者返回时，退回到原设置
         public event RollbackSettingCallbackFunc RollbackSettingCallback;
-
+        
         public delegate void SettingConfirmCallbackFunc(Setting setting);
-
+        // setting点击确认时的回调函数
         public event SettingConfirmCallbackFunc SettingConfirmCallback;
 
         // General Setting Window Delegates
@@ -61,13 +69,11 @@ namespace TodoListCSharp.views {
         public SettingWindow() {
             InitializeComponent();
             MainTitleBar.CollapseReturnButton();
-
-            // Set Close Button Callback Function
-            // this.InfoMenuItem.Click += OpenGeneralSettingWindow;
-            // this.AppearanceMenuItem.Click += OpenAppearanceSettingWindow;
-            // this.BackupMenuItem.Click += openBackupSettingWindow;
         }
-
+        
+        /// <summary>
+        /// load后的事件函数，处理相关状态
+        /// </summary>
         private void MainSettingWindow_onLoaded(object sender, EventArgs e) {
             AppearancePercentLabel.Content = setting.Alpha;
             AppearanceTransparencySlider.Value = setting.Alpha;
@@ -132,7 +138,10 @@ namespace TodoListCSharp.views {
             oGeneralTabAddWindow.CloseCallback += GeneralAddTabWindowConfirm_onClose;
             oGeneralTabAddWindow.ShowDialog();
         }
-
+        
+        /// <summary>
+        /// 基础设置确认按钮点击响应事件，添加tab
+        /// </summary>
         private void GeneralAddTabWindowConfirm_onClicked(string sTabTitle, Color sTabColor) {
             GeneralWrapPanel.Children.Add(
                 Generator.TabViewGridGenerate(sTabTitle, sTabColor));
@@ -159,13 +168,20 @@ namespace TodoListCSharp.views {
 
             iGeneralTabLastestIndex = length > 0 ? tabs[length - 1].Id + 1 : 0;
         }
-
+        
+        /// <summary>
+        /// 在外观的透明度被修改时，显示到lab，并且主窗口进行对应的显示
+        /// </summary>
+        /// <param name="value">透明度</param>
         private void AppearanceSetShowPercentValue(int value) {
             AppearancePercentLabel.Content = value;
             setting.Alpha = value;
             AppearanceSettingChange(setting);
         }
-
+        
+        /// <summary>
+        /// slider的相关事件
+        /// </summary>
         private void AppearanceSlider_onDragStart(object sender, DragStartedEventArgs e) {
             bAppearanceDraging = true;
         }
@@ -187,15 +203,13 @@ namespace TodoListCSharp.views {
         }
 
         // !! delegate forward
+        /// <summary>
+        /// 一系列的委托转发，用于处理窗口和主窗口之间传递的事件
+        /// </summary>
+        /// <param name="setting"></param>
         private void AppearanceSettingChange(Setting setting) {
             if (AppearanceSettingChangeCallback != null) {
                 AppearanceSettingChangeCallback(setting);
-            }
-        }
-
-        private void GeneralSetting_AddTab(Tab oNewTab) {
-            if (TabAddCallback != null) {
-                TabAddCallback(oNewTab);
             }
         }
 
@@ -223,7 +237,11 @@ namespace TodoListCSharp.views {
                 ReturnMainSettingWindow();
             }
         }
-
+        
+        /// <summary>
+        /// 点击返回按钮时，切换到设置窗口
+        /// todo：添加动画
+        /// </summary>
         private void ReturnMainSettingWindow() {
             GeneralPageStackPanel.Visibility = Visibility.Collapsed;
             AppearancePageStackPanel.Visibility = Visibility.Collapsed;
@@ -231,7 +249,12 @@ namespace TodoListCSharp.views {
 
             MainPageStackPanel.Visibility = Visibility.Visible;
         }
-
+        
+        /// <summary>
+        /// 自动启动开关被点击时，进行对应的设置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GeneralAutoRunCheckbox_onChecked(object sender, RoutedEventArgs e) {
             setting.AutoRun = true;
 
@@ -249,7 +272,7 @@ namespace TodoListCSharp.views {
                 SettingConfirmCallback(setting);
             }
         }
-
+        
         private void GeneralAutoRunCheckbox_onUnChecked(object sender, RoutedEventArgs e) {
             setting.AutoRun = false;
 
@@ -265,7 +288,10 @@ namespace TodoListCSharp.views {
                 SettingConfirmCallback(setting);
             }
         }
-
+        
+        /// <summary>
+        /// 切换提示状态：Exit时是否显示提示
+        /// </summary>
         private void GeneralTipsMessageCheckbox_onChecked(object sender, RoutedEventArgs e) {
             setting.CloseTips = true;
             if (SettingConfirmCallback != null) {
