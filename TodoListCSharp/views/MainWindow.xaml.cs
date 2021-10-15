@@ -179,11 +179,13 @@ namespace TodoListCSharp {
 
             if (locked == Constants.MainWindowLockStatu.DRAGABLE) {
                 locked = Constants.MainWindowLockStatu.LOCKED;
+                RightBottomResizeButton.Visibility = Visibility.Collapsed;
                 IntPtr desktopHandle = Utils.SearchDesktopHandle();
                 SetParent(hMainWindowHandle, desktopHandle);
                 return;
             }
             locked = Constants.MainWindowLockStatu.DRAGABLE;
+            RightBottomResizeButton.Visibility = Visibility.Visible;
             SetParent(hMainWindowHandle, IntPtr.Zero);
         }
 

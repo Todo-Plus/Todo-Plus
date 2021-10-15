@@ -70,7 +70,7 @@
                 Background="Transparent"
                 HorizontalAlignment="Stretch"
                 x:Name="todoList"
-                ScrollViewer.VerticalScrollBarVisibility="Visible"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
                 Height="Auto"
                 BorderThickness="0">
                 <ListBox.ItemContainerStyle>
@@ -151,7 +151,7 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" x:Name="RightBottomResizeButton">
                 <Grid MouseMove="ResizePressed" MouseDown="ResizePressed" Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
