@@ -15,8 +15,6 @@ Todo+是一个用于放置在桌面进行待办事项管理的工具，起初为
 
 ![桌面截图](https://i.loli.net/2021/10/15/MYgCqVct5lWGfEK.png)
 
-<img src="https://i.loli.net/2021/10/15/ysM9coTBJpxedD3.png" alt="设置窗口" style="zoom:67%;" />
-
 ## 安装及系统环境
 
 程序基于.Net Framework开发，可能需要安装对应的环境[.net 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)，之后在Release中下载安装包安装进行使用即可
