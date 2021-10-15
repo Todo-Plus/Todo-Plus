@@ -242,6 +242,7 @@
                 <Label FontFamily="Inter" FontSize="18" VerticalAlignment="Center" Margin="5, 0">Transparency</Label>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="10, 0">
                     <Slider
+                        x:Name="AppearanceTransparencySlider"
                         Maximum="100"
                         TickFrequency="1"
                         IsSnapToTickEnabled="True"

@@ -31,6 +31,8 @@ namespace TodoListCSharp {
 
         [DllImport("user32.dll")]
         static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         // !! Property Define
 
@@ -52,10 +54,18 @@ namespace TodoListCSharp {
         private IntPtr hMainWindowHandle = IntPtr.Zero;
         public Visibility eDoneButtonStatu { get; set; }
         public Visibility eTodoButtonStatu { get; set; }
+        
+        private const int WM_SYSCOMMAND = 0x112;
+        private HwndSource _HwndSource;
 
         // !! Functions Define and Implement
         public MainWindow() {
             InitializeComponent();
+            
+            this.SourceInitialized += delegate (object sender, EventArgs e)
+            {
+                this._HwndSource = PresentationSource.FromVisual((Visual)sender) as HwndSource;
+            };
         }
 
         private void MainWindow_onLoaded(object sender, EventArgs e) {
@@ -108,7 +118,7 @@ namespace TodoListCSharp {
         }
 
         private void MainWindow_onResize(object sender, EventArgs e) {
-            this.todoList.Height = this.Height - 80;
+            this.todoList.Height = this.Height - 85;
         }
 
         public void MainSetSize(Window window, Setting setting) {
@@ -171,11 +181,9 @@ namespace TodoListCSharp {
                 locked = Constants.MainWindowLockStatu.LOCKED;
                 IntPtr desktopHandle = Utils.SearchDesktopHandle();
                 SetParent(hMainWindowHandle, desktopHandle);
-                this.ApplicationMainWindow.ResizeMode = ResizeMode.NoResize;
                 return;
             }
             locked = Constants.MainWindowLockStatu.DRAGABLE;
-            this.ApplicationMainWindow.ResizeMode = ResizeMode.CanResize;
             SetParent(hMainWindowHandle, IntPtr.Zero);
         }
 
@@ -321,6 +329,20 @@ namespace TodoListCSharp {
 
         public void TabAddEvent(Tab oNewTab) {
             tabs.Add(oNewTab);
+        }
+        
+        private void ResizePressed(object sender, MouseEventArgs e) {
+            FrameworkElement element = sender as FrameworkElement;
+            this.Cursor = Cursors.Arrow;
+
+            if (locked == Constants.MainWindowLockStatu.DRAGABLE && e.LeftButton == MouseButtonState.Pressed) {
+                this.Cursor = Cursors.SizeNWSE;
+                ResizeWindow();
+            }
+        }
+        
+        private void ResizeWindow() {
+            SendMessage(_HwndSource.Handle, WM_SYSCOMMAND, (IntPtr)(61440 + 8), IntPtr.Zero);
         }
     }
 

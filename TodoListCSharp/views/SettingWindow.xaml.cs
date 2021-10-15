@@ -78,6 +78,7 @@ namespace TodoListCSharp.views {
 
         private void MainSettingWindow_onLoaded(object sender, EventArgs e) {
             AppearancePercentLabel.Content = setting.Alpha;
+            AppearanceTransparencySlider.Value = setting.Alpha;
             GeneralPageStackPanelInitial(tabs);
         }
 
