@@ -266,7 +266,7 @@
                 </StackPanel>
 
                 <!--Font Setting-->
-                <StackPanel Orientation="Horizontal" Margin="5, 10" HorizontalAlignment="Stretch">
+                <StackPanel Orientation="Horizontal" Margin="5, 10" HorizontalAlignment="Stretch" Visibility="Collapsed">
                     <Grid Width="Auto">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
