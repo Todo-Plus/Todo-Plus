@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using TodoListCSharp.core;
 using TodoListCSharp.utils;
+using IWshRuntimeLibrary;
 using TodoListCSharp.views;
 
 namespace TodoListCSharp.views {
@@ -27,10 +29,6 @@ namespace TodoListCSharp.views {
     public partial class SettingWindow : Window {
         // !! Property Define
 
-        private GeneralSetting oGeneralSettingWindow = null;
-        private AppearanceSetting oAppearanceSettingWindow = null;
-        private BackupSetting oBackupSettingWindow = null;
-
         private TabAddWindow oGeneralTabAddWindow;
         private int iGeneralTabLastestIndex;
 
@@ -39,6 +37,10 @@ namespace TodoListCSharp.views {
         public List<Tab> tabs;
 
         private bool bAppearanceDraging = false;
+        private const string QuickName = "TodoPlusClient";
+        private string systemStartPath { get { return Environment.GetFolderPath(Environment.SpecialFolder.Startup); } }
+        private string appAllPath { get { return Process.GetCurrentProcess().MainModule.FileName; } }
+        private string desktopPath { get { return Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory); } }
 
         // !! Events & delegate Define
         public delegate void SettingWindowClosed();
@@ -79,6 +81,9 @@ namespace TodoListCSharp.views {
         private void MainSettingWindow_onLoaded(object sender, EventArgs e) {
             AppearancePercentLabel.Content = setting.Alpha;
             AppearanceTransparencySlider.Value = setting.Alpha;
+
+            GeneralAutoStartCheckBox.IsChecked = setting.AutoRun;
+            GeneralCloseMessage.IsChecked = setting.CloseTips;
             GeneralPageStackPanelInitial(tabs);
         }
 
@@ -148,7 +153,6 @@ namespace TodoListCSharp.views {
         }
 
         private void GeneralAddTabWindowConfirm_onClose() {
-            oGeneralSettingWindow = null;
             this.Activate();
         }
         
@@ -236,6 +240,58 @@ namespace TodoListCSharp.views {
             BackupPageStackPanel.Visibility = Visibility.Collapsed;
 
             MainPageStackPanel.Visibility = Visibility.Visible;
+        }
+
+        private void GeneralAutoRunCheckbox_onChecked(object sender, RoutedEventArgs e) {
+            setting.AutoRun = true;
+            
+            List<string> shortcutPaths = Utils.GetQuickFromFolder(systemStartPath, appAllPath);
+            if (shortcutPaths.Count >= 2)
+            {
+                for (int i = 1; i < shortcutPaths.Count; i++)
+                {
+                    Utils.DeleteFile(shortcutPaths[i]);
+                }
+            }            
+            else if (shortcutPaths.Count < 1)//不存在则创建快捷方式
+            {
+                Utils.CreateShortcut(systemStartPath, QuickName, appAllPath, "Todo+");
+            }            
+            if (SettingConfirmCallback != null) {
+                SettingConfirmCallback(setting);
+            }
+        }
+
+        private void GeneralAutoRunCheckbox_onUnChecked(object sender, RoutedEventArgs e) {
+            setting.AutoRun = false;
+            
+            List<string> shortcutPaths = Utils.GetQuickFromFolder(systemStartPath, appAllPath);
+            
+            if (shortcutPaths.Count > 0)
+            {
+                for (int i = 0; i < shortcutPaths.Count; i++)
+                {
+                    Utils.DeleteFile(shortcutPaths[i]);
+                }
+            }
+            
+            if (SettingConfirmCallback != null) {
+                SettingConfirmCallback(setting);
+            }
+        }
+
+        private void GeneralTipsMessageCheckbox_onChecked(object sender, RoutedEventArgs e) {
+            setting.CloseTips = true;
+            if (SettingConfirmCallback != null) {
+                SettingConfirmCallback(setting);
+            }
+        }
+        
+        private void GeneralTipsMessageCheckbox_onUnChecked(object sender, RoutedEventArgs e) {
+            setting.CloseTips = false;
+            if (SettingConfirmCallback != null) {
+                SettingConfirmCallback(setting);
+            }
         }
     }
 }

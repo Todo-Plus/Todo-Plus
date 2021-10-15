@@ -344,6 +344,10 @@ namespace TodoListCSharp {
         private void ResizeWindow() {
             SendMessage(_HwndSource.Handle, WM_SYSCOMMAND, (IntPtr)(61440 + 8), IntPtr.Zero);
         }
+
+        public bool ShowTipMessage() {
+            return setting.CloseTips;
+        }
     }
 
     // !! subClass Define

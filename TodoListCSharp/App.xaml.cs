@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
 using TodoListCSharp.views;
+using TodoListCSharp.core;
 using Application = System.Windows.Application;
 using MessageBox = TodoListCSharp.views.MessageBox;
 
@@ -17,6 +18,7 @@ namespace TodoListCSharp
     /// </summary>
     public partial class App : Application {
         private NotifyIcon oTrayIcon = new NotifyIcon();
+        private Setting Settig;
 
         public App() {
             oTrayIcon.Icon = new System.Drawing.Icon("./resources/todo.ico");
@@ -36,9 +38,15 @@ namespace TodoListCSharp
         }
 
         public void MenuItem_ExitApplication(object sender, EventArgs e) {
-            MessageBox messageBox = new MessageBox("You sure you want to exit the program.");
-            messageBox.ConfirmButtonCallback += this.Shutdown;
-            messageBox.ShowDialog();
+            TodoListCSharp.MainWindow oMainWindow = (TodoListCSharp.MainWindow)Application.Current.MainWindow;
+            if (oMainWindow.ShowTipMessage()) {
+                MessageBox messageBox = new MessageBox("You sure you want to exit the program.");
+                messageBox.ConfirmButtonCallback += this.Shutdown;
+                messageBox.ShowDialog();
+            }
+            else {
+                Shutdown();
+            }
         }
 
         private void Application_Exit(object sender, ExitEventArgs e) {
