@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Windows;
 using System.Windows.Media;
-using Microsoft.Win32;
 using TodoListCSharp.utils;
 
 namespace TodoListCSharp.core {
@@ -13,13 +13,13 @@ namespace TodoListCSharp.core {
         public int Fontsize { get; set; }
         public string FontFamily { get; set; }
         public Color BackgroundColor { get; set; }
-        
+
         // Window
         public Rect WindowBounds { get; set; }
         public bool AutoRun { get; set; }
         public bool CloseTips { get; set; }
         public Constants.MainWindowLockStatu LockStatus { set; get; }
-        
+
         private static readonly string RegistryPath = @"Software\TodoPlus\Settings";
 
         public Setting() {
@@ -33,7 +33,7 @@ namespace TodoListCSharp.core {
             WindowBounds = Rect.Empty;
             LockStatus = Constants.MainWindowLockStatu.DRAGABLE;
         }
-        
+
         // todo：深拷贝的实现，后面考虑其他方法不用重新添加
         public Setting(Setting _setting) {
             Alpha = _setting.Alpha;
@@ -45,7 +45,7 @@ namespace TodoListCSharp.core {
             WindowBounds = _setting.WindowBounds;
             LockStatus = _setting.LockStatus;
         }
-        
+
         // 返回值表明读取结果
         public int ReadSettingFromRegistryTable() {
             RegistryKey key = Registry.CurrentUser.OpenSubKey(RegistryPath);

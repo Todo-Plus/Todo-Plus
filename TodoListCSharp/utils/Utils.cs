@@ -1,15 +1,15 @@
-﻿using System;
+﻿using IWshRuntimeLibrary;
+using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Windows.Media;
 using System.Runtime.InteropServices;
-using IWshRuntimeLibrary;
+using System.Windows.Media;
 using TodoListCSharp.core;
 
 namespace TodoListCSharp.utils {
     public class Utils {
         // !! dll import
-        
+
         [DllImport("user32.dll", SetLastError = true)]
         static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string className, string windowTitle);
         [DllImport("user32.dll")]
@@ -55,7 +55,7 @@ namespace TodoListCSharp.utils {
             if (list.Count <= 1) {
                 return oRetList;
             }
-            
+
             list.RemoveAt(0);
             int length = list.Count;
             for (int i = 0; i < length; i++) {
@@ -77,83 +77,68 @@ namespace TodoListCSharp.utils {
                 return Constants.MEDIA_COLOR_WHITE;
             }
         }
-        
-        public static string GetAppPathFromQuick(string shortcutPath)
-        {
-            if (System.IO.File.Exists(shortcutPath))
-            {
+
+        public static string GetAppPathFromQuick(string shortcutPath) {
+            if (System.IO.File.Exists(shortcutPath)) {
                 WshShell shell = new WshShell();
                 IWshShortcut shortct = (IWshShortcut)shell.CreateShortcut(shortcutPath);
                 return shortct.TargetPath;
             }
-            else
-            {
+            else {
                 return "";
             }
         }
-        
-        public static List<string> GetQuickFromFolder(string directory, string targetPath)
-        {
+
+        public static List<string> GetQuickFromFolder(string directory, string targetPath) {
             List<string> tempStrs = new List<string>();
             tempStrs.Clear();
             string tempStr = null;
             string[] files = Directory.GetFiles(directory, "*.lnk");
-            if (files == null || files.Length < 1)
-            {
+            if (files == null || files.Length < 1) {
                 return tempStrs;
             }
-            for (int i = 0; i < files.Length; i++)
-            {
+            for (int i = 0; i < files.Length; i++) {
                 tempStr = GetAppPathFromQuick(files[i]);
-                if (tempStr == targetPath)
-                {
+                if (tempStr == targetPath) {
                     tempStrs.Add(files[i]);
                 }
             }
             return tempStrs;
         }
-        
-        public static void DeleteFile(string path)
-        {
-            FileAttributes attr = System.IO. File.GetAttributes(path);
-            if (attr == FileAttributes.Directory)
-            {
+
+        public static void DeleteFile(string path) {
+            FileAttributes attr = System.IO.File.GetAttributes(path);
+            if (attr == FileAttributes.Directory) {
                 Directory.Delete(path, true);
             }
-            else
-            {
+            else {
                 System.IO.File.Delete(path);
             }
         }
-        
-        public static void CreateDesktopQuick(string desktopPath = "", string quickName = "", string appPath = "")
-        {
+
+        public static void CreateDesktopQuick(string desktopPath = "", string quickName = "", string appPath = "") {
             List<string> shortcutPaths = GetQuickFromFolder(desktopPath, appPath);
             //如果没有则创建
-            if (shortcutPaths.Count < 1)
-            {
+            if (shortcutPaths.Count < 1) {
                 CreateShortcut(desktopPath, quickName, appPath, "软件描述");
             }
         }
-        
-        public static bool CreateShortcut(string directory, string shortcutName, string targetPath, string description = null, string iconLocation = null)
-        {
-            try
-            {
+
+        public static bool CreateShortcut(string directory, string shortcutName, string targetPath, string description = null, string iconLocation = null) {
+            try {
                 if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
-                string shortcutPath = Path.Combine(directory, string.Format("{0}.lnk", shortcutName));          
+                string shortcutPath = Path.Combine(directory, string.Format("{0}.lnk", shortcutName));
                 WshShell shell = new IWshRuntimeLibrary.WshShell();
-                IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutPath);    
-                shortcut.TargetPath = targetPath;                                                              
-                shortcut.WorkingDirectory = Path.GetDirectoryName(targetPath);                                 
-                shortcut.WindowStyle = 1;                                                                       
-                shortcut.Description = description;                                                             
-                shortcut.IconLocation = string.IsNullOrWhiteSpace(iconLocation) ? targetPath : iconLocation;    
-                shortcut.Save();                                                                                
+                IWshShortcut shortcut = (IWshRuntimeLibrary.IWshShortcut)shell.CreateShortcut(shortcutPath);
+                shortcut.TargetPath = targetPath;
+                shortcut.WorkingDirectory = Path.GetDirectoryName(targetPath);
+                shortcut.WindowStyle = 1;
+                shortcut.Description = description;
+                shortcut.IconLocation = string.IsNullOrWhiteSpace(iconLocation) ? targetPath : iconLocation;
+                shortcut.Save();
                 return true;
             }
-            catch(Exception ex)
-            {
+            catch (Exception ex) {
                 string temp = ex.Message;
                 temp = "";
             }

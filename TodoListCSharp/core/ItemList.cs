@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using TodoListCSharp.core;
 namespace TodoListCSharp.core {
     /// <summary>
     /// todo： 链表的实现还需要再优化一下，保证在链表为空的时候能够继续进行序列化
@@ -20,12 +17,12 @@ namespace TodoListCSharp.core {
         public List<TodoItem> GetItemList() {
             List<TodoItem> oRetList = new List<TodoItem>();
             ItemUnit oNowItemUnit = ListStart;
-            
+
             while (oNowItemUnit != null) {
                 oRetList.Add(oNowItemUnit.GetItem());
                 oNowItemUnit = oNowItemUnit.GetNext();
             }
-            
+
             return oRetList;
         }
 
@@ -38,7 +35,7 @@ namespace TodoListCSharp.core {
         }
 
         public ItemList() {
-            
+
         }
 
         public int AppendItem(TodoItem item) {
@@ -50,7 +47,7 @@ namespace TodoListCSharp.core {
             else ListEnd = ListStart = newItem;
             return 0;
         }
-        
+
         /// <summary>
         /// 完成或回溯事项
         /// </summary>

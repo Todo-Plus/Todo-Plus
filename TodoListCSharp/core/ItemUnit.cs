@@ -1,5 +1,4 @@
-﻿using TodoListCSharp.core;
-namespace TodoListCSharp.core {
+﻿namespace TodoListCSharp.core {
     public class ItemUnit {
         private TodoItem item { set; get; }
         private ItemUnit NextItem { set; get; }
@@ -16,7 +15,7 @@ namespace TodoListCSharp.core {
         public TodoItem GetItem() {
             return item;
         }
-        
+
         public ItemUnit(TodoItem item) {
             this.item = item;
             NextItem = null;

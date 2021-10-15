@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Forms;
-using TodoListCSharp.views;
 using TodoListCSharp.core;
 using Application = System.Windows.Application;
 using MessageBox = TodoListCSharp.views.MessageBox;
 
-namespace TodoListCSharp
-{
+namespace TodoListCSharp {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
@@ -56,6 +49,6 @@ namespace TodoListCSharp
         private void NotifyIcon_onDoubleClick(object sender, EventArgs e) {
             TodoListCSharp.MainWindow oMainWindow = (TodoListCSharp.MainWindow)Application.Current.MainWindow;
             oMainWindow.Activate();
-        } 
+        }
     }
 }

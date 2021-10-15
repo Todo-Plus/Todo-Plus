@@ -1,22 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using TodoListCSharp.core;
 using TodoListCSharp.utils;
-using IWshRuntimeLibrary;
-using TodoListCSharp.views;
 
 namespace TodoListCSharp.views {
     /// <summary>
@@ -96,7 +86,7 @@ namespace TodoListCSharp.views {
         private void SettingWindowClose(object sender, EventArgs e) {
             this.Close();
         }
-        
+
         /// <summary>
         /// General窗口打开响应事件，在点击后窗口切换到该页面
         /// </summary>
@@ -105,7 +95,7 @@ namespace TodoListCSharp.views {
             GeneralPageStackPanel.Visibility = Visibility.Visible;
             oBackupSetting = new Setting(setting);
         }
-        
+
         /// <summary>
         /// Appearance窗口打开响应事件，在点击后窗口切换到该页面
         /// </summary>
@@ -114,7 +104,7 @@ namespace TodoListCSharp.views {
             AppearancePageStackPanel.Visibility = Visibility.Visible;
             oBackupSetting = new Setting(setting);
         }
-        
+
         /// <summary>
         /// Backup窗口打开响应事件，在点击后窗口切换到该页面
         /// </summary>
@@ -123,7 +113,7 @@ namespace TodoListCSharp.views {
             BackupPageStackPanel.Visibility = Visibility.Visible;
             oBackupSetting = new Setting(setting);
         }
-        
+
         /// <summary>
         /// 从子页面返回到主页面事件,这里等同于子窗口下的Cancel按钮，如果存在状态信息需要清除
         /// </summary>
@@ -155,7 +145,7 @@ namespace TodoListCSharp.views {
         private void GeneralAddTabWindowConfirm_onClose() {
             this.Activate();
         }
-        
+
         /// <summary>
         /// General页面下的初始化函数
         /// </summary>
@@ -181,13 +171,13 @@ namespace TodoListCSharp.views {
         }
 
         private void AppearanceSlider_onDragEnd(object sender, DragCompletedEventArgs e) {
-            AppearanceSetShowPercentValue((int) ((Slider) sender).Value);
+            AppearanceSetShowPercentValue((int)((Slider)sender).Value);
             bAppearanceDraging = false;
         }
 
         private void AppearanceSlider_onValueChange(object sender, RoutedPropertyChangedEventArgs<double> e) {
             if (bAppearanceDraging) {
-                AppearanceSetShowPercentValue((int) e.NewValue);
+                AppearanceSetShowPercentValue((int)e.NewValue);
             }
         }
 
@@ -244,19 +234,17 @@ namespace TodoListCSharp.views {
 
         private void GeneralAutoRunCheckbox_onChecked(object sender, RoutedEventArgs e) {
             setting.AutoRun = true;
-            
+
             List<string> shortcutPaths = Utils.GetQuickFromFolder(systemStartPath, appAllPath);
-            if (shortcutPaths.Count >= 2)
-            {
-                for (int i = 1; i < shortcutPaths.Count; i++)
-                {
+            if (shortcutPaths.Count >= 2) {
+                for (int i = 1; i < shortcutPaths.Count; i++) {
                     Utils.DeleteFile(shortcutPaths[i]);
                 }
-            }            
+            }
             else if (shortcutPaths.Count < 1)//不存在则创建快捷方式
             {
                 Utils.CreateShortcut(systemStartPath, QuickName, appAllPath, "Todo+");
-            }            
+            }
             if (SettingConfirmCallback != null) {
                 SettingConfirmCallback(setting);
             }
@@ -264,17 +252,15 @@ namespace TodoListCSharp.views {
 
         private void GeneralAutoRunCheckbox_onUnChecked(object sender, RoutedEventArgs e) {
             setting.AutoRun = false;
-            
+
             List<string> shortcutPaths = Utils.GetQuickFromFolder(systemStartPath, appAllPath);
-            
-            if (shortcutPaths.Count > 0)
-            {
-                for (int i = 0; i < shortcutPaths.Count; i++)
-                {
+
+            if (shortcutPaths.Count > 0) {
+                for (int i = 0; i < shortcutPaths.Count; i++) {
                     Utils.DeleteFile(shortcutPaths[i]);
                 }
             }
-            
+
             if (SettingConfirmCallback != null) {
                 SettingConfirmCallback(setting);
             }
@@ -286,7 +272,7 @@ namespace TodoListCSharp.views {
                 SettingConfirmCallback(setting);
             }
         }
-        
+
         private void GeneralTipsMessageCheckbox_onUnChecked(object sender, RoutedEventArgs e) {
             setting.CloseTips = false;
             if (SettingConfirmCallback != null) {

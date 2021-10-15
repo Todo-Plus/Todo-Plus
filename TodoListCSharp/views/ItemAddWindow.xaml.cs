@@ -39,7 +39,7 @@ namespace TodoListCSharp.views {
                 messageBox.ShowDialog();
                 return;
             }
-            
+
             TodoItem item = new TodoItem(title, desc);
             AddItemToList(ref item);
             this.Close();

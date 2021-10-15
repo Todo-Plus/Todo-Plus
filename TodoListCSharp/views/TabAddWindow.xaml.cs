@@ -32,7 +32,7 @@ namespace TodoListCSharp.views {
                 messageBox.ShowDialog();
                 return;
             }
-            
+
             if (ConfirmButtonCallback != null) {
                 ConfirmButtonCallback(this.TitleTextBox.Text, oSelectColor);
             }

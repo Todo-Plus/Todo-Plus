@@ -1,20 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace TodoListCSharp.controls
-{
+namespace TodoListCSharp.controls {
     /// <summary>
     /// MenuItem 菜单项
     /// params：
@@ -26,8 +14,7 @@ namespace TodoListCSharp.controls
     /// functions：
     /// @ Click： function
     /// </summary>
-    public partial class MenuItem : UserControl
-    {
+    public partial class MenuItem : UserControl {
         // !! Property Functions Define
         public ImageSource IconSource {
             get { return (ImageSource)GetValue(IconSourceProperty); }
@@ -37,17 +24,16 @@ namespace TodoListCSharp.controls
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
-        
+
         // !! Properties Register
         public static readonly DependencyProperty IconSourceProperty = DependencyProperty.Register("IconSource",
             typeof(ImageSource), typeof(MenuItem));
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register("Text",
             typeof(string), typeof(MenuItem));
-        public MenuItem()
-        {
+        public MenuItem() {
             InitializeComponent();
         }
-        
+
         // !! delegate & event define
         public delegate void ClickEventArgs(object sender, RoutedEventArgs e);
         public event ClickEventArgs Click;

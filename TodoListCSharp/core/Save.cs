@@ -5,7 +5,7 @@ using System.Collections.Generic;
 // 待实现
 
 namespace TodoListCSharp.core {
-    
+
     [Serializable]
     public class Save {
         public int version;

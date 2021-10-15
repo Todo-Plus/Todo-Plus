@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TodoListCSharp.controls {
     /// <summary>
@@ -37,7 +26,7 @@ namespace TodoListCSharp.controls {
             set { SetValue(IconDiameterProperty, value); }
         }
         public int CircleDiameter {
-            get { return (int) GetValue(CircleDiameterProperty); }
+            get { return (int)GetValue(CircleDiameterProperty); }
             set { SetValue(CircleDiameterProperty, value); }
         }
         public int Index {
@@ -81,7 +70,7 @@ namespace TodoListCSharp.controls {
                 Click(this, e);
             }
         }
-        
+
         public class IconButtonModel {
             public ImageSource ImageSource { get; set; }
             public ImageSource HoverIcon { get; set; }

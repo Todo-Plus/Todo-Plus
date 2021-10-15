@@ -1,20 +1,15 @@
-﻿using System.Windows;
-using System;
-using System.Runtime.InteropServices;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using Microsoft.Win32;
 using TodoListCSharp.controls;
-using TodoListCSharp.views;
 using TodoListCSharp.core;
 using TodoListCSharp.interfaces;
 using TodoListCSharp.utils;
-using Color = System.Drawing.Color;
-using MessageBox = TodoListCSharp.views.MessageBox;
+using TodoListCSharp.views;
 
 namespace TodoListCSharp {
     /// <summary>
@@ -46,7 +41,7 @@ namespace TodoListCSharp {
         private Constants.MainWindowLockStatu locked = Constants.MainWindowLockStatu.DRAGABLE;
 
         private static readonly string _regPath = @"Software\TodoPlus\";
-        
+
         private int iMaxIndex = 0;
         private Setting setting = null;
         private int iSaveVersion = 0;
@@ -54,16 +49,15 @@ namespace TodoListCSharp {
         private IntPtr hMainWindowHandle = IntPtr.Zero;
         public Visibility eDoneButtonStatu { get; set; }
         public Visibility eTodoButtonStatu { get; set; }
-        
+
         private const int WM_SYSCOMMAND = 0x112;
         private HwndSource _HwndSource;
 
         // !! Functions Define and Implement
         public MainWindow() {
             InitializeComponent();
-            
-            this.SourceInitialized += delegate (object sender, EventArgs e)
-            {
+
+            this.SourceInitialized += delegate (object sender, EventArgs e) {
                 this._HwndSource = PresentationSource.FromVisual((Visual)sender) as HwndSource;
             };
         }
@@ -94,7 +88,7 @@ namespace TodoListCSharp {
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
-            
+
             setting = new Setting();
             setting.ReadSettingFromRegistryTable();
             MainSetSize(this, setting);
@@ -104,7 +98,7 @@ namespace TodoListCSharp {
         private void MainWindow_onClosing(object sender, EventArgs e) {
             setting.SaveSettingToRegistryTable(this);
         }
-        
+
         public void MainWindow_onClosed(object sender, EventArgs e) {
 
             IOInterface io = new BinaryIO();
@@ -132,7 +126,7 @@ namespace TodoListCSharp {
             window.Width = WindowBounds.Width;
             window.Height = WindowBounds.Height;
 
-                // todo：实现存在一定的问题，待修改
+            // todo：实现存在一定的问题，待修改
             // if (key != null) {
             //     locked = Enum.Parse<Constants.MainWindowLockStatu>(key.GetValue("LockStatus").ToString());
             //     // 默认为可抓取状态，转到锁定状态
@@ -193,7 +187,7 @@ namespace TodoListCSharp {
         /// 主窗口列表事件——事项完成
         /// </summary>
         private void ItemDoneButton_onClicked(object sender, RoutedEventArgs e) {
-            IconButton button = (IconButton) sender;
+            IconButton button = (IconButton)sender;
             oTodoItemList.DoneOrRevertItem(button.Index, ref oDoneItemList);
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
@@ -201,7 +195,7 @@ namespace TodoListCSharp {
         }
 
         private void ItemRevertButton_onClicked(object sender, RoutedEventArgs e) {
-            IconButton button = (IconButton) sender;
+            IconButton button = (IconButton)sender;
             oDoneItemList.DoneOrRevertItem(button.Index, ref oTodoItemList);
             oShowTodoList = oDoneItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
@@ -209,7 +203,7 @@ namespace TodoListCSharp {
         }
 
         private void ItemDeleteButton_onClicked(object sender, RoutedEventArgs e) {
-            IconButton button = (IconButton) sender;
+            IconButton button = (IconButton)sender;
             oTodoItemList.DeleteItem(button.Index);
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
@@ -217,7 +211,7 @@ namespace TodoListCSharp {
         }
 
         public void StickItemButton_onClicked(object sender, RoutedEventArgs e) {
-            IconButton button = (IconButton) sender;
+            IconButton button = (IconButton)sender;
             oTodoItemList.SetItemToTop(button.Index);
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
@@ -287,10 +281,10 @@ namespace TodoListCSharp {
         private void SwitchItemList() {
             if (statu == Constants.MainWindowStatu.TODO) {
                 oShowTodoList = oDoneItemList.GetItemList();
-                TodoLabel.Style = (Style) FindResource("MWTypeUnchosedFont");
-                DoneLabel.Style = (Style) FindResource("MWTypeChosedFont");
-                TodoLine.Style = (Style) FindResource("MWTypeUnderlineUnchosed");
-                DoneLine.Style = (Style) FindResource("MWTypeUnderlineChosed");
+                TodoLabel.Style = (Style)FindResource("MWTypeUnchosedFont");
+                DoneLabel.Style = (Style)FindResource("MWTypeChosedFont");
+                TodoLine.Style = (Style)FindResource("MWTypeUnderlineUnchosed");
+                DoneLine.Style = (Style)FindResource("MWTypeUnderlineChosed");
                 eTodoButtonStatu = Visibility.Collapsed;
                 eDoneButtonStatu = Visibility.Visible;
                 statu = Constants.MainWindowStatu.DONE;
@@ -300,10 +294,10 @@ namespace TodoListCSharp {
             }
             else {
                 oShowTodoList = oTodoItemList.GetItemList();
-                TodoLabel.Style = (Style) FindResource("MWTypeChosedFont");
-                DoneLabel.Style = (Style) FindResource("MWTypeUnchosedFont");
-                TodoLine.Style = (Style) FindResource("MWTypeUnderlineChosed");
-                DoneLine.Style = (Style) FindResource("MWTypeUnderlineUnchosed");
+                TodoLabel.Style = (Style)FindResource("MWTypeChosedFont");
+                DoneLabel.Style = (Style)FindResource("MWTypeUnchosedFont");
+                TodoLine.Style = (Style)FindResource("MWTypeUnderlineChosed");
+                DoneLine.Style = (Style)FindResource("MWTypeUnderlineUnchosed");
                 eTodoButtonStatu = Visibility.Visible;
                 eDoneButtonStatu = Visibility.Collapsed;
                 statu = Constants.MainWindowStatu.TODO;
@@ -332,7 +326,7 @@ namespace TodoListCSharp {
         public void TabAddEvent(Tab oNewTab) {
             tabs.Add(oNewTab);
         }
-        
+
         private void ResizePressed(object sender, MouseEventArgs e) {
             FrameworkElement element = sender as FrameworkElement;
             this.Cursor = Cursors.Arrow;
@@ -342,7 +336,7 @@ namespace TodoListCSharp {
                 ResizeWindow();
             }
         }
-        
+
         private void ResizeWindow() {
             SendMessage(_HwndSource.Handle, WM_SYSCOMMAND, (IntPtr)(61440 + 8), IntPtr.Zero);
         }

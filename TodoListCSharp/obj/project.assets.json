@@ -15,7 +15,7 @@
     "version": "1.0.0",
     "restore": {
       "projectUniqueName": "F:\\repo\\Todo-Plus\\TodoListCSharp\\TodoListCSharp.csproj",
-      "projectName": "TodoListCSharp",
+      "projectName": "Todo+",
       "projectPath": "F:\\repo\\Todo-Plus\\TodoListCSharp\\TodoListCSharp.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
       "outputPath": "F:\\repo\\Todo-Plus\\TodoListCSharp\\obj\\",

@@ -7,12 +7,12 @@ using TodoListCSharp.utils;
 namespace TodoListCSharp.converter {
     public class HexStringToMediaColor : IValueConverter {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) {
-            string sHexString = (string) value;
+            string sHexString = (string)value;
             return Utils.HexToMediaColor(sHexString);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) {
-            Color color = (Color) value;
+            Color color = (Color)value;
             return Utils.MediaColorToHex(color);
         }
     }
