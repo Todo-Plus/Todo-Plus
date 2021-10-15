@@ -13,7 +13,9 @@ Todo+是一个用于放置在桌面进行待办事项管理的工具，起初为
 
 ## 运行截图
 
+![桌面截图](https://i.loli.net/2021/10/15/MYgCqVct5lWGfEK.png)
 
+<img src="https://i.loli.net/2021/10/15/ysM9coTBJpxedD3.png" alt="设置窗口" style="zoom:67%;" />
 
 ## 安装及系统环境
 
