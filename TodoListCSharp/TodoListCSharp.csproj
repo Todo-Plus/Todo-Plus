@@ -12,6 +12,7 @@
     <PackageIcon></PackageIcon>
     <PackageIconUrl />
     <SignAssembly>false</SignAssembly>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Forms;
 using TodoListCSharp.core;
@@ -49,6 +50,17 @@ namespace TodoListCSharp {
         private void NotifyIcon_onDoubleClick(object sender, EventArgs e) {
             TodoListCSharp.MainWindow oMainWindow = (TodoListCSharp.MainWindow)Application.Current.MainWindow;
             oMainWindow.Activate();
+        }
+
+        protected override void OnStartup(StartupEventArgs e) {
+            Process process = Process.GetCurrentProcess();
+            foreach (Process p in Process.GetProcessesByName(process.ProcessName)) {
+                if (p.Id != process.Id) {
+                    Application.Current.Shutdown();
+                    return;
+                }
+            }
+            base.OnStartup(e);
         }
     }
 }
