@@ -41,7 +41,10 @@
                 </Grid>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Foreground="White" Margin="10" Click="ConfirmButton_onClicked">
+                <Button Foreground="White" 
+                        Margin="10" 
+                        Click="ConfirmButton_onClicked"
+                        IsDefault="True">
                     Confirm
                     <Button.Template>
                         <ControlTemplate TargetType="{x:Type Button}">

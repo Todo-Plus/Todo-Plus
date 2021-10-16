@@ -119,8 +119,12 @@ namespace TodoListCSharp {
         /// <summary>
         /// 关闭窗口后的事件函数：将用户数据存储到磁盘
         /// </summary>
-        public void MainWindow_onClosed(object sender, EventArgs e) {
+        private void MainWindow_onClosed(object sender, EventArgs e) {
 
+            MainWindowSaveItems();
+        }
+
+        private void MainWindowSaveItems() {
             IOInterface io = new BinaryIO();
             Save save = new Save();
             save.todolist = oTodoItemList.GetItemListForSerializer();
@@ -219,6 +223,7 @@ namespace TodoListCSharp {
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
+            MainWindowSaveItems();
         }
         
         /// <summary>
@@ -230,6 +235,7 @@ namespace TodoListCSharp {
             oShowTodoList = oDoneItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
+            MainWindowSaveItems();
         }
 
         private void ItemDeleteButton_onClicked(object sender, RoutedEventArgs e) {
@@ -238,6 +244,7 @@ namespace TodoListCSharp {
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
+            MainWindowSaveItems();
         }
 
         public void StickItemButton_onClicked(object sender, RoutedEventArgs e) {
@@ -246,6 +253,7 @@ namespace TodoListCSharp {
             oShowTodoList = oTodoItemList.GetItemList();
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
+            MainWindowSaveItems();
         }
 
         private void Grid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e) {
@@ -314,6 +322,7 @@ namespace TodoListCSharp {
             oShowTodoList.Add(item);
             // 懒加载，每次添加直接扔到列表，顶置或者中间修改再进行直接的更新
             todoList.Items.Refresh();
+            MainWindowSaveItems();
         }
 
         private void SwitchItemList() {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
 using TodoListCSharp.core;
 
 namespace TodoListCSharp.views {
@@ -13,6 +14,10 @@ namespace TodoListCSharp.views {
         public delegate void CloseCallbackFunc();
 
         public event CloseCallbackFunc closeCallbackFunc;
+
+        private int oSelectTabIndex = -1;
+        private string oSelectTabColor = "#BBBBBB";
+
         /// <summary>
         /// 添加项目到ItemList的回调函数
         /// </summary>
@@ -57,6 +62,8 @@ namespace TodoListCSharp.views {
             }
 
             TodoItem item = new TodoItem(title, desc);
+            item.PointColor = oSelectTabColor;
+            item.Tag = oSelectTabIndex;
             AddItemToList(ref item);
             this.Close();
         }
@@ -67,6 +74,12 @@ namespace TodoListCSharp.views {
 
         private void CloseItemAddWindow(object sender, EventArgs e) {
             Close();
+        }
+
+        private void ItemComboBox_OnSelectionChanged(object sender, SelectionChangedEventArgs e) {
+            Tab oSelectedTab = (Tab)this.ComboBox.SelectedItem;
+            oSelectTabColor = oSelectedTab.Color;
+            oSelectTabIndex = oSelectedTab.Id;
         }
     }
 }

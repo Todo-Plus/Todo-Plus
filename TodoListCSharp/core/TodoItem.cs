@@ -9,7 +9,7 @@ namespace TodoListCSharp.core {
         public string ForgeColor { get; set; }
         public string PointColor { get; set; }
         private Constants.TodoItemStatu Statu { get; set; }
-        private int Tag { get; set; }
+        public int Tag { get; set; }
         private int prority { get; set; }
         private DateTime Deadline { get; set; }
         private DateTime Starttime { get; set; }
