@@ -174,4 +174,8 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Tencent.QCloud.Cos.Sdk" Version="5.4.24" />
+  </ItemGroup>
+
 </Project>
