@@ -9,10 +9,6 @@ namespace TodoListCSharp.interfaces {
         public abstract int FileToList(string path, ref ItemList output);
         public abstract int ListToFile(ref ItemList input, string path);
 
-        // 设置相关，将设置从文件中读取的，一般用在程序起始
-        public abstract int FileToSetting(string path, ref Setting settings);
-        public abstract int SettingToFile(ref Setting settings, string path);
-
         // 调整后使用save来进行存取
 
         public abstract int FileToSave(string path, ref Save output);

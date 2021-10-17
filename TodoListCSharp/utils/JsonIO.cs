@@ -51,20 +51,28 @@ namespace TodoListCSharp.utils {
             return 0;
         }
 
-        public int FileToSetting(string path, ref Setting settings) {
-            throw new System.NotImplementedException();
-        }
-
-        public int SettingToFile(ref Setting settings, string path) {
-            throw new System.NotImplementedException();
-        }
-
         public int FileToSave(string path, ref Save output) {
-            throw new NotImplementedException();
+            if (false == System.IO.File.Exists(path)) {
+                output = new Save();
+                // 文件不存在，但是不影响后续逻辑
+                return 0;
+            }
+            FileStream loadFile = new FileStream(path, FileMode.Open, FileAccess.Read);
+            int iFileLength = (int)loadFile.Length;
+            byte[] bFileBytes = new byte[iFileLength];
+            int ret = loadFile.Read(bFileBytes, 0, iFileLength);
+            string sJsonString = System.Text.Encoding.UTF8.GetString(bFileBytes);
+            
+            output = JsonSerializer.Deserialize<Save>(sJsonString);
+            return 0;
         }
 
         public int SaveToFile(ref Save input, string path) {
-            throw new NotImplementedException();
+            byte[] sJsonBytes = JsonSerializer.SerializeToUtf8Bytes(input);
+            FileStream outputFIle = new FileStream(path, FileMode.Create, FileAccess.Write);
+            outputFIle.Write(sJsonBytes);
+            return 0;
+
         }
     }
 }
