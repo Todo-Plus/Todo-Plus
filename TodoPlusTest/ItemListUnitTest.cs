@@ -5,7 +5,7 @@ namespace TodoPlusTest {
     [TestClass]
     public class ItemListUnitTest {
         [TestMethod]
-        public void AppendItemTest() {
+        public void AppendAndDeleteItemTest() {
             TodoItem todoItem1 = new TodoItem("test001", "test001");
             TodoItem todoItem2 = new TodoItem("test002", "test002");
 
@@ -15,6 +15,10 @@ namespace TodoPlusTest {
 
             System.Collections.Generic.List<TodoItem> todoItems = list.GetItemList();
             Assert.AreEqual(todoItems.Count, 2);
+
+            list.DeleteItem(0);
+            todoItems = list.GetItemList();
+            Assert.AreEqual(todoItems.Count, 1);
         }
     }
 }
