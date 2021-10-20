@@ -69,3 +69,4 @@ packages/
 .vs/
 .suo
 Todo+ Setup/
+TodoListCSharp/core/SecretKeys.cs

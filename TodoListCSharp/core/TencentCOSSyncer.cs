@@ -14,12 +14,19 @@ namespace TodoListCSharp.core {
     public class TencentCOSSyncer : SyncerInterface {
         private string appid { set; get; }
         private string bucket { set; get; }
-        private const string region = "COS_REGION";
+        private const string region = "ap-chengdu";
         private string secretId { set; get; }
         private string secretKey { set; get; }
         private CosXmlConfig xmlConfig { set; get; }
         private QCloudCredentialProvider cosCredentialProvider { set; get; }
         private CosXml cosXml { set; get; }
+
+        public TencentCOSSyncer(string id, string sid, string skey, string _bucket) {
+            appid = id;
+            secretId = sid;
+            secretKey = skey;
+            bucket = _bucket;
+        }
         
         public override int Initial() {
             xmlConfig = new CosXmlConfig.Builder()
@@ -35,7 +42,7 @@ namespace TodoListCSharp.core {
             int iDownloadResult = await Download();
 
             if (iDownloadResult != 0) {
-                Upload();
+                await Upload();
                 return 0;
             }
             
@@ -55,7 +62,7 @@ namespace TodoListCSharp.core {
             }
 
             if (LocalSave.version > RemoteSave.version) {
-                Upload();
+                await Upload();
             }
             else {
                 io.SaveToFile(ref RemoteSave, Constants.SAVE_FILEPATH);

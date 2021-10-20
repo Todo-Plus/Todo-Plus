@@ -6,7 +6,7 @@ namespace TodoPlusTest {
     public class ExampleUnitTest {
         [TestMethod]
         public void AddFuncTest() {
-            Example example = new();
+            Example example = new Example();
 
             int DstResult = 900;
             int TestA = 348;

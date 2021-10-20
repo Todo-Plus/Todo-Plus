@@ -21,7 +21,13 @@ namespace TodoListCSharp.core {
         public Constants.MainWindowLockStatu LockStatus { set; get; }
 
         private static readonly string RegistryPath = @"Software\TodoPlus\Settings";
+        
+        
+        // Sync
 
+        public string appid { get; set; }
+        public string secretId { get; set; }
+        public string secretKey { get; set; }
         public Setting() {
             // default setting
             Alpha = 100;
@@ -32,6 +38,9 @@ namespace TodoListCSharp.core {
             CloseTips = true;
             WindowBounds = Rect.Empty;
             LockStatus = Constants.MainWindowLockStatu.DRAGABLE;
+            
+            // sync setting
+            
         }
 
         // todo：深拷贝的实现，后面考虑其他方法不用重新添加

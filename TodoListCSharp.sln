@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoListCSharp", "TodoListCSharp\TodoListCSharp.csproj", "{6C6B89E9-B4D8-4AFB-8899-E951143D830D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoPlusTest", "TodoPlusTest\TodoPlusTest.csproj", "{D0597DF7-8533-4E36-B781-E372C545CF84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TodoPlusTest", "TodoPlusTest\TodoPlusTest.csproj", "{D0597DF7-8533-4E36-B781-E372C545CF84}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

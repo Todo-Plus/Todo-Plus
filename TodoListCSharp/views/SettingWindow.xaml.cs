@@ -305,5 +305,16 @@ namespace TodoListCSharp.views {
                 SettingConfirmCallback(setting);
             }
         }
+
+        private void SyncTestButton_onClicked(object sender, RoutedEventArgs e) {
+            TencentCOSSyncer syncer = new TencentCOSSyncer(
+                SecretKeys.id, 
+                SecretKeys.sid, 
+                SecretKeys.skey,
+                SecretKeys.bucket);
+            syncer.Initial();
+
+            syncer.Sync();
+        }
     }
 }

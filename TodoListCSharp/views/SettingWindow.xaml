@@ -358,6 +358,7 @@
                     Select a cloud to sync your encrypted database with.
                 </TextBlock>
             </Grid>
+            <Button Click="SyncTestButton_onClicked">Sync!</Button>
         </StackPanel>
     </Grid>
 </Window>
