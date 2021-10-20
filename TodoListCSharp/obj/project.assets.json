@@ -1,11 +1,36 @@
 {
   "version": 3,
   "targets": {
-    "net5.0-windows7.0": {}
+    "net5.0-windows7.0": {
+      "Tencent.QCloud.Cos.Sdk/5.4.24": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/COSXML.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/COSXML.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Tencent.QCloud.Cos.Sdk/5.4.24": {
+      "sha512": "e8ZYD7gOfxoyeKFrMOHYF/O0mzvGDbFN1j+QiVbNFtoLpMqKrX5Yr7zf4UxhAHlsxdl2FTVyjJPAVJ9rDN9BZQ==",
+      "type": "package",
+      "path": "tencent.qcloud.cos.sdk/5.4.24",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/COSXML.dll",
+        "tencent.qcloud.cos.sdk.5.4.24.nupkg.sha512",
+        "tencent.qcloud.cos.sdk.nuspec"
+      ]
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0-windows7.0": []
+    "net5.0-windows7.0": [
+      "Tencent.QCloud.Cos.Sdk >= 5.4.24"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Administrator\\.nuget\\packages\\": {},
@@ -29,7 +54,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net5.0-windows7.0"
+        "net5.0-windows"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -50,6 +75,12 @@
     "frameworks": {
       "net5.0-windows7.0": {
         "targetAlias": "net5.0-windows",
+        "dependencies": {
+          "Tencent.QCloud.Cos.Sdk": {
+            "target": "Package",
+            "version": "[5.4.24, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",
@@ -71,7 +102,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

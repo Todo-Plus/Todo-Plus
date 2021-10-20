@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "sUjQkUD6s4PiOgx8kMKYtM56wJu0eBlxg9nHSBYTfV8o7ZEw8WqO2UAf8MWuc9fuu0SM1lnEuP6Jgs4pCmgisw==",
+  "dgSpecHash": "pId3C6PofDOAiA9uLd4FMlrcp8XXycSqwL4A59o2iJ/OM8GCXR6rVX0Hvl0HqSSZxL0+Rx6WexnJxOslLonFfg==",
   "success": true,
   "projectFilePath": "F:\\repo\\Todo-Plus\\TodoListCSharp\\TodoListCSharp.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\tencent.qcloud.cos.sdk\\5.4.24\\tencent.qcloud.cos.sdk.5.4.24.nupkg.sha512"
+  ],
   "logs": []
 }
