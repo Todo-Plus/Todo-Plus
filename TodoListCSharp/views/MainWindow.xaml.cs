@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Threading;
 using TodoListCSharp.controls;
 using TodoListCSharp.core;
 using TodoListCSharp.interfaces;
@@ -85,7 +86,9 @@ namespace TodoListCSharp {
 
             eTodoButtonStatu = Visibility.Visible;
             eDoneButtonStatu = Visibility.Collapsed;
-
+            
+            
+            // todo: 封装为一个函数
             Save save = null;
             IOInterface io = new BinaryIO();
             int ret = io.FileToSave(Constants.SAVE_FILEPATH, ref save);
@@ -124,15 +127,50 @@ namespace TodoListCSharp {
             MainWindowSaveItems();
         }
 
-        private void MainWindowSaveItems() {
+        private void MainWindowSaveItems(bool bVersionInc = true) {
             IOInterface io = new BinaryIO();
             Save save = new Save();
             save.todolist = oTodoItemList.GetItemListForSerializer();
             save.donelist = oDoneItemList.GetItemListForSerializer();
             save.tabs = tabs;
-            save.version = iSaveVersion + 1;
+            if (bVersionInc) {
+                save.version = iSaveVersion + 1;
+                iSaveVersion++;
+            }
 
             io.SaveToFile(ref save, Constants.SAVE_FILEPATH);
+        }
+
+        public void ThreadSaveItems() {
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate {
+                this.MainWindowSaveItems(false);
+            }));
+        }
+
+        public void ThreadRefreshItems() {
+            this.Dispatcher.Invoke(DispatcherPriority.Normal, new Action(delegate {
+                Save save = null;
+                IOInterface io = new BinaryIO();
+                int ret = io.FileToSave(Constants.SAVE_FILEPATH, ref save);
+
+                if (ret != 0) {
+                    throw new Exception();
+                }
+
+                oTodoItemList = Utils.ListToItemListForIO(save.todolist);
+                oDoneItemList = Utils.ListToItemListForIO(save.donelist);
+                tabs = save.tabs;
+                iSaveVersion = save.version;
+
+                if (statu == Constants.MainWindowStatu.TODO) {
+                    oShowTodoList = oTodoItemList.GetItemList();
+                }
+                else {
+                    oShowTodoList = oDoneItemList.GetItemList();
+                }
+                todoList.ItemsSource = oShowTodoList;
+                todoList.Items.Refresh();
+            }));
         }
         
         /// <summary>

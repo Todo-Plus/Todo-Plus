@@ -12,6 +12,12 @@ using TodoListCSharp.utils;
 
 namespace TodoListCSharp.core {
     public class TencentCOSSyncer : SyncerInterface {
+        public delegate void NotifiyMainWindowRefreshFunc();
+        public delegate void NotifiyMainWindowSaveFunc();
+
+        public event NotifiyMainWindowRefreshFunc NotifiyMainWindowRefreshCallback;
+        public event NotifiyMainWindowSaveFunc NotifiyMainWindowSaveCallback;
+        
         private string appid { set; get; }
         private string bucket { set; get; }
         private const string region = "COS_REGION";
@@ -41,6 +47,9 @@ namespace TodoListCSharp.core {
             
             string RemoteTempDir = System.IO.Path.GetTempPath();
             string RemoteTempFileName = "save";
+
+            NotifiyMainWindowSaveCallback?.Invoke();
+
             IOInterface io = new BinaryIO();
             Save RemoteSave = new Save();
             Save LocalSave = new Save();
@@ -55,11 +64,13 @@ namespace TodoListCSharp.core {
             }
 
             if (LocalSave.version > RemoteSave.version) {
-                Upload();
+                NotifiyMainWindowSaveCallback?.Invoke();
+                await Upload();
             }
             else {
+                // 远程版本新，使用远程数据
                 io.SaveToFile(ref RemoteSave, Constants.SAVE_FILEPATH);
-                // todo: 通知主窗口重新读取文件
+                NotifiyMainWindowRefreshCallback?.Invoke();
             }
 
             return 0;

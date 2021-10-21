@@ -358,6 +358,11 @@
                     Select a cloud to sync your encrypted database with.
                 </TextBlock>
             </Grid>
+            <StackPanel VerticalAlignment="Center" Margin="20 5" Height="60" Orientation="Horizontal" HorizontalAlignment="Left">
+                <RadioButton VerticalAlignment="Center"></RadioButton>
+                <Image VerticalAlignment="Center" Height="60" Width="60"></Image>
+                <Label VerticalAlignment="Center" FontSize="16" FontFamily="Inter">Tencent Cloud COS</Label>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>
