@@ -38,5 +38,13 @@ namespace TodoListCSharp.core {
             BACKUP,
             ABOUT
         }
+        
+        public enum SyncerType {
+            TENCENTCOS,
+            ALIOSS,
+            ONEDRIVE,
+            GOOGLEDRIVE,
+            NONE
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Media;
+using Microsoft.Win32;
 using TodoListCSharp.core;
 
 namespace TodoListCSharp.utils {
@@ -160,5 +161,19 @@ namespace TodoListCSharp.utils {
             }
             return false;
         }
+
+        public static string GetRegistryValue(RegistryKey registryKey, string key) {
+            string sRet = string.Empty;
+            try {
+                sRet = $"{registryKey.GetValue(key)}";
+            }
+            catch (Exception e) {
+                sRet = String.Empty;
+            }
+
+            return sRet;
+        }
     }
+    
+    
 }

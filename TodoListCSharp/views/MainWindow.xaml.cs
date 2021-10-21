@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using TodoListCSharp.controls;
 using TodoListCSharp.core;
 using TodoListCSharp.interfaces;
+using TodoListCSharp.threads;
 using TodoListCSharp.utils;
 using TodoListCSharp.views;
 
@@ -48,7 +49,8 @@ namespace TodoListCSharp {
         private List<TodoItem> oShowTodoList = null;
         private Constants.MainWindowStatu statu = Constants.MainWindowStatu.TODO;
         private Constants.MainWindowLockStatu locked = Constants.MainWindowLockStatu.DRAGABLE;
-
+        private Syncer oSyncThread = null;
+        
         private static readonly string _regPath = @"Software\TodoPlus\";
 
         private int iMaxIndex = 0;
@@ -110,6 +112,7 @@ namespace TodoListCSharp {
             setting.ReadSettingFromRegistryTable();
             MainSetSize(this, setting);
             MainWindowAppearanceLoadSetting(setting);
+            StartSyncThread();
         }
         
         /// <summary>
@@ -402,6 +405,9 @@ namespace TodoListCSharp {
         private void MainWindowConfirmSetSetting(Setting oNewSetting) {
             setting = oNewSetting;
             MainWindowAppearanceLoadSetting(setting);
+            if (oNewSetting.eSyncerType != Constants.SyncerType.NONE) {
+                StartSyncThread();
+            }
         }
 
         private void MainWindowRollbackSetting() {
@@ -432,6 +438,16 @@ namespace TodoListCSharp {
 
         public bool ShowTipMessage() {
             return setting.CloseTips;
+        }
+
+        private void StartSyncThread() {
+            if (oSyncThread == null && setting.eSyncerType != Constants.SyncerType.NONE) {
+                oSyncThread = new Syncer();
+                oSyncThread.Initial(setting.appid, setting.secretId, setting.secretKey, setting.region, setting.bucket);
+                oSyncThread.ThreadRefreshItemsCallback += ThreadRefreshItems;
+                oSyncThread.ThreadSaveItemsCallback += ThreadSaveItems;
+                oSyncThread.SyncMainThread();
+            }
         }
     }
 

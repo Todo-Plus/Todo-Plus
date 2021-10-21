@@ -28,6 +28,10 @@ namespace TodoListCSharp.core {
         public string appid { get; set; }
         public string secretId { get; set; }
         public string secretKey { get; set; }
+        public string region { get; set; }
+        public string bucket { get; set; }
+        
+        public Constants.SyncerType eSyncerType { get; set; }
         public Setting() {
             // default setting
             Alpha = 100;
@@ -38,9 +42,15 @@ namespace TodoListCSharp.core {
             CloseTips = true;
             WindowBounds = Rect.Empty;
             LockStatus = Constants.MainWindowLockStatu.DRAGABLE;
-            
+
             // sync setting
-            
+            eSyncerType = Constants.SyncerType.NONE;
+            appid = string.Empty;
+            secretId = string.Empty;
+            secretKey = string.Empty;
+            region = string.Empty;
+            bucket = string.Empty;
+
         }
 
         // todo：深拷贝的实现，后面考虑其他方法不用重新添加
@@ -53,6 +63,12 @@ namespace TodoListCSharp.core {
             CloseTips = _setting.CloseTips;
             WindowBounds = _setting.WindowBounds;
             LockStatus = _setting.LockStatus;
+            eSyncerType = _setting.eSyncerType;
+            appid = _setting.appid;
+            secretId = _setting.secretId;
+            secretKey = _setting.secretKey;
+            region = _setting.region;
+            bucket = _setting.bucket;
         }
 
         // 返回值表明读取结果
@@ -71,6 +87,19 @@ namespace TodoListCSharp.core {
             AutoRun = bool.Parse($"{key.GetValue("AutoRun")}");
             CloseTips = bool.Parse($"{key.GetValue("CloseTips")}");
 
+            try {
+                eSyncerType = Enum.Parse<Constants.SyncerType>(Utils.GetRegistryValue(key, "SyncerType"));
+            }
+            catch (Exception e) {
+                eSyncerType = Constants.SyncerType.NONE;
+            }
+            
+            appid = Utils.GetRegistryValue(key, "Appid");
+            secretId = Utils.GetRegistryValue(key, "Sid");
+            secretKey = Utils.GetRegistryValue(key, "Skey");
+            region =  Utils.GetRegistryValue(key, "Region");
+            bucket =  Utils.GetRegistryValue(key, "Bucket");
+
             return 0;
         }
 
@@ -82,6 +111,13 @@ namespace TodoListCSharp.core {
             Registry.CurrentUser.CreateSubKey(RegistryPath)?.SetValue("WindowBounds", window.RestoreBounds);
             Registry.CurrentUser.CreateSubKey(RegistryPath)?.SetValue("AutoRun", AutoRun);
             Registry.CurrentUser.CreateSubKey(RegistryPath)?.SetValue("CloseTips", CloseTips);
+
+            Registry.CurrentUser.CreateSubKey(RegistryPath)?.SetValue("SyncerType", eSyncerType);
+            Registry.CurrentUser.CreateSubKey(RegistryPath)?.SetValue("Appid", appid);
+            Registry.CurrentUser.CreateSubKey(RegistryPath)?.SetValue("Sid", secretId);
+            Registry.CurrentUser.CreateSubKey(RegistryPath)?.SetValue("Skey", secretKey);
+            Registry.CurrentUser.CreateSubKey(RegistryPath)?.SetValue("Region", region);
+            Registry.CurrentUser.CreateSubKey(RegistryPath)?.SetValue("Bucket", bucket);
             return 0;
         }
     }

@@ -8,6 +8,7 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStyle="None"
+        Closed="BackupEditWindow_onClosed"
         Background="Transparent"
         MinWidth="635"
         MaxWidth="635"
@@ -19,13 +20,123 @@
     <Grid>
         <Border x:Name="WindowBorder" Background="White" CornerRadius="5" BorderThickness="1" BorderBrush="#E8E8E8" />
         <StackPanel HorizontalAlignment="Stretch">
+            <us:Titlebar Title="Backup Setting"></us:Titlebar>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="20 10">
                 <Rectangle Height="Auto" Width="2" Fill="#59ADFF" />
-                <Label FontSize="16" Margin="5 0">Title</Label>
-                <TextBox Width="540" x:Name="TitleInput"
+                <Label FontSize="16" Margin="5 0">AppID</Label>
+                <TextBox Width="540" x:Name="AppIDInput"
                          VerticalAlignment="Center"
                          FontSize="13" Padding="5"
                          BorderThickness="0 0 0 1" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="20 10">
+                <Rectangle Height="Auto" Width="2" Fill="#59ADFF" />
+                <Label FontSize="16" Margin="5 0">Region</Label>
+                <TextBox Width="540" x:Name="RegionInput"
+                         VerticalAlignment="Center"
+                         FontSize="13" Padding="5"
+                         BorderThickness="0 0 0 1" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="20 10">
+                <Rectangle Height="Auto" Width="2" Fill="#59ADFF" />
+                <Label FontSize="16" Margin="5 0">Bucket</Label>
+                <TextBox Width="540" x:Name="BucketInput"
+                         VerticalAlignment="Center"
+                         FontSize="13" Padding="5"
+                         BorderThickness="0 0 0 1" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="20 10">
+                <Rectangle Height="Auto" Width="2" Fill="#59ADFF" />
+                <Label FontSize="16" Margin="5 0">SecretID</Label>
+                <TextBox Width="540" x:Name="SecretIDInput"
+                         VerticalAlignment="Center"
+                         FontSize="13" Padding="5"
+                         BorderThickness="0 0 0 1" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Height="30" Margin="20 10">
+                <Rectangle Height="Auto" Width="2" Fill="#59ADFF" />
+                <Label FontSize="16" Margin="5 0">SecretKey</Label>
+                <TextBox Width="540" x:Name="SecretKeyInput"
+                         VerticalAlignment="Center"
+                         FontSize="13" Padding="5"
+                         BorderThickness="0 0 0 1" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Height="50" Margin="10 5">
+                <Button Foreground="White" 
+                        Margin="10" 
+                        Click="ConnectButton_onClicked" 
+                        IsDefault="True">
+                    Connect
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                                Name="T_ConfirmBorder"
+                                BorderBrush="{TemplateBinding Control.BorderBrush}"
+                                CornerRadius="15"
+                                Width="100"
+                                Height="30"
+                                Background="DodgerBlue">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="T_ConfirmBorder" Property="Background" Value="RoyalBlue" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Foreground="White" 
+                        Margin="10" 
+                        Click="ConfirmButton_onClicked" 
+                        IsDefault="True">
+                    Confirm
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                                Name="T_ConfirmBorder"
+                                BorderBrush="{TemplateBinding Control.BorderBrush}"
+                                CornerRadius="15"
+                                Width="100"
+                                Height="30"
+                                Background="MediumSeaGreen">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="T_ConfirmBorder" Property="Background" Value="Green" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Foreground="White" Margin="10" Click="CancelButton_onClicked">
+                    Cancel
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                                Name="T_CancelBorder"
+                                BorderBrush="{TemplateBinding Control.BorderBrush}"
+                                CornerRadius="15"
+                                Width="100"
+                                Height="30"
+                                Background="Crimson">
+                                <ContentPresenter Content="{TemplateBinding ContentControl.Content}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="T_CancelBorder" Property="Background" Value="Firebrick" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
             </StackPanel>
         </StackPanel>
     </Grid>

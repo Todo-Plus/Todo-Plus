@@ -1,4 +1,4 @@
-﻿﻿<Window x:Class="TodoListCSharp.views.SettingWindow"
+﻿<Window x:Class="TodoListCSharp.views.SettingWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -359,9 +359,14 @@
                 </TextBlock>
             </Grid>
             <StackPanel VerticalAlignment="Center" Margin="20 5" Height="60" Orientation="Horizontal" HorizontalAlignment="Left">
-                <RadioButton VerticalAlignment="Center"></RadioButton>
+                <RadioButton VerticalAlignment="Center" MouseDoubleClick="TencentRadioButton_onClicked"></RadioButton>
                 <Image VerticalAlignment="Center" Height="60" Width="60"></Image>
                 <Label VerticalAlignment="Center" FontSize="16" FontFamily="Inter">Tencent Cloud COS</Label>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Margin="20 5" Height="60" Orientation="Horizontal" HorizontalAlignment="Left">
+                <RadioButton VerticalAlignment="Center"></RadioButton>
+                <Image VerticalAlignment="Center" Height="60" Width="60"></Image>
+                <Label VerticalAlignment="Center" FontSize="16" FontFamily="Inter">None</Label>
             </StackPanel>
         </StackPanel>
     </Grid>

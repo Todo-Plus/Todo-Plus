@@ -7,6 +7,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using TodoListCSharp.core;
 using TodoListCSharp.utils;
+using TodoPlus.views;
 
 namespace TodoListCSharp.views {
     /// <summary>
@@ -27,6 +28,8 @@ namespace TodoListCSharp.views {
         /// 列表： tabs的列表
         /// </summary>
         private TabAddWindow oGeneralTabAddWindow;
+
+        private BackupEditWindow oBackupEditWindow;
         private int iGeneralTabLastestIndex;
 
         public Setting setting = null;
@@ -305,16 +308,31 @@ namespace TodoListCSharp.views {
                 SettingConfirmCallback(setting);
             }
         }
+        
+        /// <summary>
+        /// 设置备份响应事件
+        /// </summary>
+        private void TencentRadioButton_onClicked(object sender, RoutedEventArgs e) {
+            if (oBackupEditWindow != null) return;
+            oBackupEditWindow = new BackupEditWindow(setting);
+            oBackupEditWindow.BackupEditCloseCallback += BackupEditWindow_onClosed;
+            oBackupEditWindow.ConfirmButtonClickCallback += BackupSettingWindow_Confirm;
+            oBackupEditWindow.Owner = this;
+            oBackupEditWindow.ShowDialog();
+        }
 
-        private void SyncTestButton_onClicked(object sender, RoutedEventArgs e) {
-            TencentCOSSyncer syncer = new TencentCOSSyncer(
-                SecretKeys.id, 
-                SecretKeys.sid, 
-                SecretKeys.skey,
-                SecretKeys.bucket);
-            syncer.Initial();
+        private void BackupEditWindow_onClosed() {
+            oBackupEditWindow = null;
+        }
 
-            syncer.Sync();
+        private void BackupSettingWindow_Confirm(string appid, string sid, string skey, string region, string bucket) {
+            setting.eSyncerType = Constants.SyncerType.TENCENTCOS;
+            setting.appid = appid;
+            setting.secretId = sid;
+            setting.secretKey = skey;
+            setting.region = region;
+            setting.bucket = bucket;
+            SettingConfirmCallback?.Invoke(setting);
         }
     }
 }
