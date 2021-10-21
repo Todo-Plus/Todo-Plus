@@ -92,6 +92,7 @@ namespace TodoListCSharp.utils {
             IFormatter serializer = new BinaryFormatter();
             try {
                 output = serializer.Deserialize(loadFile) as Save;
+                loadFile.Close();
             }
             catch (Exception e) {
                 output = new Save();
@@ -103,6 +104,7 @@ namespace TodoListCSharp.utils {
             FileStream outputFile = new FileStream(path, FileMode.Create, FileAccess.Write);
             IFormatter serializer = new BinaryFormatter();
             serializer.Serialize(outputFile, input);
+            outputFile.Close();
 
             return 0;
         }

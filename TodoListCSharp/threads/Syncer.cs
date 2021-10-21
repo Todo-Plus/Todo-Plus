@@ -41,5 +41,9 @@ namespace TodoListCSharp.threads {
         public void StopThread() {
             timer.Stop();
         }
+
+        public void SyncFileNow() {
+            syncer.Sync();
+        }
     }
 }

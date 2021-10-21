@@ -53,6 +53,7 @@
     <None Remove="resources\icons\locked.bmp" />
     <None Remove="resources\icons\locked.png" />
     <None Remove="resources\icons\setting.png" />
+    <None Remove="resources\icons\sync.png" />
     <None Remove="resources\icons\totop_hover.png" />
     <None Remove="resources\icons\totop_normal.png" />
     <None Remove="resources\icons\unlock.png" />
@@ -140,6 +141,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\setting.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\sync.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="resources\icons\totop_hover.png">

@@ -140,6 +140,9 @@ namespace TodoListCSharp {
                 save.version = iSaveVersion + 1;
                 iSaveVersion++;
             }
+            else {
+                save.version = iSaveVersion;
+            }
 
             io.SaveToFile(ref save, Constants.SAVE_FILEPATH);
         }
@@ -180,7 +183,7 @@ namespace TodoListCSharp {
         ///  窗口resize时的事件函数，用于设置listbox的高度
         /// </summary>
         private void MainWindow_onResize(object sender, EventArgs e) {
-            this.todoList.Height = this.Height - 85;
+            this.todoList.Height = this.Height - 95;
         }
 
         public void MainSetSize(Window window, Setting setting) {
@@ -448,6 +451,11 @@ namespace TodoListCSharp {
                 oSyncThread.ThreadSaveItemsCallback += ThreadSaveItems;
                 oSyncThread.SyncMainThread();
             }
+        }
+
+        public void SynceWindowButton_onClicked(object sender, RoutedEventArgs e) {
+            MainWindowSaveItems(true);
+            oSyncThread.SyncFileNow();
         }
     }
 
