@@ -50,11 +50,11 @@ namespace TodoListCSharp {
         private Constants.MainWindowStatu statu = Constants.MainWindowStatu.TODO;
         private Constants.MainWindowLockStatu locked = Constants.MainWindowLockStatu.DRAGABLE;
         private Syncer oSyncThread = null;
+        private Setting oSetting = null;
         
         private static readonly string _regPath = @"Software\TodoPlus\";
 
         private int iMaxIndex = 0;
-        private Setting setting = null;
         private int iSaveVersion = 0;
 
         private IntPtr hMainWindowHandle = IntPtr.Zero;
@@ -108,10 +108,10 @@ namespace TodoListCSharp {
             todoList.ItemsSource = oShowTodoList;
             todoList.Items.Refresh();
 
-            setting = new Setting();
-            setting.ReadSettingFromRegistryTable();
-            MainSetSize(this, setting);
-            MainWindowAppearanceLoadSetting(setting);
+            oSetting = new Setting();
+            oSetting.ReadSettingFromRegistryTable();
+            MainSetSize(this, oSetting);
+            MainWindowAppearanceLoadSetting(oSetting);
             StartSyncThread();
         }
         
@@ -119,7 +119,7 @@ namespace TodoListCSharp {
         /// 关闭窗口时的事件函数，保存配置到注册表
         /// </summary>
         private void MainWindow_onClosing(object sender, EventArgs e) {
-            setting.SaveSettingToRegistryTable(this);
+            oSetting.SaveSettingToRegistryTable(this);
         }
         
         /// <summary>
@@ -243,7 +243,7 @@ namespace TodoListCSharp {
         /// 切换锁定状态，在点击lock按钮时处理
         /// </summary>
         private void SwitchWindowLockStatus() {
-            MainWindowAppearanceLoadSetting(setting);
+            MainWindowAppearanceLoadSetting(oSetting);
             hMainWindowHandle = new WindowInteropHelper(this).Handle;
 
             if (locked == Constants.MainWindowLockStatu.DRAGABLE) {
@@ -316,7 +316,7 @@ namespace TodoListCSharp {
 
             oSettingWindow = new SettingWindow();
             // 备份一份设置扔给设置窗口
-            oSettingWindow.setting = new Setting(setting);
+            oSettingWindow.setting = new Setting(oSetting);
             oSettingWindow.tabs = tabs;
             oSettingWindow.settingWindowClosed += SettingWindow_OnClosed;
             oSettingWindow.AppearanceSettingChangeCallback += MainWindowAppearanceLoadSetting;
@@ -351,7 +351,7 @@ namespace TodoListCSharp {
         /// </summary>
         private void SettingWindow_OnClosed() {
             oSettingWindow = null;
-            MainWindowAppearanceLoadSetting(setting);
+            MainWindowAppearanceLoadSetting(oSetting);
             this.Activate();
         }
 
@@ -406,15 +406,15 @@ namespace TodoListCSharp {
         }
 
         private void MainWindowConfirmSetSetting(Setting oNewSetting) {
-            setting = oNewSetting;
-            MainWindowAppearanceLoadSetting(setting);
+            oSetting = oNewSetting;
+            MainWindowAppearanceLoadSetting(oSetting);
             if (oNewSetting.eSyncerType != Constants.SyncerType.NONE) {
                 StartSyncThread();
             }
         }
 
         private void MainWindowRollbackSetting() {
-            MainWindowAppearanceLoadSetting(setting);
+            MainWindowAppearanceLoadSetting(oSetting);
         }
 
         public void TabAddEvent(Tab oNewTab) {
@@ -440,13 +440,13 @@ namespace TodoListCSharp {
         }
 
         public bool ShowTipMessage() {
-            return setting.CloseTips;
+            return oSetting.CloseTips;
         }
 
         private void StartSyncThread() {
-            if (oSyncThread == null && setting.eSyncerType != Constants.SyncerType.NONE) {
+            if (oSyncThread == null && oSetting.eSyncerType != Constants.SyncerType.NONE) {
                 oSyncThread = new Syncer();
-                oSyncThread.Initial(setting.appid, setting.secretId, setting.secretKey, setting.region, setting.bucket);
+                oSyncThread.Initial(oSetting.appid, oSetting.secretId, oSetting.secretKey, oSetting.region, oSetting.bucket);
                 oSyncThread.ThreadRefreshItemsCallback += ThreadRefreshItems;
                 oSyncThread.ThreadSaveItemsCallback += ThreadSaveItems;
                 oSyncThread.SyncMainThread();
