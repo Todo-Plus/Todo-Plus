@@ -204,14 +204,19 @@ namespace TodoListCSharp {
         /// <param name="color">主窗口将要修改的颜色值</param>
         public void MainWindowAdaptBackgroundColor(System.Windows.Media.Color color) {
             System.Windows.Media.Color TextColor = Utils.GenerateAdaptColor(color);
+            Color UnchosedColor = Utils.HexToMediaColor("#B4B4B4");
 
             if (statu == Constants.MainWindowStatu.TODO) {
                 this.TodoLabel.Foreground = new SolidColorBrush(TextColor);
                 this.TodoLine.BorderBrush = new SolidColorBrush(TextColor);
+                this.DoneLabel.Foreground = new SolidColorBrush(UnchosedColor);
+                this.DoneLine.BorderBrush = new SolidColorBrush(UnchosedColor);
             }
             else {
                 this.DoneLabel.Foreground = new SolidColorBrush(TextColor);
                 this.DoneLine.BorderBrush = new SolidColorBrush(TextColor);
+                this.TodoLabel.Foreground = new SolidColorBrush(UnchosedColor);
+                this.TodoLine.BorderBrush = new SolidColorBrush(UnchosedColor);
             }
 
             int length = oShowTodoList.Count;
@@ -395,6 +400,7 @@ namespace TodoListCSharp {
                 todoList.ItemsSource = oShowTodoList;
                 todoList.Items.Refresh();
             }
+            MainWindowAppearanceLoadSetting(oSetting);
         }
 
         // !! MainWindow Appearance Change Functions

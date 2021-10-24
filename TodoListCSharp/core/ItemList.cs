@@ -72,6 +72,7 @@ namespace TodoListCSharp.core {
                     }
 
                     oBeforeItem.SetNext(oNowItem.GetNext());
+                    if (oBeforeItem.GetNext() == null) ListEnd = oBeforeItem;
                     oDstList.AppendItem(item);
                     return 0;
                 }
@@ -120,10 +121,6 @@ namespace TodoListCSharp.core {
                 oNowItem = oNowItem.GetNext();
             }
             return -1;
-        }
-
-        public void SetListStart(ItemUnit start) {
-            ListStart = start;
         }
     }
 }
