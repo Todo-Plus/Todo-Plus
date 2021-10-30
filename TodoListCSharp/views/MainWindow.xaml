@@ -164,7 +164,7 @@
                         ToolTip="Lock"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" x:Name="RightBottomResizeButton">
-                    <Grid MouseMove="ResizePressed" MouseDown="ResizePressed" Margin="5">
+                    <Grid MouseMove="ResizePressed" MouseDown="ResizePressed" Margin="5" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition></ColumnDefinition>
                             <ColumnDefinition></ColumnDefinition>

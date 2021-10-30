@@ -45,6 +45,7 @@
     <None Remove="resources\icons\close.png" />
     <None Remove="resources\icons\delete_hover.png" />
     <None Remove="resources\icons\delete_normal.png" />
+    <None Remove="resources\icons\disable.png" />
     <None Remove="resources\icons\done_hover.png" />
     <None Remove="resources\icons\done_normal.png" />
     <None Remove="resources\icons\edit_hover.png" />
@@ -54,6 +55,7 @@
     <None Remove="resources\icons\locked.png" />
     <None Remove="resources\icons\setting.png" />
     <None Remove="resources\icons\sync.png" />
+    <None Remove="resources\icons\tencent.png" />
     <None Remove="resources\icons\totop_hover.png" />
     <None Remove="resources\icons\totop_normal.png" />
     <None Remove="resources\icons\unlock.png" />
@@ -169,7 +171,6 @@
   <ItemGroup>
     <Folder Include="utils\" />
     <Folder Include="core\" />
-    <Folder Include="test\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -180,6 +181,15 @@
 
   <ItemGroup>
     <PackageReference Include="Tencent.QCloud.Cos.Sdk" Version="5.4.24" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="resources\icons\disable.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="resources\icons\tencent.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

@@ -360,12 +360,12 @@
             </Grid>
             <StackPanel VerticalAlignment="Center" Margin="20 5" Height="60" Orientation="Horizontal" HorizontalAlignment="Left">
                 <RadioButton VerticalAlignment="Center" MouseDoubleClick="TencentRadioButton_onClicked"></RadioButton>
-                <Image VerticalAlignment="Center" Height="60" Width="60"></Image>
+                <Image VerticalAlignment="Center" Margin="10 0" Height="40" Width="40" Source="/resources/icons/tencent.png"></Image>
                 <Label VerticalAlignment="Center" FontSize="16" FontFamily="Inter">Tencent Cloud COS</Label>
             </StackPanel>
             <StackPanel VerticalAlignment="Center" Margin="20 5" Height="60" Orientation="Horizontal" HorizontalAlignment="Left">
                 <RadioButton VerticalAlignment="Center"></RadioButton>
-                <Image VerticalAlignment="Center" Height="60" Width="60"></Image>
+                <Image VerticalAlignment="Center" Margin="10 0" Height="30" Width="30" Source="/resources/icons/disable.png"></Image>
                 <Label VerticalAlignment="Center" FontSize="16" FontFamily="Inter">None</Label>
             </StackPanel>
         </StackPanel>
